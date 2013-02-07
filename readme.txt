@@ -7,6 +7,6 @@ database_port=3306
 database_user=root
 database_password=qwerty
 database_database=udhc_local_db
-admin_email=sbose78@gmail.com
+admin_email=yourmail@gmail.com
 admin_password=somepassword
 
