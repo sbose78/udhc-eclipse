@@ -11,7 +11,7 @@ public class HealthFileDAO {
 	 * @param args
 	 */
 	
-	
+	// check
 	public static int deleteHealthFile(int id)
 	{
 		// The table's primary key is idhealth_files
