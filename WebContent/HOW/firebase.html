@@ -1,0 +1,46 @@
+
+<html>
+<head>
+
+
+		 <script src="https://static.firebase.com/v0/firebase.js">
+		</script>
+
+		<script type="text/javascript">
+
+		
+
+			var myDataReference ;
+
+			function call_on_click()
+			{   
+				
+				
+				alert("Done!");
+
+				try{
+					myDataReference = new Firebase('https://sbose78.firebaseio.com/');	
+					myDataReference.push('I am now writing data into Firebase_shoubhik_2!');	
+				}
+				
+				catch(e)
+				{
+
+				}				
+			}	
+
+		</script>
+
+
+
+</head>
+
+
+<body>
+	<input type="button" value="push me" onclick="call_on_click()">
+
+
+</body>
+
+
+</html>
