@@ -1,4 +1,4 @@
-Add a credentials.properties file in the /WebContent/WEB-INF/ directory
+Add a credentials.properties file in the /WebContent/WEB-INF/classes directory
 with the following name-value pairs as application for your database server and admin email. The admin email will be used to send emails.
 not setting the below values may cause expected behaviour.
 
