@@ -4,10 +4,27 @@
     Author     : root - shoubhik bose
 --%>
 
+    
+
+    
+
+<%@ page import="org.udhc.gen.*" %> 
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+
+    
+    <head> 
+        
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        
 
 
           <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+                <script type="text/javascript" src="<%=request.getContextPath()%>/INPUT/js/jquery-1.8.3.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   
   
@@ -42,22 +59,8 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/SOLUTION/scripts.js"></script>
 
 
-
-    
-
-    
-
-<%@ page import="org.udhc.gen.*" %> 
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-
-    
-    <head>
         
         
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Health record form</title>
     </head>
     

@@ -21,6 +21,77 @@ import javax.mail.*;
 
 
 public class EmailUtil {
+	
+	
+	public static String sendMail(String from,String to[],String cc[] , String bcc[],String subject, String content)throws Exception
+    {
+    	 			Properties properties = new Properties();
+    	 			properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("credentials.properties"));
+    	 			
+    	 			from = properties.getProperty("admin_email");
+    	 			String pass =  properties.getProperty("admin_password");
+        	
+    	
+                    String host = "smtp.gmail.com";
+                   
+                    Properties props = System.getProperties();
+                    props.put("mail.smtp.starttls.enable", "true"); 
+                    props.put("mail.smtp.host", host);
+                    props.put("mail.smtp.user", from);
+                    props.put("mail.smtp.password", pass);
+                    props.put("mail.smtp.port", "587");
+                    props.put("mail.smtp.auth", "true");
+
+
+                    javax.mail.Session session = Session.getDefaultInstance(props, null);
+                    MimeMessage message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(from));
+
+                    InternetAddress[] toAddress = new InternetAddress[to.length];
+                
+                    // To get the array of addresses
+                    for( int i=0; i < to.length ; i++ ) { // changed from a while loop
+                        toAddress[i] = new InternetAddress(to[i]);
+                        System.out.println(toAddress[i]);
+                    }
+                    System.out.println(Message.RecipientType.TO);
+
+                    for( int i=0; i < toAddress.length; i++) { // changed from a while loop
+                        message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+                        
+                    }
+                    
+                    String bcc_list[] = User.getModeratorEmails();
+                    
+                    InternetAddress[] bccAddress = new InternetAddress[bcc_list.length];
+                    
+                    // To get the array of addresses
+                    for( int i=0; i <bcc_list.length ; i++ ) { // changed from a while loop
+                        bccAddress[i] = new InternetAddress(bcc_list[i]);
+                        System.out.println(bccAddress[i]);
+                    }
+                    System.out.println(Message.RecipientType.BCC);
+
+                    for( int i=0; i < bccAddress.length; i++) { // changed from a while loop
+                        message.addRecipient(Message.RecipientType.BCC, bccAddress[i]);
+                        
+                    }
+                    
+                 
+                    message.setSubject(subject);
+                    //message.setText("Welcome to JavaMail");
+                    
+                    message.setContent(content, "text/html");
+                    
+                    Transport transport = session.getTransport("smtp");
+                    transport.connect(host, from, pass);
+                    transport.sendMessage(message, message.getAllRecipients());
+                    transport.close();
+
+      return "OK";
+   }
+    
+	
     
     public static String sendMail(String from,String to[], String subject, String content)throws Exception
     {
@@ -56,6 +127,7 @@ public class EmailUtil {
 
                     for( int i=0; i < toAddress.length; i++) { // changed from a while loop
                         message.addRecipient(Message.RecipientType.TO, toAddress[i]);
+                        
                     }
                     
                     
@@ -73,8 +145,15 @@ public class EmailUtil {
    }
     
     public static void main(String args[]) throws Exception{
+    	
+    	/*
     	String arr[]={"rishabhjain.rj01@gmail.com","rishabh.rishi@gmail.com", "sbose78@gmail.com"};
     	sendMail("",arr , "Just a test ", "relax - sending from app");
+    	
+    	*/
+    	
+    	
+    	
     }
         
         

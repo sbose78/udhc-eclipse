@@ -188,4 +188,14 @@
     <servlet-name>UpdateUserPrivilegeAprroval</servlet-name>
     <url-pattern>/UpdateUserPrivilegeAprroval</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SendMail</display-name>
+    <servlet-name>SendMail</servlet-name>
+    <servlet-class>org.udhc.gen.SendMail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendMail</servlet-name>
+    <url-pattern>/SendMail</url-pattern>
+  </servlet-mapping>
 </web-app>

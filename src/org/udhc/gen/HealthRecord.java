@@ -10,8 +10,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
+import java.util.TimeZone;
 
 import org.udhc.gen.models.Report;
 
@@ -21,6 +27,9 @@ import org.udhc.gen.models.Report;
  * @author root
  */
 public class HealthRecord {
+	
+	
+	
     public String getTopic_id() {
 		return topic_id;
 	}
@@ -77,6 +86,23 @@ public class HealthRecord {
 		this.consent_letter = consent_letter;
 	}
 
+	String date;
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	int solved;
+	public int getSolved() {
+		return solved;
+	}
+
+	public void setSolved(int solved) {
+		this.solved = solved;
+	}
 
 	String topic_id;
     String topic;
@@ -101,6 +127,33 @@ public class HealthRecord {
         this.socialWorker_id=social_worker_id;
         
     }
+    
+    
+    public HealthRecord(int topic_id , String topic,String social_worker_id,String patient_name, String problem_details, int approved, String date,int solved)
+    {
+        this.topic_id=topic_id+"";
+        this.problem_id= patient_name;
+        this.problem_details=problem_details;
+        this.topic=topic;
+        this.approved=approved;
+        this.socialWorker_id=social_worker_id;
+        this.date=date;
+        this.solved =solved;
+        
+    }
+    
+    public HealthRecord(int topic_id , String topic,String social_worker_id,String patient_name, String problem_details, int approved, String date)
+    {
+        this.topic_id=topic_id+"";
+        this.problem_id= patient_name;
+        this.problem_details=problem_details;
+        this.topic=topic;
+        this.approved=approved;
+        this.socialWorker_id=social_worker_id;
+        this.date=date;
+        
+    }
+    
     
    
     /*
@@ -265,7 +318,7 @@ public class HealthRecord {
     	return 0;
     }
     
-    public static ArrayList<HealthRecord> getAllUploadedHealthRecords() throws IOException
+    public static ArrayList<HealthRecord> getAllUploadedHealthRecords() 
     {
     	 
     	 System.out.println("testing");
@@ -284,16 +337,29 @@ public class HealthRecord {
                 Statement stmt=null;
 
                 stmt=con.createStatement();
-                rst=stmt.executeQuery("select * from forum ");
+                rst=stmt.executeQuery("select * from forum");
                 while(rst.next()){
-//    public HealthRecord(String topic_id , String topic,String patient_name, String problem_details, int approved)
-//      public HealthRecord(int topic_id , String topic,String social_worker_id,String patient_name, String problem_details, int approved)
-         	
-            
-
-                    
-                    HealthRecord h=new HealthRecord(Integer.parseInt(rst.getString("idforum")),rst.getString("topic"),rst.getString("social_worker_id"),rst.getString("problem_id"),rst.getString("problem_details"),rst.getInt("approved"));
-                    lhr.add(h);
+        
+                	/*
+                   Date my_date = rst.getTimestamp("upload_date");
+                   
+                   Calendar c = Calendar.getInstance();
+                 //  System.out.println(c.getTimeZone().getDisplayName());
+                   
+                 //  c.setTimeZone(TimeZone.getTimeZone("GMT-1300"));
+                   int month = c.get(Calendar.MONTH);
+                //   System.out.println(month);
+                  String m =new DateFormatSymbols().getMonths()[month];
+                  String d = c.get(Calendar.DAY_OF_MONTH)+"";
+                  String y = c.get(Calendar.YEAR)+"";
+                  
+                  
+                   String date_string = d+ " "+ m+" , "+y;  */
+                   
+                   //String date_string= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(my_date);
+                	
+                   HealthRecord h=new HealthRecord(Integer.parseInt(rst.getString("idforum")),rst.getString("topic"),rst.getString("social_worker_id"),rst.getString("problem_id"),rst.getString("problem_details"),rst.getInt("approved"),rst.getString("upload_date").toString(),rst.getInt("solved"));
+                   lhr.add(h);
                 }
                 DbCon.closeConnection(con);
         }
@@ -302,7 +368,7 @@ public class HealthRecord {
         
         catch(Exception e)
         {
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
         
         
@@ -314,13 +380,7 @@ public class HealthRecord {
      public static ArrayList<HealthRecord> getAllHealthRecords() throws IOException
     {
     	 
-    	 System.out.println("testing");
-    	 
-    	Properties properties = new Properties();
-     	properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("credentials.properties"));
-     	
-     	//System.out.println(properties.keys().nextElement().toString());
-     	System.out.println(properties.getProperty("database_database"));
+    	
      	
         ArrayList<HealthRecord> lhr = new ArrayList<HealthRecord>();
         
@@ -505,7 +565,7 @@ public class HealthRecord {
         
         catch(Exception e)
         {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         
         
@@ -699,8 +759,12 @@ public class HealthRecord {
                this.problem_id=sc_name; 
                 Connection conn= DbCon.getDbConnection();
                 PreparedStatement pstatement = null;
+                
+                DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, ''yy");
+                Date date = new Date();
+                String upload_date = dateFormat.format(date).toString();
 
-                String queryString = "INSERT INTO forum(topic,social_worker_id,problem_details,problem_id,consent_letter) VALUES (?,?, ?,?,?)";
+                String queryString = "INSERT INTO forum(topic,social_worker_id,problem_details,problem_id,consent_letter, upload_date) VALUES (?,?, ?,?,?,?)";
                 pstatement = conn.prepareStatement(queryString, pstatement.RETURN_GENERATED_KEYS);
                 
                 pstatement.setString(1, this.topic);
@@ -708,7 +772,8 @@ public class HealthRecord {
                 
                 pstatement.setString(3, this.problem_details);
                 pstatement.setString(4, this.problem_id);
-                pstatement.setBlob(5, consent_letter);                
+                pstatement.setBlob(5, consent_letter);          
+                pstatement.setString(6, upload_date);
                 
                 int updateQuery = pstatement.executeUpdate();
                 
@@ -765,7 +830,7 @@ public class HealthRecord {
         {       Connection conn= DbCon.getDbConnection();
                 PreparedStatement pstatement = null;
                
-                String queryString = "UPDATE forum SET solution_user = ? , solution_content = ? WHERE idforum = "+topic_id;
+                String queryString = "UPDATE forum SET solution_user = ? , solution_content = ? , solved = 1 WHERE idforum = "+topic_id;
                 pstatement = conn.prepareStatement(queryString);
                 
                 pstatement.setString(1, user);
@@ -805,9 +870,21 @@ public class HealthRecord {
         }       
         catch(Exception e)
         {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
                     
         return solution_content;
-    }    
+    }   
+    
+    public static void main(String args[]) throws IOException
+    {
+    	ArrayList<HealthRecord> ahr = getAllUploadedHealthRecords();
+    	System.out.println("************************8"+ahr.size());
+    	for (HealthRecord r : ahr){
+    		String my_date= r.getDate();
+    		
+    		System.out.println(r.getDate());
+    	}
+    }
+    
    }

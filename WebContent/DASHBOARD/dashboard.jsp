@@ -15,6 +15,9 @@
   <script type="text/javascript" src="<%=request.getContextPath()%>/jqwidgets/jqxcore.js"></script>
     
     <script type="text/javascript" src="<%=request.getContextPath()%>/jqwidgets/jqxtabs.js"></script>
+    
+    <script src="<%=request.getContextPath()%>/INPUT/colorbox/jquery.colorbox.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/INPUT/colorbox/colorbox.css" />
 
 <title>My control room</title>
 
@@ -112,6 +115,16 @@ table{
 }
 
 
+.solution_box{
+	
+		border-radius: 5px;
+		border: solid 2px black;
+		padding: 8px;
+		text-decoration: none;
+		
+
+}
+
 
 </style>
 
@@ -168,6 +181,7 @@ table{
 	
 	function call_on_ready(){
 		
+		$("a.solution_box").colorbox({iframe:true, innerWidth:900, innerHeight:700});
 			
 		$('#jqxtabs').jqxTabs({ position: 'top', width: '99%' , height: "auto", reorder: true });
 			if(  $("input#user_approval_button").size() > 0 )
@@ -311,7 +325,10 @@ table{
    
 
 <table>
-<th width="20%">PATIENT</th><th width="40%">HEALTH ISSUE</th><th width="20%">APPROVAL STATUS</th><th width="20%">UPLOADED BY </th>
+
+<th width="20%"> SOLUTION  </th>
+
+<th width="15%">PATIENT</th><th width="25%">HEALTH ISSUE</th><th width="10%">APPROVAL STATUS</th><th width="15%">UPLOADED BY </th> <th width="20"%>Date</th>
 
 
 <%
@@ -323,7 +340,30 @@ table{
 %>
 
 <tr>
+	
+	<td valign="middle">
+	
+		&nbsp
+		<%
+		
+			String solved_image= request.getContextPath()+"/STATICS/images/solved.jpeg";
+			if( record.getSolved() == 0){
+				solved_image= request.getContextPath()+"/STATICS/images/unsolved.jpeg";				
+			}
+			
+		%> 
+		<img src="<%=solved_image %>" alt="image" width="50px" height="50px"/>
+		
+		&nbsp 		
+		<a class="solution_box" href="<%=request.getContextPath()%>/SOLUTION/submitSolution.jsp?topic_id=<%=record.getTopic_id()%>">Update</a> 
+		&nbsp
+		<a class="solution_box"  href="<%=request.getContextPath()%>/SOLUTION/composeEmail.jsp?topic_id=<%=record.getTopic_id()%>&social_worker_id=<%=record.getSocialWorker_id()%>">EMAIL</a>
+	
+	</td>
+
 	<td>
+		
+	
 		<%=record.getProblem_id() %>
 	</td>
 	
@@ -334,6 +374,11 @@ table{
 		
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=topic_id%>"><%=record.getTopic() %></a>
+		
+		<br>
+	
+		
+		
 	</td>
 	
 	<td align="center">
@@ -350,6 +395,10 @@ table{
 	
 	<td>
 		<%=record.getSocialWorker_id() %>
+	</td>
+	
+	<td>
+		<%=record.getDate() %>
 	</td>
 	
 </tr>

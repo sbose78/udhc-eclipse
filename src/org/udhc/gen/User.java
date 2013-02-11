@@ -169,7 +169,7 @@ public class User {
     
     public static String[] getModeratorEmails()
     {
-    	String arr[]={"sbose78@gmail.com", "shivika.ch@gmail.com ","rakesh7biswas@gmail.com",
+    	String arr[]={ "bhavna.seth@gmail.com","sbose78@gmail.com", "shivika.ch@gmail.com ","rakesh7biswas@gmail.com",
       "pranab@pranab.in","tamoghnab@gmail.com","soumyadeepbhaumik@rediffmail.com","bera.kaustav@gmail.com" ,"rajibs123@yahoo.com" 
     			
     	};

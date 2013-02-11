@@ -28,14 +28,16 @@ public class CatchSolution extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
-    {        
+    {        System.out.println(request.getParameter("solution_content")+";"+Integer.parseInt(request.getParameter("topic_id")));
                 String solution=request.getParameter("solution_content");
                 int topic_id=Integer.parseInt(request.getParameter("topic_id"));
                 String user=User.getLoggedInUserEmail(request);
                 
                 org.udhc.gen.HealthRecord hr = new org.udhc.gen.HealthRecord();                
-                hr.insertSolution(topic_id,solution,user);        
-                response.sendRedirect(request.getContextPath()+"/SOLUTION/solution.jsp?topic_id="+topic_id);        
+                hr.insertSolution(topic_id,solution,user);
+                response.getOutputStream().println("Thank you . The solution has been recorded.");
+                
+                //response.sendRedirect(request.getContextPath()+"/SOLUTION/solution.jsp?topic_id="+topic_id);        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -157,7 +157,7 @@ public class CatchHealthIssue2 extends HttpServlet {
            content+="<br><br>Warm regards, <br> The UDHC Team";
             
            topic="[ UDHC ] - "+ patient_name + "uploaded by " + org.udhc.gen.User.getLoggedInUserName(request);
-           org.udhc.gen.EmailUtil.sendMail("sbose78", to, subject, content);
+      //     org.udhc.gen.EmailUtil.sendMail("sbose78", to, subject, content);
             
            response.sendRedirect(request.getContextPath()+"/UPLOADER/care-seeker-input-edit.jsp?topic_id="+topic_id);
            
