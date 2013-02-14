@@ -32,7 +32,7 @@ input.email:focus{
 
 input.submit_button{
 
-	background-color: #6798DD;
+	background-color: #0C4B80;
 	padding: 7px;
 	border-radius: 5px;
 	color: white;

@@ -37,24 +37,31 @@ public class SendMail extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String sendee_to= request.getParameter("sendee_to");
-		String sendee_cc= request.getParameter("sendee_cc");
-		String sendee_bcc= request.getParameter("sendee_bcc");
-		String subject  =  request.getParameter("subject");
-		
-		
 		String email_text  = request.getParameter("email_text");
+		
+		String subject  =  request.getParameter("subject");
+		/*
+		String sendee_cc= request.getParameter("sendee_cc");
+		
+		
+		String sendee_bcc= request.getParameter("sendee_bcc");
+		
 		String sendees_to[] = sendee_to.split("\\s+");
 		String sendees_cc[]= sendee_cc.split("\\s+");;
 		String sendees_bcc[] =  sendee_bcc.split("\\s+");;
 		
 		System.out.println(sendees_to+";"+sendee_cc+";"+sendee_bcc);
-		
+		*/
+		String arr[] = {sendee_to};
+		System.out.println(sendee_to);
 		try {
-			EmailUtil.sendMail("sbose78@gmail.com" ,sendees_to, sendees_cc,sendees_bcc, subject , email_text);
+			EmailUtil.sendMail("sbose78@gmail.com" ,arr, subject , email_text);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		response.getWriter().println("Thank you - the patient has been notified.");
 		
 	}
 

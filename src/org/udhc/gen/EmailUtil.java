@@ -60,7 +60,7 @@ public class EmailUtil {
                         message.addRecipient(Message.RecipientType.TO, toAddress[i]);
                         
                     }
-                    
+                 /*   
                     String bcc_list[] = User.getModeratorEmails();
                     
                     InternetAddress[] bccAddress = new InternetAddress[bcc_list.length];
@@ -77,7 +77,7 @@ public class EmailUtil {
                         
                     }
                     
-                 
+                 */
                     message.setSubject(subject);
                     //message.setText("Welcome to JavaMail");
                     
@@ -146,11 +146,11 @@ public class EmailUtil {
     
     public static void main(String args[]) throws Exception{
     	
-    	/*
-    	String arr[]={"rishabhjain.rj01@gmail.com","rishabh.rishi@gmail.com", "sbose78@gmail.com"};
+    	
+    	String arr[]={"sbose78@gmail.com"};
     	sendMail("",arr , "Just a test ", "relax - sending from app");
     	
-    	*/
+    	
     	
     	
     	

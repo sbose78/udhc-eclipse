@@ -111,6 +111,33 @@ public class HealthRecord {
     String problem_id;
     int approved;
     InputStream consent_letter;
+    String solution_date;
+    public String getSolution_date() {
+		return solution_date;
+	}
+
+	public void setSolution_date(String solution_date) {
+		this.solution_date = solution_date;
+	}
+
+	public String getSolution_content() {
+		return solution_content;
+	}
+
+	public void setSolution_content(String solution_content) {
+		this.solution_content = solution_content;
+	}
+
+	public String getSolution_user() {
+		return solution_user;
+	}
+
+	public void setSolution_user(String solution_user) {
+		this.solution_user = solution_user;
+	}
+
+	String solution_content;
+    String solution_user;
     
     public HealthRecord(){
     	
@@ -188,6 +215,17 @@ public class HealthRecord {
         this.socialWorker_id=socialWorker_id;
         this.problem_details=problem_details;
         this.topic=topic;
+    }
+    
+    public HealthRecord(String topic_id,String topic, String socialWorker_id,String problem_id, String problem_details, String solution_date)
+    {
+        
+        this.topic_id= topic_id;
+        this.problem_id=problem_id;
+        this.socialWorker_id=socialWorker_id;
+        this.problem_details=problem_details;
+        this.topic=topic;
+        this.solution_date=solution_date;
     }
     
     /*
@@ -376,6 +414,45 @@ public class HealthRecord {
         return lhr;
     }
     
+    
+    public static ArrayList<HealthRecord> getAllSolvedHealthRecords() throws IOException
+    {
+    	 
+    	
+     	
+        ArrayList<HealthRecord> lhr = new ArrayList<HealthRecord>();
+        
+        Connection con;//=DbCon.getDbConnection();
+     
+        try{
+            
+                con=DbCon.getDbConnection();
+
+                ResultSet rst=null;
+                Statement stmt=null;
+
+                stmt=con.createStatement();
+                rst=stmt.executeQuery("select * from forum where approved = 1 and solved = 1");
+                while(rst.next()){
+
+                    
+                    HealthRecord h=new HealthRecord(rst.getString("idforum"),rst.getString("topic"),rst.getString("social_worker_id"),rst.getString("problem_id"),rst.getString("problem_details"), rst.getString("solution_date"));
+                    lhr.add(h);
+                }
+                DbCon.closeConnection(con);
+        }
+        
+        
+        
+        catch(Exception e)
+        {
+            System.out.println(e.toString());
+        }
+        
+        
+        
+        return lhr;
+    }
     
      public static ArrayList<HealthRecord> getAllHealthRecords() throws IOException
     {
@@ -829,12 +906,17 @@ public class HealthRecord {
         try            
         {       Connection conn= DbCon.getDbConnection();
                 PreparedStatement pstatement = null;
+                
+                DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, ''yy");
+                Date date = new Date();
+                String upload_date = dateFormat.format(date).toString();
                
-                String queryString = "UPDATE forum SET solution_user = ? , solution_content = ? , solved = 1 WHERE idforum = "+topic_id;
+                String queryString = "UPDATE forum SET solution_user = ? , solution_content = ? , solved = 1 , solution_date = ? WHERE idforum = "+topic_id;
                 pstatement = conn.prepareStatement(queryString);
                 
                 pstatement.setString(1, user);
                 pstatement.setString(2, solution);
+                pstatement.setString(3 , upload_date);
                 
                 int updateQuery = pstatement.executeUpdate();
                 DbCon.closeConnection(conn, pstatement);            
@@ -846,12 +928,25 @@ public class HealthRecord {
         return "OK";
     }    
     
+    public HealthRecord(int topic_id, String topic, String patient_name, String solution_content, String solution_date, String solution_user, int solved)
+    {
+    	this.topic_id=topic_id+"";
+    	this.topic=topic;
+    	this.problem_id=patient_name;
+    	this.solution_date=solution_date;
+    	this.solved=solved;
+    	this.solution_content=solution_content;
+    	
+    	
+    }
      
-    public static String showSolution(int topic_id)
+    public static HealthRecord showSolution(int topic_id)
     {
         Connection con;//=DbCon.getDbConnection();
         String solution_user="";
         String solution_content="";
+        
+        HealthRecord h = null;
         
         try{
                 con=DbCon.getDbConnection();
@@ -860,10 +955,21 @@ public class HealthRecord {
                 Statement stmt=null;
 
                 stmt=con.createStatement();
-                rst=stmt.executeQuery("select solution_user , solution_content from health1.forum where idforum = "+topic_id);
+                rst=stmt.executeQuery("select topic,solved, solution_date , solution_user , problem_id,solution_content from forum where idforum = "+topic_id);
                 while(rst.next()){
+                	
                     solution_user=rst.getString("solution_user");
                     solution_content=rst.getString("solution_content");
+// int topic_id, String topic, String patient_name, String solution_content, String solution_date, String solution_user, int solved                    
+                    h= new HealthRecord(
+                    		topic_id,
+                    		rst.getString("topic"),
+                    		rst.getString("problem_id"),
+                    		rst.getString("solution_content"),
+                    		rst.getString("solution_date"),
+                    		rst.getString("solution_user"),
+                    		rst.getInt("solved")     
+                    );
                     break;
                 }
                 DbCon.closeConnection(con);
@@ -873,7 +979,7 @@ public class HealthRecord {
             e.printStackTrace();
         }
                     
-        return solution_content;
+        return h;
     }   
     
     public static void main(String args[]) throws IOException

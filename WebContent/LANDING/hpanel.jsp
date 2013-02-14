@@ -67,9 +67,17 @@
 					<li><a href="<%=request.getContextPath()%>/PROCESS/process.jsp">PROCESS</a>
 					</li>
 					
+					<li><a href="<%=request.getContextPath()%>/SOLUTION/solutionList.jsp">OUTPUT</a>
+					</li>
+				
+				<%
+					if ( User.isModerator(User.getLoggedInUserEmail(request))){
+				
+				%>
+					
 					<li><a href="<%=request.getContextPath()%>/DASHBOARD/dashboard.jsp">DASHBOARD</a>
 					</li>
-					
+				<%} %>
 					
 					
 				</ul>	
@@ -99,7 +107,7 @@
 	cursor:pointer;
 
 	float:left;
-	width:40%;
+	width:30%;
 	
 	background: rgb(246,248,249); /* Old browsers */
 background: -moz-linear-gradient(top, rgba(246,248,249,1) 0%, rgba(229,235,238,1) 50%, rgba(215,222,227,1) 51%, rgba(245,247,249,1) 100%); /* FF3.6+ */

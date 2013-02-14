@@ -353,11 +353,23 @@ table{
 			
 		%> 
 		<img src="<%=solved_image %>" alt="image" width="50px" height="50px"/>
+
+<%
+String loggedInUser = User.getLoggedInUserEmail(request);
+
+	if(loggedInUser.equals("sbose78@gmail.com") || equals("bera.kaustav@gmail.com") || loggedInUser.equals("rakesh7biswas@gmail.com")){
+		
+	
+%>		
 		
 		&nbsp 		
 		<a class="solution_box" href="<%=request.getContextPath()%>/SOLUTION/submitSolution.jsp?topic_id=<%=record.getTopic_id()%>">Update</a> 
 		&nbsp
 		<a class="solution_box"  href="<%=request.getContextPath()%>/SOLUTION/composeEmail.jsp?topic_id=<%=record.getTopic_id()%>&social_worker_id=<%=record.getSocialWorker_id()%>">EMAIL</a>
+		
+<%
+	}
+%>
 	
 	</td>
 

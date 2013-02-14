@@ -59,7 +59,7 @@ input.email:focus{
 
 input.submit_button{
 
-	background-color: #6798DD;
+	background-color: #0C4B80;
 	padding: 7px;
 	border-radius: 5px;
 	color: white;
@@ -73,24 +73,53 @@ input.submit_button{
 </head>
 <body>
 
+
+<%
+	String topic_id=request.getParameter("topic_id");
+
+%>
+
 <form id="email" action="<%=request.getContextPath()%>/SendMail">
 	
 	To: &nbsp;  <input class="email" type="text" name="sendee_to" value="<%=request.getParameter("social_worker_id")%>"><br>
 	
-	 
+	( Currently, this supports only 1 email recipient - it will support multiple emails in a few days ).
+	<br><br>
+	<!--  
 	CC: &nbsp;  <input class="email" type="hidden" name="sendee_cc" value="<%=request.getParameter("social_worker_id")%>"><br>
 	BCC: &nbsp;  <input class="email" type="hidden" name="sendee_bcc" value="<%=request.getParameter("social_worker_id")%>"><br>
+	-->
+	
 	 
 	Subject: &nbsp; <input class="email"  type="text" name="subject">
 	<br><br>
-	<textarea id="email_text" rows="200" cols="70">
 	
 	
-		
+	
+	<a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=topic_id%>">
+Health issue page
+	</a>
+	
+	<br><br>
+	
+	
+	
+	<a href="<%=request.getContextPath()%>/SOLUTION/viewSolution.jsp?topic_id=<%=topic_id%>">Solution page
+	
+	</a>
+	
+		<br><br>
+	
+	
+	
+	<textarea id="email_text" name="email_text" rows="200" cols="70">
+	
+	
+	
 	
 	</textarea>
 	
-	<input class="submit_button" type="submit" " value="send mail">
+	<input class="submit_button" type="submit" " value="send mail to notify patient">
 	
 	
 	
