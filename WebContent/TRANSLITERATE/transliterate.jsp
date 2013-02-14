@@ -49,7 +49,7 @@
 
 				        // Enable transliteration in the textbox with id
 				        // 'transliterateTextarea'.
-				        control.makeTransliteratable(['narrative_text','narrative_local']);
+				        control.makeTransliteratable(['narrative_local']);
 				      }
 				     
 

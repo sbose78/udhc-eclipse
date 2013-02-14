@@ -1,4 +1,7 @@
+<%@page import="org.udhc.gen.models.Solution"%>
 <%@page import="org.udhc.gen.HealthRecord"%>
+<%@page import="org.udhc.dao.*"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -21,7 +24,7 @@
 <style type="text/css">
 
 table{
-	margin-left: 5%;
+	margin-left: 10px;
 	margin-right:5%;
 	margin-bottom: 2px;
 	padding-left: 150px;
@@ -106,18 +109,35 @@ table{
 
 <%
 
+	
 	ArrayList<HealthRecord> ahr = HealthRecord.getAllSolvedHealthRecords();
 	for ( HealthRecord record : ahr)
 	{
+		String topic_id = record.getTopic_id()	;
 		
-	
-%>
-
-  <tr >
+%>		
+<tr >
   		<td class="patient_name"><%= record.getProblem_id() %></td>
   		<td class="topic_name"><a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=record.getTopic_id()%>"> <%= record.getTopic() %> </a></td>
-  		<td class="solution_box"> <a class="solution_link" href="<%=request.getContextPath()%>/SOLUTION/viewSolution.jsp?topic_id=<%=record.getTopic_id()%>"> Solution</a> </td>
-  		<td class="topic_name"> <%=record.getSolution_date() %> </td>
+  		  		<td class="topic_name"> <%=record.getSolution_date() %> </td>
+  		
+  
+ <%	
+		SolutionDAO dao = new SolutionDAO();
+		ArrayList<Solution> solutions = dao.getSolutionsByTopicId(Integer.parseInt(topic_id));
+		for( Solution s : solutions){		
+		
+%>
+  		<td class="solution_box"> <a class="solution_link" href="<%=request.getContextPath()%>/SOLUTION/viewSolution.jsp?solution_id=<%=s.getSolution_id()%>&topic_id=<%=record.getTopic_id()%>"> 
+  		
+  		<%= s.getSolution_language() %></a> 
+  		</td>
+  		
+<%
+		}
+%>  		
+  		
+  		
   		
   </tr>
   

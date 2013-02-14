@@ -51,12 +51,18 @@ public class DbCon {
              		database_password=root
              		database_database=qwerty
              		
+             		characterEncoding
+             		user
+             		password
+             		
              		*/
 
                 
                 
                 Class.forName(driver).newInstance();
-                conn = DriverManager.getConnection(url+dbName,userName,password);
+                conn= DriverManager.getConnection(url+dbName+"?user="+userName+"&password="+password+"&characterEncoding=utf8");
+                
+                //conn = DriverManager.getConnection(url+dbName,userName,password);
                 
                 System.out.println("Connected to the database");
                 

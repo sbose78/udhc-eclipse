@@ -3,10 +3,13 @@
     Created on : 17 May, 2012, 12:53:26 AM
     Author     : root
 --%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="org.udhc.dao.SolutionDAO"%>
 <%@page import="org.udhc.gen.HealthRecord"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="org.udhc.gen.models.*"%>
+
 <!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <head>
 <style type="text/css">
 
@@ -46,7 +49,9 @@ header{
 
 <%
 	int topic_id= Integer.parseInt( request.getParameter("topic_id"));
+	int solution_id  = Integer.parseInt( request.getParameter("solution_id"));
 	HealthRecord record = HealthRecord.showSolution(topic_id);
+	Solution solution = SolutionDAO.getSolutionById(solution_id);
 	if( record!=null){
 		
 	
@@ -85,7 +90,7 @@ header{
 		   
 		   <strong> <%= record.getProblem_id() %></strong>
 		     <br><br> Solution dated : &nbsp;
-		  <strong> <%= record.getSolution_date() %> </strong>
+		  <strong> <%= solution.getSolution_date() %> </strong>
 		    
 		
 			</div>
@@ -117,7 +122,7 @@ header{
 
 Health issue inputs URL : &nbsp;
 
-<a class="solution_link" href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=record.getTopic_id()%>">
+<a class="solution_link" href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=record.getTopic_id()%>&solution_id=<%=solution_id%>">
 
 <%=domain%><%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=record.getTopic_id()%>
 
@@ -127,8 +132,8 @@ Health issue inputs URL : &nbsp;
 <br><br>Health Issue solution URL : &nbsp; 
 
 
-<a class="solution_link" href="<%=request.getContextPath()%>/SOLUTION/viewSolution.jsp?topic_id=<%=record.getTopic_id()%>">
-<%=domain%><%=request.getContextPath()%>/SOLUTION/viewSolution.jsp?topic_id=<%=record.getTopic_id()%>
+<a class="solution_link" href="<%=request.getContextPath()%>/SOLUTION/viewSolution.jsp?topic_id=<%=record.getTopic_id()%>&solution_id=<%=solution_id%>">
+<%=domain%><%=request.getContextPath()%>/SOLUTION/viewSolution.jsp?topic_id=<%=record.getTopic_id()%>&solution_id=<%=solution_id%>
 </a> 
 	
 </div>
@@ -142,7 +147,7 @@ Health issue inputs URL : &nbsp;
 
 <div id="solution_box" >
     
-    <%=record.getSolution_content()%>    
+    <%=solution.getSolution_content()%>    
     
 </div>
 

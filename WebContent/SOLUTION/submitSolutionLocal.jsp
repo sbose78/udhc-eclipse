@@ -77,12 +77,23 @@ input.submit_button{
 									<div id="narrative_div_text">	
 											<label> Enter Solution</label>
 											<p>
+												<select name="solution_language">
+												
+													<option value="ENGLISH">ENGLISH</option>
+													<option value="BENGALI">BENGALI</option>
+													<option value="HINDI">HINDI</option>
+												
+												</select>
 												<input type="hidden" name="topic_id" value="<%=request.getParameter("topic_id")%>"><br>
-												<input type="hidden" name="language" value="ENGLISH"><br>																																	
+																								
 												<textarea rows="20" cols="80" name="solution_content" id="narrative_text"></textarea>
 												<input class="submit_button" type="submit" value="SUBMIT SOLUTION">
 											</p>										
 									</div>
+
 							</form>	
-			</body>                                                                 
+
+
+
+	</body>                                                                 
 </html>

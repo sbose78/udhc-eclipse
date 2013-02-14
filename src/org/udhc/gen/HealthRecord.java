@@ -915,7 +915,7 @@ public class HealthRecord {
                 pstatement = conn.prepareStatement(queryString);
                 
                 pstatement.setString(1, user);
-                pstatement.setString(2, solution);
+                pstatement.setString(2, "");
                 pstatement.setString(3 , upload_date);
                 
                 int updateQuery = pstatement.executeUpdate();

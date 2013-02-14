@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.udhc.dao.SolutionDAO;
+import org.udhc.gen.models.Solution;
+
 /**
  *
  * @author root
@@ -28,19 +31,31 @@ public class CatchSolution extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
-    {        System.out.println(request.getParameter("solution_content")+";"+Integer.parseInt(request.getParameter("topic_id")));
-                String solution=request.getParameter("solution_content");
+    {        
+		request.setCharacterEncoding("UTF-8");
+        String solution_content=request.getParameter("solution_content");
+
+    	
+    	//System.out.println(request.getParameter("solution_content")+";"+Integer.parseInt(request.getParameter("topic_id")));
+             //   System.out.println(solution_content);
                 int topic_id=Integer.parseInt(request.getParameter("topic_id"));
+                
+                String solution_language = request.getParameter("solution_language");
                 String user=User.getLoggedInUserEmail(request);
                 
-                org.udhc.gen.HealthRecord hr = new org.udhc.gen.HealthRecord();                
-                hr.insertSolution(topic_id,solution,user);
+                Solution s = new Solution(topic_id, solution_content, "0", user, solution_language);
+            	SolutionDAO dao = new SolutionDAO();
+                
+                    org.udhc.gen.HealthRecord hr = new org.udhc.gen.HealthRecord();                
+                    hr.insertSolution(topic_id,solution_content,user);                	
+                	
+                	System.out.println(dao.insertSolution(s));
+               
                 response.getOutputStream().println("Thank you . The solution has been recorded.");
                 
                 //response.sendRedirect(request.getContextPath()+"/SOLUTION/solution.jsp?topic_id="+topic_id);        
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
      * <code>GET</code> method.
