@@ -275,16 +275,23 @@ public class HealthRecord {
                 pstatement.setInt(1, topic_id);                
                 updateQuery = pstatement.executeUpdate();
                
+                // solution table
+                
+                queryString = "DELETE FROM solution WHERE topic_id = ?";
+                pstatement = conn.prepareStatement(queryString);                
+                pstatement.setInt(1, topic_id);                
+                updateQuery = pstatement.executeUpdate();
                 
                 DbCon.closeConnection(conn, pstatement);            
         }
         catch(Exception e)
         {
         	e.printStackTrace();
+        	return 0;
         	
            // return e.toString();
         }
-    	return 0;
+    	return 1;
     }
     
     public static int  updateHealthIssueApprovalStatus(int topic_id, int approve_status) {

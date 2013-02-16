@@ -198,4 +198,14 @@
     <servlet-name>SendMail</servlet-name>
     <url-pattern>/SendMail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteHealthIssueFromDashboard</display-name>
+    <servlet-name>DeleteHealthIssueFromDashboard</servlet-name>
+    <servlet-class>org.udhc.controller.DeleteHealthIssueFromDashboard</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteHealthIssueFromDashboard</servlet-name>
+    <url-pattern>/DeleteHealthIssueFromDashboard</url-pattern>
+  </servlet-mapping>
 </web-app>

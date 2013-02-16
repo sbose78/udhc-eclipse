@@ -126,6 +126,17 @@ table{
 }
 
 
+#load_wait{
+
+	margin: auto;
+	left: 40%;
+	right: 40%;
+	top: 50%;
+	bottom: 50%;
+	position: fixed;
+	z-index:999;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -178,9 +189,55 @@ table{
 			});
 	}
 	
+	 function deleteHealthIssue(topic_id){
+		 $("#load_wait").show();
+		  var finalUrl='<%=request.getContextPath()%>/DeleteHealthIssueFromDashboard?topic_id='+topic_id;
+	    	 var req=$.ajax({
+	                   type:"GET",
+	                   url:finalUrl,
+	                   //contentType: "application/json; charset=utf-8",
+	                   dataType:"JSON",
+	                   success: function(html){
+	                 	 // alert(html[0].about);
+	                 	 // $("#load_wait").hide();
+	                 //	 alert(html);
+	                 	 deleteHealthIssue_callback(html,topic_id);
+	                 	                             
+	                },
+	               complete:function(jqXHR, textStatus) {
+	                 // alert("request complete "+textStatus);
+	            	 //  $("#load_wait").hide();
+	               },
+	              error: function(xhr, textStatus, errorThrown){
+	                //  alert('request failed->'+textStatus);
+	            	//  $("#load_wait").hide();
+	            	  $("#load_wait").hide();
+	            	  alert(" Please report there error: "+textStatus);
+	              }   
+	              
+	              
+	    	 });  
+
+		  
+	  }	
+	  
+	  function deleteHealthIssue_callback(response, topic_id){
+		  $("#load_wait").hide();
+		  if( response[0].isdeleted == "true"){
+			  $("tr[topic_id='"+topic_id+"']").remove();		
+			  alert("Deleted");
+		  }
+		  else{
+			  alert("Sorry , could not delete");
+		  }
+		  
+	  }	
+	
 	
 	function call_on_ready(){
 		
+		
+		$("#load_wait").hide();
 		$("a.solution_box").colorbox({iframe:true, innerWidth:900, innerHeight:700});
 			
 		$('#jqxtabs').jqxTabs({ position: 'top', width: '99%' , height: "auto", reorder: true });
@@ -201,7 +258,23 @@ table{
 				
 				
 			}
-		
+			
+			if ( $("a.delete_health_issue").size() > 0  ){
+				
+				$("a.delete_health_issue").click(function(){
+					
+
+					// check if yes or no
+					var topic_id = $(this).attr("topic_id");
+					var r=confirm("Are you sure you want to delete ?");
+					if (r==true)
+					 {
+					 		deleteHealthIssue(topic_id);
+					 }
+				});	
+		  }
+			
+		 
 		
 			if ( $("input#approval_button").size() > 0 ){
 				
@@ -303,6 +376,12 @@ table{
 <br><br><br><br><br><br>
 <body >
 
+<div id="load_wait">
+	
+		<img src="<%=request.getContextPath()%>/STATICS/images/loading2.gif"/>
+
+</div>
+
 <%
 
 	if( User.isModerator(User.getLoggedInUserEmail(request))){
@@ -314,8 +393,9 @@ table{
 <div id="jqxtabs" align="center">
 	 <ul>
                
-                <li style="margin-left: 37%;">HEALTH ISSUE APPROVAL </li>
+                <li style="margin-left: 31%;">HEALTH ISSUE APPROVAL </li>
                 <li> USER APPROVAL </li>
+                <li> Solutions management </li>
      </ul>
      
      <div>
@@ -333,13 +413,16 @@ table{
 
 <%
 	ArrayList<HealthRecord> all_records = HealthRecord.getAllUploadedHealthRecords();
+	
+	
+
 	for( HealthRecord record:all_records)
 	{
 		String topic_id=record.getTopic_id();
 
 %>
 
-<tr>
+<tr topic_id="<%=topic_id%>" >
 	
 	<td valign="middle">
 	
@@ -352,19 +435,18 @@ table{
 			}
 			
 		%> 
-		<img src="<%=solved_image %>" alt="image" width="50px" height="50px"/>
+		<img class="solution_options" src="<%=solved_image %>" alt="image" width="20px" height="20px"/>
 
 <%
 String loggedInUser = User.getLoggedInUserEmail(request);
 
-	if(loggedInUser.equals("sbose78@gmail.com") || equals("bera.kaustav@gmail.com") || loggedInUser.equals("rakesh7biswas@gmail.com")){
+	if(loggedInUser.equals("sbose78@gmail.com") || loggedInUser.equals("bera.kaustav@gmail.com") || loggedInUser.equals("rakesh7biswas@gmail.com")){
 		
 	
 %>		
 		
-		&nbsp 		
-		<a class="solution_box" href="<%=request.getContextPath()%>/SOLUTION/submitSolution.jsp?topic_id=<%=record.getTopic_id()%>">Update</a> 
-		&nbsp
+				
+		<a class="solution_box" href="<%=request.getContextPath()%>/SOLUTION/solutions_landing.jsp?topic_id=<%=record.getTopic_id()%>">Update</a> 
 		<a class="solution_box"  href="<%=request.getContextPath()%>/SOLUTION/composeEmail.jsp?topic_id=<%=record.getTopic_id()%>&social_worker_id=<%=record.getSocialWorker_id()%>">EMAIL</a>
 		
 <%
@@ -384,8 +466,15 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 			<img width="29px" src="<%=request.getContextPath() %>/STATICS/images/edit_icon.jpeg"/>
 		</a>
 		
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=topic_id%>"><%=record.getTopic() %></a>
+		<!-- CLICKING HERE WILL DELETE HEALTH ISSUE and remove this row -->
+		
+		<a topic_id=<%=topic_id%> class="delete_health_issue" href="#">
+			<img width="29px" src="<%=request.getContextPath() %>/STATICS/images/delete_icon.png"/>
+		</a>
+		
+		&nbsp;&nbsp;
+		<a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=topic_id%>"><%=record.getTopic() %>
+		</a>
 		
 		<br>
 	
@@ -478,6 +567,17 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 		
 	</div>
 </div>
+
+<div align="center" >
+	
+	<table>
+		<th></th>
+	
+	
+	</table>
+
+</div>
+
 
 </div>
 

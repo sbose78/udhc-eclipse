@@ -60,6 +60,41 @@ public class SolutionDAO {
 	 return "OK";
 	}
 	
+	public String update(Solution solution){
+		 int updateQuery=0;
+		try            
+        {
+              
+                Connection conn= DbCon.getDbConnection();
+                PreparedStatement pstatement = null;
+                
+                
+                
+                String queryString = "UPDATE solution SET solution_content = ? ," +
+                		"solution_language = ? " +                		
+                		"WHERE solution_id = ?";
+                pstatement = conn.prepareStatement(queryString); 
+                
+                pstatement.setString(1, solution.getSolution_content());   
+                pstatement.setString(2, solution.getSolution_language());
+                pstatement.setInt(3, solution.getSolution_id());
+                
+                updateQuery = pstatement.executeUpdate();
+                
+                DbCon.closeConnection(conn, pstatement);
+            
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+        	return e.toString();
+        	
+           // return e.toString();
+        }
+		
+		return updateQuery+"";
+	}
+	
 	public ArrayList<Solution> getSolutionsByTopicId(int topic_id){
 		
 		Connection con;//=DbCon.getDbConnection();

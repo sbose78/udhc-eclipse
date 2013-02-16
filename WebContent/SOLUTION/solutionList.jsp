@@ -24,11 +24,11 @@
 <style type="text/css">
 
 table{
-	margin-left: 10px;
-	margin-right:5%;
+	margin-left: 1px;
+
 	margin-bottom: 2px;
-	padding-left: 150px;
-	font-size: 120%;
+	padding-left: 2px;
+	font-size: 100%;
 }
 
 .patient_name{
@@ -103,7 +103,7 @@ table{
 
 </div>
 
-<br><br><br>
+<br>
 
 <table>
 

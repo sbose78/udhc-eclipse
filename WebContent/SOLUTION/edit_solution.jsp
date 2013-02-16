@@ -1,4 +1,10 @@
-<html>                                                                  
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@page import="org.udhc.dao.SolutionDAO"%>
+<%@page import="org.udhc.gen.models.*"%>
+
+<html>
+                                                                  
  <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
                 <script type="text/javascript" src="<%=request.getContextPath()%>/INPUT/js/jquery-1.8.3.min.js"></script>
@@ -16,33 +22,8 @@
 
 <style type="text/css">
 
-input.email{
-
-	width: 700px;
-
-}
-input.email:focus{
-
-	border: solid 5px #EC9505;
-	width: 700px;
-	height:20px;
-	border-radius: 5px;
-
-}		
-
-input.submit_button{
-
-	background-color: #0C4B80;
-	padding: 7px;
-	border-radius: 5px;
-	color: white;
-	
-
-}
-
 </style>
 
-<! end of Google transliterate API >
 
 
 	        <script type="text/javascript">                                         
@@ -69,25 +50,34 @@ input.submit_button{
 	<body> 
 
 							
+<%
 
+	SolutionDAO dao = new SolutionDAO();
+	int solution_id= Integer.parseInt(request.getParameter("solution_id"));
+	Solution solution = dao.getSolutionById(solution_id);
+	System.out.println(solution.getSolution_content());
 
-							<form method="post" action="<%=request.getContextPath()%>/CatchSolution">
+%>
+
+							<form  method="post" action="<%=request.getContextPath()%>/CatchSolution">
 
 
 									<div id="narrative_div_text">	
-											<label> Enter Solution</label>
+											<label> Enter Solution in <%=solution.getSolution_language() %></label>
 											<p>
-												<select name="solution_language">
+											
+												<input type="hidden" name="topic_id" value="<%=solution.getTopic_id()%>"><br>
+												<input type="hidden" name="solution_id" value="<%=solution.getSolution_id()%>"><br>
+												<input type="hidden" name="update" value="true"><br>
+												<input type="hidden" name="solution_language" value="<%=solution.getSolution_language()%>"><br>
 												
-													<option value="ENGLISH">ENGLISH</option>
-													<option value="BENGALI">BENGALI</option>
-													<option value="HINDI">HINDI</option>
-												
-												</select>
-												<input type="hidden" name="topic_id" value="<%=request.getParameter("topic_id")%>"><br>
-												<input type="hidden" name="update" value="false"><br>
 																								
-												<textarea rows="20" cols="80" name="solution_content" id="narrative_text"></textarea>
+												<textarea rows="20" cols="80" name="solution_content" id="narrative_text">
+												<%=solution.getSolution_content() %>
+												
+												</textarea>
+												
+												
 												<input class="submit_button" type="submit" value="SUBMIT SOLUTION">
 											</p>										
 									</div>

@@ -76,7 +76,7 @@
                     <li><a class="howwhywhat" href='<%=request.getContextPath()%>/STATICS/why.jsp'>WHY</a></li>
                     <li><a style='background-color:red'  class="medic_theme" href='<%=request.getContextPath()%>/INPUT/displayInputs.jsp'>INPUT</a></li>
                     <li><a class="medic_theme" href='<%=request.getContextPath()%>/PROCESS/process.jsp'>PROCESS</a></li>
-                    <li><a class="medic_theme" href='<%=request.getContextPath()%>/problem_list.jsp'>OUTPUT</a>                  </li>
+                    <li><a class="medic_theme" href='<%=request.getContextPath()%>/SOLUTION/solutionList.jsp'>OUTPUT</a>                  </li>
                     <li><a class="howwhywhat" href="<%=request.getContextPath()%>/DASHBOARD/dashboard.jsp">DASHBOARD</a>
 					</li>
                                    

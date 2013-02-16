@@ -83,14 +83,24 @@ img.scans{
 
 width:auto;
 height: 300px;
- 	
+position: relative;
+z-index:20;
  
+
+}
+
+img.scans:hover{
+
+width:auto;
+height: 850px;
+z-index: 214747
+
 
 }
 
 input.scan_button{
 	cursor:pointer;
-
+	z-index:3000;
 	position:absolute;
 	background-color: #C93733;
 	color: white;

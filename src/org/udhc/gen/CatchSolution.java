@@ -34,22 +34,36 @@ public class CatchSolution extends HttpServlet {
     {        
 		request.setCharacterEncoding("UTF-8");
         String solution_content=request.getParameter("solution_content");
-
+        int topic_id=Integer.parseInt(request.getParameter("topic_id"));
+   
+        String solution_language = request.getParameter("solution_language");
+        String user=User.getLoggedInUserEmail(request);
+        
+        Solution s = new Solution(topic_id, solution_content, "0", user, solution_language);
+    	SolutionDAO dao = new SolutionDAO();
+        
+        
+        
+        String isUpdate = request.getParameter("update");
+        if(isUpdate!=null && isUpdate.equalsIgnoreCase("true")){
+            int solution_id=Integer.parseInt(request.getParameter("solution_id"));
+        	// call DAO function to update
+        	s = new Solution(solution_id,topic_id, solution_content, "0", user, solution_language);
+        	System.out.println(dao.update(s));
+        	
+        }
+        else{
+                org.udhc.gen.HealthRecord hr = new org.udhc.gen.HealthRecord();                
+                hr.insertSolution(topic_id,solution_content,user);  
+                
+                // call dao function to insert
+                
+            	System.out.println(dao.insertSolution(s));
+        }
     	
     	//System.out.println(request.getParameter("solution_content")+";"+Integer.parseInt(request.getParameter("topic_id")));
              //   System.out.println(solution_content);
-                int topic_id=Integer.parseInt(request.getParameter("topic_id"));
-                
-                String solution_language = request.getParameter("solution_language");
-                String user=User.getLoggedInUserEmail(request);
-                
-                Solution s = new Solution(topic_id, solution_content, "0", user, solution_language);
-            	SolutionDAO dao = new SolutionDAO();
-                
-                    org.udhc.gen.HealthRecord hr = new org.udhc.gen.HealthRecord();                
-                    hr.insertSolution(topic_id,solution_content,user);                	
-                	
-                	System.out.println(dao.insertSolution(s));
+           
                
                 response.getOutputStream().println("Thank you . The solution has been recorded.");
                 
