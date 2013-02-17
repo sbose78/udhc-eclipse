@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import com.mysql.jdbc.UpdatableResultSet;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  *
@@ -83,12 +84,24 @@ public class User {
     int approved; 
     String userid;
     String name;
-    
+    private boolean isModerator;
     // this constructor is used for the PATIENT table. 
     // name = scientific name of patient
     // email = email of social worker
     
-    public User(String name, String email)
+    public boolean getIsModerator() {
+		return isModerator;
+	}
+
+
+
+	public void setIsModerator(Boolean isModerator) {
+		this.isModerator = isModerator;
+	}
+
+
+
+	public User(String name, String email)
     {
         this.name=name;
         this.email=email;
@@ -106,6 +119,16 @@ public class User {
         
     }
     
+    public User(int role,String email,String name, int approved, boolean  isModerator)
+    {
+        this.role=role;
+        this.email=email;
+        this.approved=approved;
+        this.isModerator = isModerator;
+        this.name= name;
+        
+        
+    }
     
     
     
@@ -169,11 +192,54 @@ public class User {
     
     public static String[] getModeratorEmails()
     {
+    	/*
     	String arr[]={"pandita.aakriti@gmail.com", "bhavna.seth@gmail.com","sbose78@gmail.com", "shivika.ch@gmail.com ","rakesh7biswas@gmail.com",
       "pranab@pranab.in","tamoghnab@gmail.com","soumyadeepbhaumik@rediffmail.com","bera.kaustav@gmail.com" ,"rajibs123@yahoo.com" 
     			
-    	};
-    	return arr;
+    	};*/
+    	
+    	String arr[]=new String[10];
+    	
+    	
+    	 Connection con;//=DbCon.getDbConnection();
+         
+         ArrayList<String> user_al=new ArrayList<String>();
+      
+         try{
+             
+                 con=DbCon.getDbConnection();
+
+                 ResultSet rst=null;
+                 Statement stmt=null;
+
+                 stmt=con.createStatement();
+                 rst=stmt.executeQuery("select email  from user_roles where moderator = 1");// where social_worker_id = '"+social_worker_id+"'");
+                 while(rst.next()){
+                     
+                 	System.out.println("Found atleast one");
+                 	
+                     String email = rst.getString("email");
+                     user_al.add(email);
+                         //return true;
+                 }
+                 
+                 
+                 DbCon.closeConnection(con);
+         }
+         
+         
+         
+         catch(Exception e)
+         {
+             System.out.println(e.toString());
+         }
+         
+         String a[]= new String[user_al.size()];
+         user_al.toArray(a);
+         
+         return a;
+    	
+    	
     }
     
     public static boolean isModerator(String email)
@@ -647,7 +713,9 @@ public class User {
                            
                            while(rst.next()){
                           //     System.out.println("here");
-                        	   User user = new User( rst.getInt("role"), rst.getString("email"), rst.getString("name"), rst.getInt("approved"));
+                        	   
+                        	   Boolean isMod = rst.getInt("moderator")==1?true:false;
+                        	   User user = new User( rst.getInt("role"), rst.getString("email"), rst.getString("name"), rst.getInt("approved"),isMod);
                         	   all_users.add(user);
                            }
                            DbCon.closeConnection(con);
@@ -672,11 +740,17 @@ public class User {
     
     public static void main(String args[])
     {
+    	/*
     	 ArrayList<User> all_users = User.getAllUsers();
     	 for ( User u : all_users){
    // 		 System.out.println("here");
     		 System.out.println(u);
     	 }
+    	 */
+    	String rr[]=User.getModeratorEmails();
+    	for( String s : rr){
+    		System.out.println(s);
+    	}
     	
     }            
 }

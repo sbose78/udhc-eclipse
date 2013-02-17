@@ -166,7 +166,7 @@
   <context-param>
     <description>domain</description>
     <param-name>domain_url</param-name>
-    <param-value>http://localhost:8080/udhc-eclipse-tomcat6/</param-value>
+    <param-value>http://care.udhc.co.in/</param-value>
   </context-param>
   <servlet>
     <description></description>
@@ -207,5 +207,25 @@
   <servlet-mapping>
     <servlet-name>DeleteHealthIssueFromDashboard</servlet-name>
     <url-pattern>/DeleteHealthIssueFromDashboard</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CatchProfileData</display-name>
+    <servlet-name>CatchProfileData</servlet-name>
+    <servlet-class>org.udhc.controller.CatchProfileData</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CatchProfileData</servlet-name>
+    <url-pattern>/CatchProfileData</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateModerator</display-name>
+    <servlet-name>UpdateModerator</servlet-name>
+    <servlet-class>org.udhc.controller.UpdateModerator</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateModerator</servlet-name>
+    <url-pattern>/UpdateModerator</url-pattern>
   </servlet-mapping>
 </web-app>

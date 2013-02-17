@@ -48,7 +48,7 @@
 	  <div id="all_links">	  		
 				<ul >
 				
-					<li> <a class="popup_login" onclick="openLoginPopup()" href="#"><img height="27px" src="<%=request.getContextPath()%>/STATICS/images/openid_icon.png"/> &nbsp; <%=action %></a>
+					<li> <a class="popup_login" onclick="openLoginPopup()" href="#"> <%=action %></a>
 					</li>
 				
 					<li> <a style='background-color:red' href="<%=request.getContextPath()%>/HOW/how.jsp">HOW</a>
@@ -69,6 +69,18 @@
 					
 					<li><a href="<%=request.getContextPath()%>/SOLUTION/solutionList.jsp">OUTPUT</a>
 					</li>
+			<%
+				if( !User.getLoggedInUserEmail(request).equals("GUEST") && User.getLoggedInUserRole(request).equals("2")){
+			%>
+					<li><a href="<%=request.getContextPath()%>/PROFILE/DOCTOR/profile.jsp?doctor_email=<%=User.getLoggedInUserEmail(request)%>">
+					<img style="{position:relative; top:40px; }" width="30px" heitgh="30px" src="<%=request.getContextPath()%>/STATICS/images/malefemale.jpeg" /></a>
+					</li>
+			
+			<%
+				}
+			%>
+						
+					
 				
 				<%
 					if ( User.isModerator(User.getLoggedInUserEmail(request))){

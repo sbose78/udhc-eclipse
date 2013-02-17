@@ -76,6 +76,32 @@ table{
 
 }
 
+.is_moderator{
+
+	border-radius:9px;
+	margin:auto;left:0;right:0;
+	cursor: pointer;
+	padding: 7px;
+	background-color:green;
+	color: white;
+	margin: 6px;
+
+}
+
+.is_not_moderator{
+
+
+	border-radius:9px;
+	margin:auto;left:0;right:0;
+	cursor: pointer;
+	padding: 7px;
+	background-color: red;
+	color: white;
+	margin: 6px;
+
+}
+
+
 .user_not_approved_button{
 
 		border-radius:9px;
@@ -259,6 +285,26 @@ table{
 				
 			}
 			
+			
+			/*   For moderator approval */
+			if(  $("input#moderator_approval_button").size() > 0 )
+			{
+				$("input#moderator_approval_button").click(function(){
+					var approval_status= $(this).attr("class");
+					var email=$(this).attr("email");
+					var moderator = $(this).attr("moderator");
+					//var approved =  $(this).attr("approved"); 
+					$(this).attr("value"," WORKING....");
+					
+					// send request to server
+
+					makeModeratorChange(email,moderator,this);
+				
+				});
+				
+				
+			}
+			
 			if ( $("a.delete_health_issue").size() > 0  ){
 				
 				$("a.delete_health_issue").click(function(){
@@ -320,6 +366,59 @@ table{
 			
 		}
 		
+		function makeModeratorChange(email,moderator,button){
+			// send to server
+			var updated_moderator = moderator == "true"?"false":"true";
+			var finalUrl='<%=request.getContextPath()%>/UpdateModerator?email='+email+'&moderator='+updated_moderator;
+	    	 var req=$.ajax({
+	                   type:"GET",
+	                   url:finalUrl,
+	                   //contentType: "application/json; charset=utf-8",
+	                   dataType:"JSON",
+	                   success: function(response){
+	                 	
+	                	   makeModeratorChange_callback(button,updated_moderator,response);
+	           		                 	                             
+	                },
+	               complete:function(jqXHR, textStatus) {
+	                 // alert("request complete "+textStatus);
+	               },
+	              error: function(xhr, textStatus, errorThrown){
+	                //  alert('request failed->'+textStatus);
+	              }   
+	    	 });
+		}
+			
+			
+		
+		function makeModeratorChange_callback(button,moderator,response){
+			
+			var updatedModeratorStatus = "";
+			var updatedModeratorClass = "";
+			
+			if( response[0].status != "0")
+			{
+				//alert("upadting "+moderator );
+				updatedModeratorStatus = moderator=="true"?"YES":"NO";
+				$(button).attr("value",updatedModeratorStatus);
+				$(button).attr("moderator",moderator);
+				
+				updatedModeratorClass = moderator=="true"?"is_moderator":"is_not_moderator";
+				$(button).attr("class",updatedModeratorClass);
+				
+			}
+			
+			else{
+				updatedModeratorStatus = moderator=="true"?"NO":"YES";
+				$(button).attr("value",updatedModeratorStatus);
+				
+				updatedModeratorClass = moderator=="true"?"is_not_moderator":"is_moderator";
+				$(button).attr("class",updatedModeratorClass);
+				
+			}
+			
+		}
+	
 		function updateApprovalButton(response,button,updatedApprovalStatus,updatedApprovalClass)
 		{
 		//	alert(response[0].status);
@@ -395,7 +494,7 @@ table{
                
                 <li style="margin-left: 31%;">HEALTH ISSUE APPROVAL </li>
                 <li> USER APPROVAL </li>
-                <li> Solutions management </li>
+                <li> MODERATORS </li>
      </ul>
      
      <div>
@@ -413,7 +512,8 @@ table{
 
 <%
 	ArrayList<HealthRecord> all_records = HealthRecord.getAllUploadedHealthRecords();
-	
+String loggedInUser = User.getLoggedInUserEmail(request);
+
 	
 
 	for( HealthRecord record:all_records)
@@ -438,7 +538,6 @@ table{
 		<img class="solution_options" src="<%=solved_image %>" alt="image" width="20px" height="20px"/>
 
 <%
-String loggedInUser = User.getLoggedInUserEmail(request);
 
 	if(loggedInUser.equals("sbose78@gmail.com") || loggedInUser.equals("bera.kaustav@gmail.com") || loggedInUser.equals("rakesh7biswas@gmail.com")){
 		
@@ -467,11 +566,16 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 		</a>
 		
 		<!-- CLICKING HERE WILL DELETE HEALTH ISSUE and remove this row -->
-		
+<%
+if(loggedInUser.equals("sbose78@gmail.com") || loggedInUser.equals("bera.kaustav@gmail.com") || loggedInUser.equals("rakesh7biswas@gmail.com")){
+  
+%>			
 		<a topic_id=<%=topic_id%> class="delete_health_issue" href="#">
 			<img width="29px" src="<%=request.getContextPath() %>/STATICS/images/delete_icon.png"/>
 		</a>
-		
+<%
+}
+%>		
 		&nbsp;&nbsp;
 		<a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=topic_id%>"><%=record.getTopic() %>
 		</a>
@@ -531,7 +635,7 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 		<br><br>
 		
 		<table>
-			<th > Email </th>  <th>Name</th> <th>Role</th>  <th>Approval status</th>
+			<th > Email </th>  <th>Name</th> <th>Role</th>  <th>Approval status</th> <th>Moderator?</th> 
 <%
 	for( User user : all_users){
 %>			
@@ -540,8 +644,9 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 			
 			<td> <%= user.getEmail() %></td>
 			<td><%= user.getName() %></td>
+			
 			<td><%= User.getUserPrivilegeName(user.getRole())%></td>
-			<td>
+			<td align="center">
 			
 					<%
 						String button_class = "user_approved_button";
@@ -555,6 +660,28 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 					
 					<input email="<%=user.getEmail()%>" role="<%=user.getRole() %>" approved="<%=user.getApproved() %>" type="button" class="<%=button_class%>" id="user_approval_button" value="<%=button_value%>">
 			
+			</td>
+			<td align="center">
+				<%
+					String button_mod_class=  "is_moderator";
+					String button_mod_value= "YES";
+					if( !user.getIsModerator())
+					{	button_mod_class=  "is_not_moderator";
+						button_mod_value= "NO";
+						
+					}
+					if(loggedInUser.equals("sbose78@gmail.com") || loggedInUser.equals("bera.kaustav@gmail.com") || loggedInUser.equals("rakesh7biswas@gmail.com")  ){
+						
+				
+				
+				%>
+				
+				
+				<input email="<%=user.getEmail()%>" role="<%=user.getRole() %>" moderator="<%=user.getIsModerator() %>" type="button" class="<%=button_mod_class%>" id="moderator_approval_button" value="<%=button_mod_value%>">
+				
+				<%
+					}
+				%>
 			</td>
 	   </tr>
 			
@@ -589,7 +716,7 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 %>
 
 <div align="center"><br><br><br><br>
-	THE DASHBOARD IS CURRENTLY AVAILABLE ONLY FOR MODERATORS.<br>
+	Work in progress.
 	
 </div>
 
