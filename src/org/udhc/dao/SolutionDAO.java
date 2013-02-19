@@ -95,6 +95,9 @@ public class SolutionDAO {
 		return updateQuery+"";
 	}
 	
+
+	
+	
 	public ArrayList<Solution> getSolutionsByTopicId(int topic_id){
 		
 		Connection con;//=DbCon.getDbConnection();
@@ -114,6 +117,45 @@ public class SolutionDAO {
                 	String solution_date = rst.getString("solution_date");
                 	String solution_user = rst.getString("solution_user");
                 	String solution_language = rst.getString("solution_language");
+                	
+                	Solution s=new Solution(solution_id, topic_id, solution_content, solution_date, solution_user, solution_language);                           
+                    solutions.add(s);
+                }
+                DbCon.closeConnection(con);
+                
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.toString());
+        }
+        
+        return solutions; 
+	}
+	
+	
+	
+	
+
+	public ArrayList<Solution> getAllSolutions(){
+		
+		Connection con;//=DbCon.getDbConnection();
+        String a="";
+        ArrayList<Solution > solutions= new ArrayList<Solution>();
+        try{            
+                con=DbCon.getDbConnection();
+                ResultSet rst=null;
+                Statement stmt=null;
+                stmt=con.createStatement();
+                rst=stmt.executeQuery("select * from solution ");                                   
+                
+                while(rst.next())
+                {
+                	int solution_id = rst.getInt("solution_id");
+                	String solution_content = rst.getString("solution_content");
+                	String solution_date = rst.getString("solution_date");
+                	String solution_user = rst.getString("solution_user");
+                	String solution_language = rst.getString("solution_language");
+                	int topic_id = rst.getInt("topic_id");
                 	
                 	Solution s=new Solution(solution_id, topic_id, solution_content, solution_date, solution_user, solution_language);                           
                     solutions.add(s);

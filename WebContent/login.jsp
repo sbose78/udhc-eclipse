@@ -7,6 +7,9 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/INPUT/js/jquery-1.8.3.min.js"></script>
 <script src="<%=request.getContextPath()%>/LANDING/jquery.bxslider/jquery.bxslider.min.js"></script>
 <link href="<%=request.getContextPath()%>/LANDING/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+<script src="<%=request.getContextPath()%>/INPUT/colorbox/jquery.colorbox.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/INPUT/colorbox/colorbox.css" />
+
 
 <title> Welcome to the User-driven health network </title>
 
@@ -73,6 +76,18 @@ body{
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
 
 }
+
+
+#phr_button{
+	padding: 10px;
+	color: white;
+	background-color: #0B75B2;
+	font-size: 110%;
+	text-decoration: none;
+	border-radius: 8px;
+	
+}
+
 </style>
 
 
@@ -81,6 +96,10 @@ body{
 	$(document).ready(call_on_ready);
 	
 	function call_on_ready(){
+		
+	//	$("a#phr_button").colorbox({iframe:true, innerWidth:1200, innerHeight:800});
+
+		
 		  $('.bxslider').bxSlider({
 			 
 			  
@@ -141,16 +160,16 @@ body{
 								data with your 'informed consent' 							
 							</div>   <hr></hr>
 							Our doctors will help solve your health issue with your consent.
-							<br><br><br><br>
+							<br><br>
    			               Please download the letter of  CONSENT in any of the 3 languages below:
    			               
-   			               <br><br> <br><br>
+   			               <br><br> 
                         
                         
                        <a class="buttons_link" href="<%=request.getContextPath()%>/STATICS/docs/udhc-hindi.pdf">Hindi</a> &nbsp;
                        <a class="buttons_link" href="<%=request.getContextPath()%>/STATICS/docs/udhc-bengali.pdf">Bengali</a>&nbsp;
                        <a class="buttons_link" href="<%=request.getContextPath()%>/STATICS/docs/udhc-english.pdf">English</a>&nbsp;
-							<br><br>	<br><br>	
+							<br><br>	<br>	
 						</li>
 						<li>
 							<div class="description_heading">
@@ -162,9 +181,29 @@ body{
 							<br><br>	<br><br>
 							
 					&nbsp;&nbsp;&nbsp;		 <a class="buttons_link" href="<%=request.getContextPath()%>/INPUT/care-seeker-input.jsp">ADD YOUR HEALTH ISSUE </a>
-							
+							<br><br><br>
 												
-						</li> 
+						</li>
+						<li>
+						
+						<div class="description_heading">
+								
+								Patient health records 
+																
+						</div>		<hr></hr>
+						<br>
+						 &nbsp;<br><br> 
+						<a id="phr_button"  href="<%=request.getContextPath()%>/SOLUTION/phrquery.jsp">
+						
+						Open Patient Health Record 
+						
+						</a>
+						
+						
+					
+						
+						</li>
+						 
 						
 					</ul>
 				

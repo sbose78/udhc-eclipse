@@ -363,6 +363,9 @@ public class HealthRecord {
     	return 0;
     }
     
+    
+		
+	    
     public static ArrayList<HealthRecord> getAllUploadedHealthRecords() 
     {
     	 
@@ -385,24 +388,7 @@ public class HealthRecord {
                 rst=stmt.executeQuery("select * from forum");
                 while(rst.next()){
         
-                	/*
-                   Date my_date = rst.getTimestamp("upload_date");
-                   
-                   Calendar c = Calendar.getInstance();
-                 //  System.out.println(c.getTimeZone().getDisplayName());
-                   
-                 //  c.setTimeZone(TimeZone.getTimeZone("GMT-1300"));
-                   int month = c.get(Calendar.MONTH);
-                //   System.out.println(month);
-                  String m =new DateFormatSymbols().getMonths()[month];
-                  String d = c.get(Calendar.DAY_OF_MONTH)+"";
-                  String y = c.get(Calendar.YEAR)+"";
-                  
-                  
-                   String date_string = d+ " "+ m+" , "+y;  */
-                   
-                   //String date_string= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(my_date);
-                	
+                            	
                    HealthRecord h=new HealthRecord(Integer.parseInt(rst.getString("idforum")),rst.getString("topic"),rst.getString("social_worker_id"),rst.getString("problem_id"),rst.getString("problem_details"),rst.getInt("approved"),rst.getString("upload_date").toString(),rst.getInt("solved"));
                    lhr.add(h);
                 }
@@ -421,6 +407,51 @@ public class HealthRecord {
         return lhr;
     }
     
+    
+    public static ArrayList<HealthRecord> getAllUploadedHealthRecordsByPatientName(String patient_name) 
+    {
+    	 
+    	 System.out.println("testing");
+    	 
+    	
+     	
+        ArrayList<HealthRecord> lhr = new ArrayList<HealthRecord>();
+        
+        Connection con;//=DbCon.getDbConnection();
+     
+        try{
+            
+                con=DbCon.getDbConnection();
+
+                ResultSet rst=null;
+                Statement stmt=null;
+
+                String sql="select * from forum where problem_id = ? order by idforum asc";
+                PreparedStatement ps=con.prepareStatement(sql);
+                ps.setString(1, patient_name);
+                rst=ps.executeQuery();
+                while(rst.next()){
+        
+                            	
+                   HealthRecord h=new HealthRecord(Integer.parseInt(rst.getString("idforum")),rst.getString("topic"),rst.getString("social_worker_id"),rst.getString("problem_id"),rst.getString("problem_details"),rst.getInt("approved"),rst.getString("upload_date").toString(),rst.getInt("solved"));
+                   lhr.add(h);
+                }
+                DbCon.closeConnection(con);
+        }
+        
+        
+        
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        
+        
+        return lhr;
+    }
+    
+
     
     public static ArrayList<HealthRecord> getAllSolvedHealthRecords() throws IOException
     {
