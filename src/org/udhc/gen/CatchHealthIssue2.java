@@ -150,11 +150,9 @@ public class CatchHealthIssue2 extends HttpServlet {
            */
           
            String to[]=User.getModeratorEmails();
-           String subject="[UDHC Alpha TEST] Patient name : "+ patient_name + " uploaded by " + org.udhc.gen.User.getLoggedInUserName(request);
+           String subject="[NEW HEALTH ISSUE] Patient name : "+ patient_name + " uploaded by " + org.udhc.gen.User.getLoggedInUserName(request);
            String content=" Hello care-givers!, <br>A new health issue has been posted on UDHC : "+topic;
-           content+="<br><strong> ***This is an automated email sent from the UDHC website. </Strong> Visit <a href='http://care.udhc.co.in/UPLOADER/care-seeker-input-edit.jsp?topic_id="+topic_id+"'>Health issue approval page</a> to approve/edit the health issue  ***<br><br>";
-           content+="  NARRATIVE: <br>"+problem_details;
-           content+="<br><br>Warm regards, <br> The UDHC Team";
+           content+=" <strong> NARRATIVE  </strong>: <br> <br> <br>"+problem_details+"<br> <br> <br>";
             
            topic="[ UDHC ] - "+ patient_name + "uploaded by " + org.udhc.gen.User.getLoggedInUserName(request);
            org.udhc.gen.EmailUtil.sendMail("sbose78", to, subject, content);
