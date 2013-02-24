@@ -279,9 +279,9 @@ if( issue.getApproved()==1 || (issue.getApproved()==0 && (User.isModerator(User.
 		%>
 
 		<li><a class="report_image"
-			href="<%=request.getContextPath()%>/ViewImage?file_id=<%=image.getReport_id()%>"
+			href="<%=request.getContextPath()%>/ViewImage?file_id=<%=image.getReport_id()%>&scale=500"
 			title="<%=image.getDescription()%>"> <img
-				src='<%=request.getContextPath()%>/ViewImage?file_id=<%=image.getReport_id()%>'
+				src='<%=request.getContextPath()%>/ViewImage?file_id=<%=image.getReport_id()%>&scale=800'
 				height='200px' width='200px' />
 		</a></li>
 

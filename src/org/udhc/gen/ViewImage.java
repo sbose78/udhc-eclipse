@@ -4,13 +4,20 @@
  */
 package org.udhc.gen;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.imgscalr.Scalr;
 
 /**
  *
@@ -40,11 +47,28 @@ public class ViewImage extends HttpServlet {
              */
             
             int file_id=Integer.parseInt(request.getParameter("file_id"));
+            String scale_req=request.getParameter("scale");
+            int scale=800;
+            if(scale_req != null){
+            	scale= Integer.parseInt(scale_req);
+            }
+            
             //InputStream image= HealthRecord.getImageData(file_id);
-            imbytes=HealthRecord.getImageData(file_id);
+           // imbytes=HealthRecord.getImageData(file_id);
+            
+            InputStream my_image = HealthRecord.getImageStream(file_id);
+            BufferedImage img = ImageIO.read(my_image); // load image
+            BufferedImage scaledImg = Scalr.resize(img,scale);
+            
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(scaledImg, "jpg", baos );
+            baos.flush();
+            byte[] imageInByte = baos.toByteArray();
+            baos.close();
+            o.write(imageInByte);
             
            
-            o.write(imbytes);
+            //o.write(imbytes);
             o.flush();
             o.close();            
 

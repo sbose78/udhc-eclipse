@@ -5,6 +5,7 @@
 package org.udhc.gen;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -610,6 +611,43 @@ public class HealthRecord {
         
     }
     
+    public static InputStream getImageStream(int file_id){
+    	
+    	Connection con;//=DbCon.getDbConnection();
+        
+        InputStream is;
+        byte[] imgdata=null;
+   
+      try{
+          
+              con=DbCon.getDbConnection();
+
+              ResultSet rst=null;
+              Statement stmt=null;
+              
+            
+
+              stmt=con.createStatement();
+              rst=stmt.executeQuery("select * from health_files where idhealth_files = "+file_id);
+              while(rst.next()){    
+                      InputStream b=rst.getBinaryStream("file");
+                      return b;
+              }
+              DbCon.closeConnection(con);
+           
+      }
+      
+      
+      
+      catch(Exception e)
+      {
+          System.out.println(e.toString());
+      }
+      
+      return null;
+      
+    	
+    }
     
     public static ArrayList<Integer> getImagesList(int topic_id)
     {

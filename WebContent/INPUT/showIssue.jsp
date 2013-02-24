@@ -25,7 +25,7 @@
           //              out.print("<a href='"+request.getContextPath()+"/ViewImage?file_id="+image+"'><img src='"+request.getContextPath()+"/ViewImage?file_id="+image+"' height='50px' width='50px' /> "+i+"</a>,");
         %>
 
-<a href="#" onclick="show_image('<%=request.getContextPath()%>/ViewImage?file_id=<%=image%>')"><img src='<%=request.getContextPath()%>/ViewImage?file_id=<%=image%>' height='80px' width='80px' /></a>
+<a href="#" onclick="show_image('<%=request.getContextPath()%>/ViewImage?file_id=<%=image%>')"><img src='<%=request.getContextPath()%>/ViewImage?file_id=<%=image%>&scale=100' height='80px' width='80px' /></a>
 
 <%
 	}
@@ -75,7 +75,12 @@
 
 
 <br>
-Patient name : <%=  issue.getProblem_id() %> <br>
+Patient name : 
+
+<a class="patient_profile" href="<%=request.getContextPath()%>/PROFILE/PATIENT/profile.jsp?patient_name=<%=issue.getProblem_id()%>">
+<%=  issue.getProblem_id() %> 
+</a>
+<br>
 <%
   if (  User.getLoggedInUserEmail(request).equals(issue.getSocialWorker_id()) || User.isModerator( User.getLoggedInUserEmail(request)))
   {
