@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.udhc.dao.UserDAO;
+import org.udhc.gen.EmailUtil;
+import org.udhc.gen.User;
 
 /**
  * Servlet implementation class UpdateModerator
@@ -55,7 +57,7 @@ public class UpdateModerator extends HttpServlet {
 		
 		status_array.add(status_object);
 		
-		
+	
 
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
@@ -64,6 +66,29 @@ public class UpdateModerator extends HttpServlet {
 		System.out.println(status_array);
 		out.print(status_array);
 		out.flush();
+		
+		String to[]={email};
+
+		try {
+			
+			
+			if(isModerator){
+					EmailUtil.sendMail("", to, "ArogyaUDHC Moderator", "Congratulations, you are now a moderator and have access to the dashboard!<br>");
+					String to1[]={"kaustav.bera@udhc.co.in","sbose78@gmail.com","caregiver@udhc.co.in",User.getLoggedInUserEmail(request)};
+					EmailUtil.sendMail("", to1, "ArogyaUDHC moderator approval for "+email, "Approved by " +User.getLoggedInUserEmail(request));
+			}
+			else{
+				String to1[]={"kaustav.bera@udhc.co.in","sbose78@gmail.com","caregiver@udhc.co.in",User.getLoggedInUserEmail(request)};
+				EmailUtil.sendMail("", to1, "ArogyaUDHC moderator approval cancelled for "+email, "Cancelled by " +User.getLoggedInUserEmail(request));
+
+			}
+				
+	}
+	catch (Exception e) {
+		
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		
 		
 		

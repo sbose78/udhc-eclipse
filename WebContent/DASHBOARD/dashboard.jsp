@@ -519,6 +519,7 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 	for( HealthRecord record:all_records)
 	{
 		String topic_id=record.getTopic_id();
+		
 
 %>
 
@@ -638,14 +639,39 @@ if(loggedInUser.equals("sbose78@gmail.com") || loggedInUser.equals("bera.kaustav
 			<th > Email </th>  <th>Name</th> <th>Role</th>  <th>Approval status</th> <th>Moderator?</th> 
 <%
 	for( User user : all_users){
+		boolean isPatient= User.getUserPrivilegeName(user.getRole()).equals("patient")?true:false;
+		 
 %>			
 			<tr>
 			
 			
-			<td> <%= user.getEmail() %></td>
+			<td> 
+			
+			<%
+			if(!isPatient || ( isPatient && (loggedInUser.equals("rakesh7biswas@gmail.com") || loggedInUser.equals("bera.kaustav@gmail.com") || loggedInUser.equals("sbose78@gmail.com"))))
+			{
+				out.println( user.getEmail() );
+				
+			}
+			else {
+				out.println("HIDDEN");
+			}
+			
+			%>
+			
+			</td>
 			<td><%= user.getName() %></td>
 			
-			<td><%= User.getUserPrivilegeName(user.getRole())%></td>
+			<td>
+		
+			<%
+				
+					out.println(User.getUserPrivilegeName(user.getRole()));	
+				
+			
+			%>
+			
+			</td>
 			<td align="center">
 			
 					<%

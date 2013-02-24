@@ -321,8 +321,13 @@ if( issue.getApproved()==1 || (issue.getApproved()==0 && (User.isModerator(User.
 </strong>
 
 <br>
-<br> Patient name :
-<%=issue.getProblem_id()%>
+<br> Patient name : &nbsp;
+
+<a class="patient_profile" href="<%=request.getContextPath()%>/PROFILE/PATIENT/profile.jsp?patient_name=<%=issue.getProblem_id()%>">
+  		<%= issue.getProblem_id() %>
+  		</a>
+  		
+
 <br>
 
 <!-- Uploaded by: <%=issue.getSocialWorker_id()%>  -->

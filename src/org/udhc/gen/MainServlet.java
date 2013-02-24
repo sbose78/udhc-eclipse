@@ -111,11 +111,11 @@ public class MainServlet extends HttpServlet {
 		                         * 
 		                         * 
 		                         */
-		                        
+                                String name=org.udhc.gen.User.getName(authentication.getEmail().toString());
+
 		                        if(User.checkUserPresence(authentication.getEmail()))
 		                        {
 		                                      String email=authentication.getEmail();
-		                                      String name=org.udhc.gen.User.getName(authentication.getEmail().toString());
 		                                      String role=""+org.udhc.gen.User.getLoggedInUserRole(email);
 		                                      System.out.println("Role"+role);
 		                                      request.getSession().setAttribute("role",role);
@@ -135,12 +135,21 @@ public class MainServlet extends HttpServlet {
 		                                      response.sendRedirect(redirect_to);
 		                                      
 		                                      */
+		                                    
 		                                      
 		                                      response.sendRedirect(request.getContextPath()+"/AUTH/successful.jsp");
 		                                      return;                            
 		                        }
 		                        else
 		                        {
+		                        	  String content ="Hi "+name+", <br>";
+                                      content+="Thank you for registering. <br><br>";
+                                      content+="Please note that if you are registering as a doctor/medical student," +
+                                      		"one of our moderators may get in touch with you to approve your account." +
+                                      		"<br><br>Take care.<br> ";
+                                      	
+                                      
+                                      EmailUtil.sendMail("", User.getModeratorEmails(),"ArogyaUDHC registration" , content );
 		                            response.sendRedirect(request.getContextPath()+"/completeProfile.jsp");
 		                            return;
 		                        }

@@ -82,14 +82,9 @@
 						
 					
 				
-				<%
-					if ( User.isModerator(User.getLoggedInUserEmail(request))){
-				
-				%>
-					
 					<li><a href="<%=request.getContextPath()%>/DASHBOARD/dashboard.jsp">DASHBOARD</a>
 					</li>
-				<%} %>
+				
 					
 					
 				</ul>	

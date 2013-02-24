@@ -34,12 +34,17 @@
 
 #care_seeker_form
 {
-	padding:19px;
-	background-color: #E9E9E9;
 	font-size: 110%;
 	width: 80%;
 	margin: auto;
 	right: 0;left:0;
+
+	
+	
+	border: solid 2px #7895D7;
+	padding: 20px;
+	border-radius: 9px;
+	background-color: #EAEFF1;
 	
 
 }
@@ -117,9 +122,12 @@ input.scan_button{
 	margin: auto;
 	left: 0;right: 0;
 	text-align: left; 
-	padding: 5%;
-	font-size: 120%;
-	background-color: #FFF982;
+	font-size: 120%;	
+	
+	border: solid 2px #7895D7;
+	padding: 20px;
+	border-radius: 9px;
+	background-color: #EAEFF1;
 }
 
 .file_upload_form_button{
@@ -615,9 +623,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 	     <td align="center" valign="top" >
 	     <div id="add_new_scan_section">		       
 			            
-    <strong><h3>Add a new health report / scan  </h3></strong><br>
-    	
-    	
+    <strong><h3>Add a new health report / scan  </h3></strong>
+    
+    <p style="{color:red;}">
+    
+    <font color="red">Files should be in image formats : JPEG/JPG/PNG only </font> 
+    
+    </p>
     
 	<form  action="<%=request.getContextPath()%>/CatchImageUpload" method="post" enctype="multipart/form-data" id="form_image" name="form_image">
 			            <input name="topic_id" id="topic_id" value="<%=request.getParameter("topic_id")%>" type="hidden">         
@@ -634,8 +646,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 	   </table>
 
 </div>    
-
+<br><br>
+<br><br><br>
   <hr></hr>
+  
+  
 
 <style>
 

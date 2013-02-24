@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.udhc.gen.EmailUtil;
 import org.udhc.gen.HealthRecord;
 
 /**
@@ -48,6 +49,8 @@ public class changeHealthIssueApprovalStatus extends HttpServlet {
 		status.put("status",transaction_status );
 		
 		jsonarray.add(status);
+		
+		
 		
 		response.setContentType("application/json");
 		

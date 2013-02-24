@@ -32,13 +32,18 @@ table{
 }
 
 .patient_name{
+	cursor:pointer;
 	color:white;
 	padding:10px;
-	
 	border-radius: 6px;
 	margin-right: 10px;
 	background-color: #73A000;
 }
+
+.patient_name a{
+	text-decoration:none;
+}
+
 
 .topic_name{
 	background-color: #DFDFDF ; 
@@ -78,7 +83,8 @@ table{
 	
 	function call_on_ready(){
 		$("a.solution_link").colorbox({iframe:true, innerWidth:1000, innerHeight:900});
-		
+		$("a.patient_profile").colorbox({iframe:true, innerWidth:1300, innerHeight:900});
+
 	}		
 
 
@@ -117,7 +123,16 @@ table{
 		
 %>		
 <tr >
-  		<td class="patient_name"><%= record.getProblem_id() %></td>
+  		<td class="patient_name">
+  		
+  		<a class="patient_profile" href="<%=request.getContextPath()%>/PROFILE/PATIENT/profile.jsp?patient_name=<%= record.getProblem_id()%>">
+  		<%= record.getProblem_id() %>
+  		</a>
+  		
+  		
+  		
+  		
+  		</td>
   		<td class="topic_name"><a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=record.getTopic_id()%>"> <%= record.getTopic() %> </a></td>
   		  		<td class="topic_name"> <%=record.getSolution_date() %> </td>
   		
