@@ -250,7 +250,7 @@ label{
                        
                         <br><br>
                         <label> <strong>Narrative</strong></label><br><br>
-                        <textarea id="editor" name="editor" rows="20" cols="75" >
+                        <textarea id="editor" name="problem_details" rows="20" cols="75" >
                         
                         <%=problem_details %>
                         
@@ -259,7 +259,6 @@ label{
                    <br>   <input type='button' id="b" VALUE= " SAVE UPDATES">
                         
                         
-                        <input type="hidden" id="v" name="problem_details">  
   </form>
       </div>            
 </body>

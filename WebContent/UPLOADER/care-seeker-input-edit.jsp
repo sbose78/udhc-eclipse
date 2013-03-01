@@ -12,10 +12,17 @@
 
     <script src="http://yui.yahooapis.com/3.5.0/build/yui/yui-min.js"></script>
     
-    <head>    	<meta charset='utf-8'/>
-                <script type="text/javascript" src="<%=request.getContextPath()%>/INPUT/js/jquery-1.8.3.min.js"></script>
- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <head>    	
+    
+    		<meta charset='utf-8'/>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/INPUT/js/jquery-1.8.3.min.js"></script>
+ 			<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+ 			<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+ 
+
+		 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/cleditor/jquery.cleditor.css" /> 
+		 <script type="text/javascript" src="<%=request.getContextPath()%>/cleditor/jquery.cleditor.js"></script>
+		 
         
                 	
 
@@ -52,9 +59,10 @@
 
 input.text_box
 {
-	height:40px;
+	height:30px;
 	font-size:14pt;
 	width:500px;	
+	padding:5px;
 }
 
 label{
@@ -206,6 +214,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 	
 	$(document).ready(function() {
   // Handler for .ready() called.
+  
+  
+  		$("#editor").cleditor({
+	
+								width:870,
+								height:400
+	
+		});
+  
+  		$("#b").click(function(){
+  		
+  			 sendHealthIssueUpdate();  			  			
+  		});
 
   			
   		$("#load_wait").hide();
@@ -332,7 +353,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 
 
 		function fetchAllImageIDs(){
-			   alert("FETCHING ALL Image uploads");
+		//	   alert("FETCHING ALL Image uploads");
 			   $("#load_wait").show();
 			 
 				var finalUrl='<%=request.getContextPath()%>/GetAllImagesIDs?topic_id=<%=request.getParameter("topic_id")%>';
@@ -722,7 +743,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
                        
                         <br><br>
                         <label> <strong>Narrative</strong></label><br><br>
-                        <textarea id="editor" name="editor" rows="20" cols="75" >
+                        <textarea id="editor" name="problem_details" rows="20" cols="75" >
                         
                         <%=problem_details %>
                         
@@ -731,7 +752,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
                         
                         <br><br><br><br><br>
                       
-                        <input type="hidden" id="v" name="problem_details">     
   </form>
       </div>            
 </body>
@@ -740,38 +760,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 </html>
                 <script>
 
-                        (function() {
-                            var Dom = YAHOO.util.Dom,
-                                Event = YAHOO.util.Event;
-
-                            var myConfig = {
-                                height: '180px',
-                                width: '1000px',
-                                dompath: true,
-                                focusAtStart: true
-                            };
-
-                            YAHOO.log('Create the Editor..', 'info', 'example');
-                            var myEditor = new YAHOO.widget.SimpleEditor('editor', myConfig);
-                            myEditor.render();
-                            
-                         //Inside an event handler after the Editor is rendered
-                            YAHOO.util.Event.on('b', 'click', function() {
-                                //Put the HTML back into the text area
-                                myEditor.saveHTML();
-
-                                //The var html will now have the contents of the textarea
-                                var html = myEditor.get('element').value;
-                                document.getElementById("v").value=html;
-                              //   document.form1.submit(); 
-                              sendHealthIssueUpdate();
-                                
-                            });
-                        })();
+                     
                         
                         function sendHealthIssueUpdate()
                         {
-                          alert("Updating..");
+                      //    alert("Updating..");
           				$("#load_wait").show();
 
                         	var formObject=document.getElementById("form1");
