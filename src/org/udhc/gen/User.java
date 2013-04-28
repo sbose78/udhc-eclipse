@@ -379,7 +379,7 @@ public class User {
  * 	  If a user claims to be a doctor or social worker 
  * 	  then he needs to get approved from the moderators.
  * 
- *   So , role =1,2,-1,-2    ->   approved = 0 or NOT APPROVED
+ *   So , role =1,2,-1,-2    ->   approved = 0 i.e, NOT APPROVED
  *        role =0  -> needs care-seeker or lowest privileges , hence can be approved.		
  * 
  */

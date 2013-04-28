@@ -234,7 +234,13 @@ table{
 		<td width="70%">
 		<img height="50px" src="<%=request.getContextPath()%>/STATICS/images/MA-logo.jpg"/> 
 							<label>  ArogyaUDHC </label> <br>
-							<label class="prof">Care-seeker</label>
+							<label class="prof">Care-seeker  &nbsp;
+							
+							<a href="<%=request.getContextPath()%>/TIMELINE/timeline.jsp?patient_name=<%=patient_name%>">
+									<img src="<%=request.getContextPath()%>/STATICS/images/stopwatch.png">
+							</a>
+							 
+							</label>
 							
 			
 		</td>

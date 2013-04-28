@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/udhc-eclipse-tomcat6" docBase="udhc-eclipse-tomcat6" reloadable="true" crossContext="true">
+    <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
+       maxActive="10" maxIdle="5" 
+       username="root" password="qwerty"
+       driverClassName="com.mysql.jdbc.Driver"  
+       url="jdbc:mysql://localhost:3306/udhc_local_db" />
+    
+    <Resource name="jdbc/awsDB" auth="Container" type="javax.sql.DataSource"
+       maxActive="20" maxIdle="10" 
+       username="sbose78" password="qwerty123456"
+       driverClassName="com.mysql.jdbc.Driver"  
+       url="jdbc:mysql://udhc-amazon.ccff5kdt5xn6.ap-northeast-1.rds.amazonaws.com:3306/health?autoReconnect=true" />
+    
+ </Context>

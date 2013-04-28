@@ -39,22 +39,7 @@ public class MainServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         manager = new OpenIdManager();
-  //     manager.setRealm("http://udhc-java.jelastic.servint.net/test1");
-  //      manager.setReturnTo("http://udhc-java.jelastic.servint.net/test1/openid");
-        
-  //    manager.setRealm("http://www.udhc.co.in/");
-  //    manager.setReturnTo("http://www.udhc.co.in/openid");
-        
- //       manager.setRealm("http://heroku-sbose78-1.herokuapp.com/");
- //       manager.setReturnTo("http://heroku-sbose78-1.herokuapp.com/openid");
-       
-        
-//     manager.setRealm("http://localhost:8080/udhc-eclipse-tomcat6/");
- //     manager.setReturnTo("http://localhost:8080/udhc-eclipse-tomcat6/openid");
-       
- //   manager.setRealm("http://care.udhc.co.in/");    
- //   manager.setReturnTo("http://care.udhc.co.in/openid");
-        
+ 
         
     }
 
@@ -123,20 +108,7 @@ public class MainServlet extends HttpServlet {
 		                                      // save name to session object This is possible only for care-givers
 		                                      request.getSession().setAttribute("name",name);
 		                                      
-		                                      /*
-		                                      String redirect_to=org.udhc.gen.User.getRedirectURL(request);
-		                                      if(redirect_to==null) 
-		                                      {
-		                                          redirect_to=request.getContextPath()+"/home.jsp";
-		                                      }
-		                                      
-		                                 //     System.out.println("----2----"+redirect_to );
-		                                      
-		                                      response.sendRedirect(redirect_to);
-		                                      
-		                                      */
-		                                    
-		                                      
+		                                        
 		                                      response.sendRedirect(request.getContextPath()+"/AUTH/successful.jsp");
 		                                      return;                            
 		                        }

@@ -22,7 +22,10 @@
 <title>Solutions</title>
 
 <style type="text/css">
+td{
 
+	border: solid 1px black;
+}
 table{
 	margin-left: 1px;
 	
@@ -38,7 +41,9 @@ div#table_container{
 	max-height: 500px;
 	padding: 1%;
 	
-	background-color:#F1F1F1;
+	
+	color: black;
+	background-color:white;
 	overflow: scroll;
 	overflow: auto;
 
@@ -52,7 +57,9 @@ div#table_container{
 	/*
 	margin-right: 10px;
 	*/
-	background-color: #73A000;
+	
+	color: black;
+	background-color:white;
 }
 
 .patient_name a{
@@ -64,13 +71,15 @@ div#table_container{
 
 
 a.patient_profile:visited{
-	color:white;
+	color:black;
 }
 
 
 .topic_name{
     white-space: nowrap;	
-	background-color: #DFDFDF ; 
+	
+	color: black;
+	background-color:white;
 	padding:10px;
 	/*
 	margin-left: 20px;
@@ -89,32 +98,36 @@ a.patient_profile:visited{
 .solution_box a{
 	text-decoration: none;
 	padding: 10px;
-	color: white;
-	background-color:#3369E7;
+	color: black;
+	background-color:white;
 }
 
 .solution_box a:hover{
 	text-decoration: none;
 	padding: 10px;
-	color: white;
-	background-color:blue;
 	
+	color: black;
+	background-color:white;
 }
 
 td.date{
-
+	  white-space: nowrap;
 	padding: 10px;
 
 }
 .solution_box{
-     background-color:#3369E7;
+     
+	color: black;
+	background-color:white;
 }
 
 
 #info{
 	font-size: 120%;
 	padding: 1%;
-	background: #F1F1F1;		
+	background: black;
+	color: white;
+	cursor: pointer;	
 }
 
 
@@ -127,8 +140,29 @@ td.date{
 	function call_on_ready(){
 		$("a.solution_link").colorbox({iframe:true, innerWidth:1000, innerHeight:900});
 		$("a.patient_profile").colorbox({iframe:true, innerWidth:1300, innerHeight:900});
+		$("div#info").click(function(){
+			selectText("table_container");
+		});
 
-	}		
+	}	
+	
+	function selectText(element) {
+	    var doc = document
+	        , text = doc.getElementById(element)
+	        , range, selection
+	    ;    
+	    if (doc.body.createTextRange) { //ms
+	        range = doc.body.createTextRange();
+	        range.moveToElementText(text);
+	        range.select();
+	    } else if (window.getSelection) { //all others
+	        selection = window.getSelection();        
+	        range = doc.createRange();
+	        range.selectNodeContents(text);
+	        selection.removeAllRanges();
+	        selection.addRange(range);
+	    }
+	}
 
 
 </script>
@@ -145,23 +179,19 @@ td.date{
 
 <div id="info" align="center">
 
-<img width="50px"  height="50px" src="<%=request.getContextPath()%>/STATICS/images/solved.jpeg"/>
-&nbsp;&nbsp;
 
-	The following health issues have been solved by our team
+	Click here to select the full table ( do a Ctrl + C and finally a Ctrl + V to Excel after that)
 
 </div>
 
 <br>
-
 <div id="table_container">
-
 <table>
 
 <%
 
 	
-	ArrayList<HealthRecord> ahr = HealthRecord.getAllSolvedHealthRecords();
+	ArrayList<HealthRecord> ahr = HealthRecord.getAllUploadedHealthRecords();
 	for ( HealthRecord record : ahr)
 	{
 		String topic_id = record.getTopic_id()	;
@@ -182,10 +212,12 @@ td.date{
   		
   		
   		</td>
-  <td class="topic_name" width="500px">
-  
-  		<a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=record.getTopic_id()%>"> <%= topic%> 
+  <td class="topic_name" >
+  		<a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=record.getTopic_id()%>"> <%= topic %> 
   		</a>
+  		</td>
+  		<td>
+  			<%= record.getDate() %>
   		</td>
   		
   
@@ -199,8 +231,10 @@ td.date{
   		<td class="solution_box"> 
   		<a class="solution_link" href="<%=request.getContextPath()%>/SOLUTION/viewSolution.jsp?solution_id=<%=s.getSolution_id()%>&topic_id=<%=record.getTopic_id()%>"> 
   		
-  		<%= s.getSolution_language().substring(0,3) %>(<Strong> <%=date %></Strong> )	 </a>
+  		<%= s.getSolution_language().substring(0,3) %></a>
   		</td>
+  		
+  		<td class="date" width="100px"><%= date %></td>
   		
   		
 <%
@@ -217,4 +251,3 @@ td.date{
 	</table>
 	</div>
 </body>
-</html>

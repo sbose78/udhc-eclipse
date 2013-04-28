@@ -12,27 +12,50 @@ package org.udhc.gen;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Properties;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 public class DbCon {
+	
+	public static Connection getPooledDbConnection() throws NamingException, SQLException
+	{
+		
+		Context initContext = new InitialContext();
+		DataSource ds   = (DataSource)initContext.lookup("java:/comp/env/jdbc/TestDB");
+		Connection conn = ds.getConnection();
+		
+		System.out.println(conn.toString());
+		//use conn
+		//conn.close();
+		return conn;
+		
+	}
     
+	
     public static Connection getDbConnection()
     {
         Connection conn = null;
         try{
-                System.out.println("MySQL Connection being established");
-               
-              
-             /*   
-             
-                  
-                String url = "jdbc:mysql://localhost:3306/";
-                String dbName = "udhc_local_db";
-                String driver = "com.mysql.jdbc.Driver";
-                String userName = "root"; 
-                String password = "qwerty";
-               
-        */
-                            
+                System.out.println("MySQL Connection being established");     
+                
+                Context initContext = new InitialContext();
+        		DataSource ds   = (DataSource)initContext.lookup("java:/comp/env/jdbc/awsDB");
+        		conn = ds.getConnection();
+        		
+        		
+        		
+        		System.out.println(conn.toString());
+        		//use conn
+        		//conn.close();
+        		return conn;
+        		
+                
+        
+             /*               
                 Properties properties = new Properties();
                	properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("credentials.properties"));
                	
@@ -43,21 +66,7 @@ public class DbCon {
                 String userName = properties.getProperty("database_user");
                 String password = properties.getProperty("database_password");
                 	
-             	/*
-             	
-             	database_host=jdbc:mysql://localhost:3306/
-             		database_port=udhc_local_db
-             		database_user=com.mysql.jdbc.Driver
-             		database_password=root
-             		database_database=qwerty
-             		
-             		characterEncoding
-             		user
-             		password
-             		
-             		*/
-
-                
+             
                 
                 Class.forName(driver).newInstance();
                 conn= DriverManager.getConnection(url+dbName+"?user="+userName+"&password="+password+"&characterEncoding=utf8");
@@ -67,7 +76,7 @@ public class DbCon {
                 System.out.println("Connected to the database");
                 
            
-                
+               */ 
                 
 
         }
@@ -80,6 +89,8 @@ public class DbCon {
           
           return conn;
     }
+    
+    
     
     public static String closeConnection(Connection con, PreparedStatement ps)
     {
@@ -110,7 +121,7 @@ public class DbCon {
     }
     
     public static void main(String args[]) {
-    	getDbConnection();
+    	
 		
 	}
     

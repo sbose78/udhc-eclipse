@@ -30,20 +30,7 @@ public class registerUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try{
-            
-            /*
-             * 
-             * 
-             *  public User(int role,String email,int approved,String name,String userid)
-    {
-        this.role=role;
-        this.email=email;
-        this.approved=approved;
-        this.name=name;
-        this.userid=userid;
-    }
-             * 
-             */
+        
             
             // 0 - caregiver
             // 1 - social worker
@@ -62,7 +49,7 @@ public class registerUser extends HttpServlet {
             	 String split_name[]= name.split(" ");
             	 if( !Character.isLetter(name.charAt(0) ))
             	 {
-            		 // # or * present
+            		 // control enters here only if # or * present in the sci name string
             		 split_loc = 1;
             		 
             	 }
@@ -89,15 +76,7 @@ public class registerUser extends HttpServlet {
             request.getSession(true).setAttribute("role", request.getParameter("role") );
             
             
-            /*
-             * Added in the prev servlet
-             * 
-                        request.getSession().setAttribute("name",authentication.getFullname());
-                        request.getSession().setAttribute("email",authentication.getEmail());
-                        request.getSession().setAttribute("gender",authentication.getGender());
-             *              * 
-             */
-            
+         
             
             
         }
@@ -115,7 +94,7 @@ public class registerUser extends HttpServlet {
         response.sendRedirect(request.getContextPath()+"/AUTH/successful.jsp");
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP
      * <code>GET</code> method.

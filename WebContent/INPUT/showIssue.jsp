@@ -25,7 +25,7 @@
           //              out.print("<a href='"+request.getContextPath()+"/ViewImage?file_id="+image+"'><img src='"+request.getContextPath()+"/ViewImage?file_id="+image+"' height='50px' width='50px' /> "+i+"</a>,");
         %>
 
-<a href="#" onclick="show_image('<%=request.getContextPath()%>/ViewImage?file_id=<%=image%>')"><img src='<%=request.getContextPath()%>/ViewImage?file_id=<%=image%>&scale=100' height='80px' width='80px' /></a>
+<a class="report_image" href="<%=request.getContextPath()%>/ViewImage?file_id=<%=image%>" ><img src='<%=request.getContextPath()%>/ViewImage?file_id=<%=image%>&scale=100' height='80px' width='80px' /></a>
 
 <%
 	}

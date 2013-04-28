@@ -25,7 +25,11 @@
 	<classpathentry kind="lib" path="/root/udhc-libs/guava-12.0.jar"/>
 	<classpathentry kind="lib" path="/root/udhc-libs/JOpenId-1.08.jar"/>
 	<classpathentry kind="lib" path="/root/udhc-libs/mail.jar"/>
-	<classpathentry kind="lib" path="/root/udhc-libs/mysql-connector-java-5.1.19-bin.jar"/>
+	<classpathentry kind="lib" path="/root/udhc-libs/mysql-connector-java-5.1.19-bin.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="/root/udhc-libs/sax2r2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

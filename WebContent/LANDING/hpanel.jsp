@@ -61,7 +61,7 @@
 					</li>
 					
 					
-					<li><a style='background-color:red'  href="<%=request.getContextPath()%>/INPUT/displayInputs.jsp">INPUT</a>
+					<li><a style='background-color:red'  href="<%=request.getContextPath()%>/INPUT/input_directory.jsp">INPUT</a>
 					</li>
 					
 					<li><a href="<%=request.getContextPath()%>/PROCESS/process.jsp">PROCESS</a>

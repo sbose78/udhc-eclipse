@@ -49,7 +49,19 @@ public class CatchUpdateHealthIssue extends HttpServlet {
 		
 		// calling DAO function.
 		record.updateHealthRecord();
-				
+		
+		String subject ="Updated Health issue "+ topic;
+		String content ="Health issue : <a href='"+request.getContextPath()
+				+"/INPUT/displayIssueGraphically.jsp?topic_id="
+				+topic_id+"'>"	
+				+topic+"</a> updated by "+ User.getLoggedInUserName(request);
+		
+		try{
+			EmailUtil.sendMail("", User.getModeratorEmails(), subject, content);
+		}
+		catch( Exception e){
+			e.printStackTrace();
+		}				
 	}
 
 }

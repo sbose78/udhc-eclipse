@@ -166,7 +166,7 @@
   <context-param>
     <description>domain</description>
     <param-name>domain_url</param-name>
-    <param-value>http://care.udhc.co.in/</param-value>
+    <param-value>http://care.udhc.co.in/timeline</param-value>
   </context-param>
   <servlet>
     <description></description>
@@ -227,5 +227,57 @@
   <servlet-mapping>
     <servlet-name>UpdateModerator</servlet-name>
     <url-pattern>/UpdateModerator</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>getApprovedRecords</display-name>
+    <servlet-name>getApprovedRecords</servlet-name>
+    <servlet-class>org.udhc.controller.getApprovedRecords</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getApprovedRecords</servlet-name>
+    <url-pattern>/getApprovedRecords</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CatchTimelinePost</display-name>
+    <servlet-name>CatchTimelinePost</servlet-name>
+    <servlet-class>org.udhc.controller.CatchTimelinePost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CatchTimelinePost</servlet-name>
+    <url-pattern>/CatchTimelinePost</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetTimelinePosts</display-name>
+    <servlet-name>GetTimelinePosts</servlet-name>
+    <servlet-class>org.udhc.controller.GetTimelinePosts</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetTimelinePosts</servlet-name>
+    <url-pattern>/GetTimelinePosts</url-pattern>
+  </servlet-mapping>
+  <resource-ref>
+    <description>DB Connection</description>
+    <res-ref-name>jdbc/awsDB</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  <resource-ref>
+    <description>DB Connection</description>
+    <res-ref-name>jdbc/TestDB</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  <servlet>
+    <description></description>
+    <display-name>DbPoolTest</display-name>
+    <servlet-name>DbPoolTest</servlet-name>
+    <servlet-class>org.udhc.controller.upload.DbPoolTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DbPoolTest</servlet-name>
+    <url-pattern>/DbPoolTest</url-pattern>
   </servlet-mapping>
 </web-app>
