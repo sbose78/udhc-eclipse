@@ -9,7 +9,7 @@
 
         
         
-        <div><%@include file="../hpanel.jsp" %></div>
+        <div><%@include file="../LANDING/hpanel.jsp" %></div>
 
 <style>
 

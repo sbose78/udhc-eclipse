@@ -18,7 +18,7 @@
     
     <body>
         
-         <%@include file="../hpanel.jsp" %>
+         <%@include file="../LANDING/hpanel.jsp" %>
         <div align='center'>
             <h4 align="center"> User Reviews </h4>
             

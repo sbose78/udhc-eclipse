@@ -1,4 +1,4 @@
-<%@page import="org.udhc.gen.HealthRecord"%>
+<%@page import="org.udhc.models.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -258,9 +258,35 @@ table{
 		  }
 		  
 	  }	
+	  
+	  function refreshVisiblity(){
+		  
+		  $( "tr[type='health_issue']" ).each(function(){
+				 $(this).show();	 
+							 
+			});
+		  
+	  }
 	
 	
 	function call_on_ready(){
+		
+		$("input#search_all").keyup(function(){
+			
+			refreshVisiblity();
+			
+			 $( "tr[type='health_issue']" ).each(function(){
+				 var search_string =$("input#search_all").val();
+				 var ref_string = $(this).attr('tags');
+				 
+				 
+				 if ( ref_string.toLowerCase().indexOf(search_string.toLowerCase()) <0 ){
+				//	 alert (search_string + ":" + ref_string);
+					 $(this).hide();	 
+				 }
+				 
+			});
+		});
 		
 		
 		$("#load_wait").hide();
@@ -499,7 +525,15 @@ table{
      
      <div>
      
-     	<h3 align="center">	Health issues </h2>
+     	<h3 align="center">	Health issues
+     	
+     	
+     		&nbsp;&nbsp;
+     		&nbsp; <img width="20px" alt="" src="<%=request.getContextPath()%>/STATICS/images/06-magnify.png">   
+     		&nbsp; <input id="search_all" type="search" name="s"> 
+     	
+     	</h2>
+     
      
    
 
@@ -520,10 +554,13 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 	{
 		String topic_id=record.getTopic_id();
 		
+		int approved_status = record.getApproved();
+	 	String approved_value = approved_status == 1 ? "APPROVED" : "NOT";
+	 	String searchTag = record.getSocialWorker_id() + " "+record.getTopic() + " "+ record.getProblem_id() + " "+approved_value;
 
 %>
 
-<tr topic_id="<%=topic_id%>" >
+<tr topic_id="<%=topic_id%>" tags="<%=searchTag%>" type="health_issue">
 	
 	<td valign="middle">
 	

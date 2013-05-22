@@ -9,8 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.udhc.gen.DbCon;
-import org.udhc.gen.models.Doctor;
-import org.udhc.gen.models.Patient;
+import org.udhc.models.Doctor;
+import org.udhc.models.Patient;
 
 public class PatientDAO {
 	
@@ -44,7 +44,7 @@ public class PatientDAO {
 						         	return my_keys.getInt(1)+"";
 						         }
 						         
-						         DbCon.closeConnection(conn, pstatement);
+					                DbCon.closeConnection(conn,pstatement);
 					
 							}
 							catch(Exception e)
@@ -86,7 +86,7 @@ public class PatientDAO {
 		                	                       
 		                	 break;
 		                }
-		                DbCon.closeConnection(con);
+		                DbCon.closeConnection(con,stmt,rst);
 		                
 		        }
 		        catch(Exception e)

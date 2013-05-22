@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@ page import="org.udhc.gen.User" %>
+<%@ page import="org.udhc.models.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,10 +30,15 @@
 <style>
 
 #topic_div{
-	background-color:  #CB2934;
-	color: white;
-	padding: 10px;
-	font-size: 110%;
+	
+	color: #064169;
+	padding: 20px;
+	font-size: 190%;
+	margin-top:20px;
+	margin-bottom:20px;
+	
+	width: 80%;
+	
 }
 
 
@@ -132,7 +137,7 @@ input.scan_button{
 	text-align: left; 
 	font-size: 120%;	
 	
-	border: solid 2px #7895D7;
+	
 	padding: 20px;
 	border-radius: 9px;
 	background-color: #EAEFF1;
@@ -187,16 +192,14 @@ input.scan_button{
 	background-color: #FFF982;
 
 }
-h2{
 
-	background: rgb(246,248,249); /* Old browsers */
-background: -moz-linear-gradient(top, rgba(246,248,249,1) 0%, rgba(229,235,238,1) 50%, rgba(215,222,227,1) 51%, rgba(245,247,249,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(246,248,249,1)), color-stop(50%,rgba(229,235,238,1)), color-stop(51%,rgba(215,222,227,1)), color-stop(100%,rgba(245,247,249,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 ); /* IE6-9 */
+.info{
+
+	margin-left:5%;
+	width: 80%;
+	font-size: 140%;
+	padding: 10px;
+	
 
 }
 
@@ -548,31 +551,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 <img src="<%=request.getContextPath()%>/STATICS/images/loading.gif"/>
 
 </div>    
-    <body   class="yui-skin-sam" >
-    
+    <body  class="yui-skin-sam" >
+    <br>
             
-           
+         
                   
-            <h2 align="center"> PART 1 - ADD OR DELETE HEALTH ISSUE FILES   
-           
-          </h2>
-          <br><BR>
-          <div style="{font-size: 120%}"align="center">
+            
        
-         Share using this permament link : <a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=request.getParameter("topic_id")%>"> http://care.udhc.co.in/<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=request.getParameter("topic_id")%> </a>
-      
-            </div>
-            <br><BR>
-             
           
             
 
 <%
-	String loggedInUserEmail=org.udhc.gen.User.getLoggedInUserEmail(request);
+	String loggedInUserEmail=User.getLoggedInUserEmail(request);
 	
 	
 
-	 if(org.udhc.gen.User.getLoggedInUserEmail(request).equals("GUEST"))
+	 if(User.getLoggedInUserEmail(request).equals("GUEST"))
     {
         
         String redirect_url=request.getContextPath()+"/INPUT/care-seeker-input.jsp";
@@ -592,10 +586,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
   		
         
 <%        
-       // response.sendRedirect(request.getContextPath()+"/account.jsp?message=YOU ARE NOT SIGNED IN");        
-        //String link=request.getContextPath()+"/login_float.jsp";
-        
-        
+      
     }
     else 
     {
@@ -620,10 +611,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
                 
 <div align='center'>
 
-  <Strong> <div id="topic_div"><%= topic %> </div></Strong>
 
- <hr></hr>
+Share using this permament link : <a href="<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=request.getParameter("topic_id")%>"> http://care.udhc.co.in/<%=request.getContextPath()%>/INPUT/displayIssueGraphically.jsp?topic_id=<%=request.getParameter("topic_id")%> </a>
+<br>
+
+   <div id="topic_div"> 
+   <img alt="" src="tag.png"> &nbsp;
+   
+   <%= topic %> </div>
+
+ 
+    <div class="info">   
     
+    PART 1 - ADD OR DELETE HEALTH REPORTS
+            <br><BR>
+            
+            <hr></hr>
+      
+               
+           
+          </div>
     
     <table>       
     	<tr>
@@ -669,7 +676,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 </div>    
 <br><br>
 <br><br><br>
-  <hr></hr>
   
   
 
@@ -683,15 +689,30 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 	font-size: 120%;
 
 }
+hr{
+	
+	
 
+}
 </style>
-                  
+                    
 
-<h2 align="center"> PART 2 - UPDATE THE HEALTH ISSUE NARRATIVE -</h2>
+
+
 
  <div id="edit_status" align="center" >   </div>
+ 
+ <div align="center">
+ 
+<div class="info"> PART 2 - UPDATE THE HEALTH ISSUE NARRATIVE 
+<br><br>
+<hr></hr>
+
+</div> 
             
 <div id="care_seeker_form" align="center">
+
+
 
 
   <form method="post" action="<%=request.getContextPath() %>/CatchUpdateHealthIssue" name="form1" id="form1"  enctype="multipart/form-data">
@@ -753,6 +774,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
                         <br><br><br><br><br>
                       
   </form>
+  </div>
       </div>            
 </body>
     

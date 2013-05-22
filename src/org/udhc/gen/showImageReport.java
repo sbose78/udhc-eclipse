@@ -41,7 +41,7 @@ public class showImageReport extends HttpServlet {
             
             int file_id=Integer.parseInt(request.getParameter("report_id"));
             //InputStream image= HealthRecord.getImageData(file_id);
-            imbytes=org.udhc.gen.models.Report.getImageData(file_id);
+            imbytes=org.udhc.models.Report.getImageData(file_id);
             
            
             o.write(imbytes);

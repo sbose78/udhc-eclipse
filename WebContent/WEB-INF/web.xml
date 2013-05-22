@@ -3,7 +3,7 @@
   <display-name>udhc-eclipse-tomcat6</display-name>
   <servlet>
     <servlet-name>CatchHealthIssue</servlet-name>
-    <servlet-class>org.udhc.gen.CatchHealthIssue</servlet-class>
+    <servlet-class>org.udhc.controller.healthRecord.CatchHealthIssue</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>MainServlet</servlet-name>
@@ -11,7 +11,7 @@
   </servlet>
   <servlet>
     <servlet-name>registerUser</servlet-name>
-    <servlet-class>org.udhc.gen.registerUser</servlet-class>
+    <servlet-class>org.udhc.controller.user.registerUser</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>CatchForumPost</servlet-name>
@@ -23,15 +23,15 @@
   </servlet>
   <servlet>
     <servlet-name>ViewImage</servlet-name>
-    <servlet-class>org.udhc.gen.ViewImage</servlet-class>
+    <servlet-class>org.udhc.controller.healthRecord.ViewImage</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>CatchSolution</servlet-name>
-    <servlet-class>org.udhc.gen.CatchSolution</servlet-class>
+    <servlet-class>org.udhc.controller.solution.CatchSolution</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>CatchHealthIssue2</servlet-name>
-    <servlet-class>org.udhc.gen.CatchHealthIssue2</servlet-class>
+    <servlet-class>org.udhc.controller.healthRecord.CatchHealthIssue2</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>UploadToDocs</servlet-name>
@@ -39,7 +39,7 @@
   </servlet>
   <servlet>
     <servlet-name>signout</servlet-name>
-    <servlet-class>org.udhc.gen.signout</servlet-class>
+    <servlet-class>org.udhc.controller.user.signout</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>CatchReport</servlet-name>
@@ -107,7 +107,7 @@
     <description></description>
     <display-name>CatchUpdateHealthIssue</display-name>
     <servlet-name>CatchUpdateHealthIssue</servlet-name>
-    <servlet-class>org.udhc.controller.CatchUpdateHealthIssue</servlet-class>
+    <servlet-class>org.udhc.controller.healthRecord.CatchUpdateHealthIssue</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CatchUpdateHealthIssue</servlet-name>
@@ -117,7 +117,7 @@
     <description></description>
     <display-name>DeleteHealthIssue</display-name>
     <servlet-name>DeleteHealthIssue</servlet-name>
-    <servlet-class>org.udhc.controller.DeleteHealthIssue</servlet-class>
+    <servlet-class>org.udhc.controller..healthRecord.DeleteHealthIssue</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteHealthIssue</servlet-name>
@@ -127,7 +127,7 @@
     <description></description>
     <display-name>CatchImageUpload</display-name>
     <servlet-name>CatchImageUpload</servlet-name>
-    <servlet-class>org.udhc.controller.CatchImageUpload</servlet-class>
+    <servlet-class>org.udhc.controller.healthRecord.CatchImageUpload</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CatchImageUpload</servlet-name>
@@ -147,7 +147,7 @@
     <description></description>
     <display-name>DeleteHealthFile</display-name>
     <servlet-name>DeleteHealthFile</servlet-name>
-    <servlet-class>org.udhc.controller.DeleteHealthFile</servlet-class>
+    <servlet-class>org.udhc.controller.healthRecord.DeleteHealthFile</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteHealthFile</servlet-name>
@@ -166,13 +166,13 @@
   <context-param>
     <description>domain</description>
     <param-name>domain_url</param-name>
-    <param-value>http://care.udhc.co.in/timeline</param-value>
+    <param-value> http://care.udhc.co.in/  </param-value>
   </context-param>
   <servlet>
     <description></description>
     <display-name>changeHealthIssueApprovalStatus</display-name>
     <servlet-name>changeHealthIssueApprovalStatus</servlet-name>
-    <servlet-class>org.udhc.controller.changeHealthIssueApprovalStatus</servlet-class>
+    <servlet-class>org.udhc.controller.healthRecord.changeHealthIssueApprovalStatus</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>changeHealthIssueApprovalStatus</servlet-name>
@@ -182,7 +182,7 @@
     <description></description>
     <display-name>UpdateUserPrivilegeAprroval</display-name>
     <servlet-name>UpdateUserPrivilegeAprroval</servlet-name>
-    <servlet-class>org.udhc.controller.UpdateUserPrivilegeAprroval</servlet-class>
+    <servlet-class>org.udhc.controller.user.UpdateUserPrivilegeAprroval</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateUserPrivilegeAprroval</servlet-name>
@@ -202,7 +202,7 @@
     <description></description>
     <display-name>DeleteHealthIssueFromDashboard</display-name>
     <servlet-name>DeleteHealthIssueFromDashboard</servlet-name>
-    <servlet-class>org.udhc.controller.DeleteHealthIssueFromDashboard</servlet-class>
+    <servlet-class>org.udhc.controller.healthRecord.DeleteHealthIssueFromDashboard</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteHealthIssueFromDashboard</servlet-name>
@@ -212,7 +212,7 @@
     <description></description>
     <display-name>CatchProfileData</display-name>
     <servlet-name>CatchProfileData</servlet-name>
-    <servlet-class>org.udhc.controller.CatchProfileData</servlet-class>
+    <servlet-class>org.udhc.controller.user.CatchProfileData</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CatchProfileData</servlet-name>
@@ -222,7 +222,7 @@
     <description></description>
     <display-name>UpdateModerator</display-name>
     <servlet-name>UpdateModerator</servlet-name>
-    <servlet-class>org.udhc.controller.UpdateModerator</servlet-class>
+    <servlet-class>org.udhc.controller.user.UpdateModerator</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateModerator</servlet-name>
@@ -232,7 +232,7 @@
     <description></description>
     <display-name>getApprovedRecords</display-name>
     <servlet-name>getApprovedRecords</servlet-name>
-    <servlet-class>org.udhc.controller.getApprovedRecords</servlet-class>
+    <servlet-class>org.udhc.controller.healthRecord.getApprovedRecords</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>getApprovedRecords</servlet-name>
@@ -242,7 +242,7 @@
     <description></description>
     <display-name>CatchTimelinePost</display-name>
     <servlet-name>CatchTimelinePost</servlet-name>
-    <servlet-class>org.udhc.controller.CatchTimelinePost</servlet-class>
+    <servlet-class>org.udhc.controller.user.CatchTimelinePost</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CatchTimelinePost</servlet-name>

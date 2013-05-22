@@ -17,6 +17,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import org.udhc.models.*;
+
 /**
  *
  * @author root
@@ -64,7 +66,7 @@ public class CatchReport extends HttpServlet {
                     }
                }
                 
-               org.udhc.gen.models.Report r=new org.udhc.gen.models.Report(org.udhc.gen.User.getLoggedInUserEmail(request),patient_id,description, image_report) ;
+               org.udhc.models.Report r=new org.udhc.models.Report(User.getLoggedInUserEmail(request),patient_id,description, image_report) ;
                System.out.println(r.insertReport());
     }    
             

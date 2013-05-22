@@ -1,7 +1,7 @@
 
-<%@page import="org.udhc.gen.User"%>
+<%@page import="org.udhc.models.*"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/mystyle.css" type="text/css" />
-<%@page import="org.udhc.gen.HealthRecord"%>
+
 <%@page import="java.util.ArrayList"%>
 
 

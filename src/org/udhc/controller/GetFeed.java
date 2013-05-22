@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.udhc.gen.HealthRecord;
+import org.udhc.models.*;
 
 /**
  * Servlet implementation class GetFeed

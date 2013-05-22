@@ -12,7 +12,7 @@
         <title> Often asked  </title>
     </head>
     
-        <%@include file="../hpanel.jsp" %>
+        <%@include file="../LANDING/hpanel.jsp" %>
 
         
         

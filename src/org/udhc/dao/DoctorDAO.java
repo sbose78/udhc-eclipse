@@ -15,7 +15,7 @@ import java.util.Date;
 import javax.print.Doc;
 
 import org.udhc.gen.DbCon;
-import org.udhc.gen.models.*;
+import org.udhc.models.*;
 
 public class DoctorDAO {
 	
@@ -94,7 +94,7 @@ public class DoctorDAO {
 	                				doctor_dp, doctor_id);                           
 	                	 break;
 	                }
-	                DbCon.closeConnection(con);
+	                DbCon.closeConnection(con,stmt);
 	                
 	        }
 	        catch(Exception e)

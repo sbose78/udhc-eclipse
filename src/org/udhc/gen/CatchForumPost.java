@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.udhc.models.User;
+import org.udhc.models.*;
+
 /**
  *
  * @author root
@@ -46,7 +49,7 @@ public class CatchForumPost extends HttpServlet {
                 int votedowns =0;
                 String date = "0";
                 
-                org.udhc.gen.ForumPost fp=new org.udhc.gen.ForumPost(post_id,topic_id,post_data,email,voteups,votedowns,date);
+                ForumPost fp=new ForumPost(post_id,topic_id,post_data,email,voteups,votedowns,date);
                 
                 String status = fp.insertForumPost();                    
                 

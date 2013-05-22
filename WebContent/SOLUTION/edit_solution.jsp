@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="org.udhc.dao.SolutionDAO"%>
-<%@page import="org.udhc.gen.models.*"%>
+<%@page import="org.udhc.models.*"%>
 
 <html>
                                                                   

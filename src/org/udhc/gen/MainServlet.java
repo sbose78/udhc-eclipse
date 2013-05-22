@@ -22,6 +22,9 @@ import org.expressme.openid.Authentication;
 import org.expressme.openid.Endpoint;
 import org.expressme.openid.OpenIdException;
 import org.expressme.openid.OpenIdManager;
+
+import org.udhc.models.*;
+
 /**
  *
  * @author root
@@ -96,12 +99,12 @@ public class MainServlet extends HttpServlet {
 		                         * 
 		                         * 
 		                         */
-                                String name=org.udhc.gen.User.getName(authentication.getEmail().toString());
+                                String name=User.getName(authentication.getEmail().toString());
 
 		                        if(User.checkUserPresence(authentication.getEmail()))
 		                        {
 		                                      String email=authentication.getEmail();
-		                                      String role=""+org.udhc.gen.User.getLoggedInUserRole(email);
+		                                      String role=""+User.getLoggedInUserRole(email);
 		                                      System.out.println("Role"+role);
 		                                      request.getSession().setAttribute("role",role);
 		                                      

@@ -100,13 +100,7 @@ input.submit_button{
 Health issue page
 	</a>
 	
-	<br><br>
-	
-	
-	
-	<a href="<%=request.getContextPath()%>/SOLUTION/viewSolution.jsp?topic_id=<%=topic_id%>">Solution page
-	
-	</a>
+
 	
 		<br><br>
 	

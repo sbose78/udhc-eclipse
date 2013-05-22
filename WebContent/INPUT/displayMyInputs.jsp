@@ -63,6 +63,7 @@ function uploadImage()
 <link rel="stylesheet" href="<%=request.getContextPath()%>/mystyle.css" type="text/css" />
 <script type="text/javascript" src="<%=request.getContextPath()%>/INPUT/script.js"></script>
 
+<%@ page import="org.udhc.models.*" %>
 <%@ page import="org.udhc.gen.*" %> 
 <%@ page import="java.util.*" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -76,13 +77,13 @@ function uploadImage()
     <body>
         
         <input type="hidden" id="context_path" value="<%=request.getContextPath()%>">
-                <div><%@include file="../hpanel.jsp" %></div>
+                <div><%@include file="../LANDING/hpanel.jsp" %></div>
       
       
       
       
 <%
-	if(org.udhc.gen.User.getLoggedInUserEmail(request).equals("GUEST"))
+	if(org.udhc.models.User.getLoggedInUserEmail(request).equals("GUEST"))
     {
         
       /*  String redirect_url=request.getContextPath()+"/INPUT/displayMyInputs.jsp";

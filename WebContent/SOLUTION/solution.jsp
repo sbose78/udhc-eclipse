@@ -70,12 +70,12 @@
     <input type="hidden" value="<%=topic_id%>" id="topic_id">
     <input type="hidden" value="<%=request.getContextPath()%>" id="context_path">
     
-      <div><%@include file="../hpanel.jsp" %></div>
+      <div><%@include file="../LANDING/hpanel.jsp" %></div>
       
       <h3 align="center">
           
           <%
-                    	org.udhc.gen.HealthRecord hr=org.udhc.gen.HealthRecord.getHealthRecordByID(topic_id);
+                    	org.udhc.models.HealthRecord hr=org.udhc.models.HealthRecord.getHealthRecordByID(topic_id);
                                 String topic=hr.getTopic();
                     %>
           

@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.udhc.gen.DbCon;
-import org.udhc.gen.HealthRecord;
+import org.udhc.models.HealthRecord;
 
 public class HealthRecordMigrate {
 

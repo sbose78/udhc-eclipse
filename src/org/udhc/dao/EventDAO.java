@@ -12,9 +12,9 @@ import java.util.Date;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.udhc.gen.models.*;
 
 import org.udhc.gen.DbCon;
+import org.udhc.models.*;
 
 public class EventDAO {
 

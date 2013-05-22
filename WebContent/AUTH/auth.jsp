@@ -19,7 +19,7 @@
 
 <%
 
-	if(!org.udhc.gen.User.getLoggedInUserEmail(request).equals("GUEST"))
+	if(!org.udhc.models.User.getLoggedInUserEmail(request).equals("GUEST"))
 	{
 		response.sendRedirect(request.getContextPath()+"/signout");
 	}

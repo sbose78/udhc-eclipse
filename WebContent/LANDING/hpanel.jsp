@@ -1,9 +1,24 @@
+   
+        <script type="text/javascript">
 
- <%@page import="org.udhc.gen.User"%>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31924728-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+ <%@page import="org.udhc.models.User"%>
 <%
     String action="";
     
-     if(org.udhc.gen.User.getLoggedInUserEmail(request).equals("GUEST"))
+     if(User.getLoggedInUserEmail(request).equals("GUEST"))
      {
     	  action="LOGIN";
     	 
@@ -73,7 +88,7 @@
 				if( !User.getLoggedInUserEmail(request).equals("GUEST") && User.getLoggedInUserRole(request).equals("2")){
 			%>
 					<li><a href="<%=request.getContextPath()%>/PROFILE/DOCTOR/profile.jsp?doctor_email=<%=User.getLoggedInUserEmail(request)%>">
-					<img style="{position:relative; top:40px; }" width="30px" heitgh="30px" src="<%=request.getContextPath()%>/STATICS/images/malefemale.jpeg" /></a>
+					<img style="{position:relative; top:40px; }" width="30px" height="30px" src="<%=request.getContextPath()%>/STATICS/images/malefemale.jpeg" /></a>
 					</li>
 			
 			<%

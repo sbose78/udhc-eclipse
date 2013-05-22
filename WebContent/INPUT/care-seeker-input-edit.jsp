@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@ page import="org.udhc.gen.User" %>
+<%@ page import="org.udhc.models.User" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -113,7 +113,7 @@ label{
 <script src="http://yui.yahooapis.com/3.5.0/build/yui/yui-min.js"></script>
 
 
-<%@ page import="org.udhc.gen.*" %>
+<%@ page import="org.udhc.models.*" %>
 
 
 
@@ -154,11 +154,11 @@ label{
 </style>            
              
 <%
-	String loggedInUserEmail=org.udhc.gen.User.getLoggedInUserEmail(request);
+	String loggedInUserEmail=User.getLoggedInUserEmail(request);
 	
 	
 
-	 if(org.udhc.gen.User.getLoggedInUserEmail(request).equals("GUEST"))
+	 if(User.getLoggedInUserEmail(request).equals("GUEST"))
     {
         
         String redirect_url=request.getContextPath()+"/INPUT/care-seeker-input.jsp";

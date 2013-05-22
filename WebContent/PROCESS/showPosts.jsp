@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%@ page import="org.udhc.gen.*" %> 
+<%@ page import="org.udhc.models.*" %> 
 <%@ page import="java.util.*" %> 
 
        
@@ -17,7 +17,7 @@
         <%
         	//      out.println("<div class='div_posts_list'>");
                     int topic_id=Integer.parseInt(request.getParameter("topic_id"));
-                    ArrayList<org.udhc.gen.ForumPost> posts = org.udhc.gen.ForumPost.getPostsByTopic_id(topic_id);
+                    ArrayList<ForumPost> posts = ForumPost.getPostsByTopic_id(topic_id);
                 //    out.println("<br><B>"+topic_id+"</B>");
                      for (ForumPost f : posts)
                      {

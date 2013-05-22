@@ -1,5 +1,5 @@
 <%@page import="org.udhc.gen.*"%>
-<%@page import="org.udhc.gen.models.*"%>
+<%@page import="org.udhc.models.*"%>
 <%@page import="org.udhc.dao.*"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"

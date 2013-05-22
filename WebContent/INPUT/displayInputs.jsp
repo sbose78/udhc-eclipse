@@ -34,6 +34,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/INPUT/script.js"></script>
 
 <%@ page import="org.udhc.gen.*" %>
+<%@ page import="org.udhc.models.*" %>
 <%@ page import="java.util.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -55,7 +56,7 @@
 
 
         
-                <div><%@include file="../hpanel.jsp" %></div>
+                <div><%@include file="../LANDING/hpanel.jsp" %></div>
 
         
         <div id="displayInputs_add_new" align="center">

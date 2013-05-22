@@ -4,7 +4,7 @@
 <%@page import="java.util.LinkedHashMap"%>
 
 <%@page import="java.util.Properties"%>
-<%@page import="org.udhc.gen.models.Solution"%>
+<%@page import="org.udhc.models.Solution"%>
 <%@page import="org.udhc.dao.*"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -34,7 +34,7 @@
 
 </script>
 
-<title>Update profile - doctor</title>
+<title>Update profile - Care-seeker</title>
 <style>
 
 .input_date{

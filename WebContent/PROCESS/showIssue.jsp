@@ -1,7 +1,7 @@
 
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/mystyle.css" type="text/css" />
-<%@page import="org.udhc.gen.HealthRecord"%>
+<%@page import="org.udhc.models.*"%>
 <%@page import="java.util.ArrayList"%>
 
 
@@ -32,5 +32,5 @@
 <%
 	}
 
-        out.println(org.udhc.gen.HealthRecord.getHealthRecordByID(Integer.parseInt(request.getParameter("topic_id"))).getProblem_details());
+        out.println(HealthRecord.getHealthRecordByID(Integer.parseInt(request.getParameter("topic_id"))).getProblem_details());
 %>

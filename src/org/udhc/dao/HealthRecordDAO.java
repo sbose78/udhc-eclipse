@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.udhc.gen.DbCon;
-import org.udhc.gen.HealthRecord;
+import org.udhc.models.HealthRecord;
 
 public class HealthRecordDAO {
 	
@@ -37,7 +37,7 @@ public class HealthRecordDAO {
 	                    HealthRecord h=new HealthRecord(rst.getString("idforum"),rst.getString("topic"),rst.getString("social_worker_id"),rst.getString("problem_id"),rst.getString("problem_details"));
 	                    lhr.add(h);
 	                }
-	                DbCon.closeConnection(con);
+	                DbCon.closeConnection(con,stmt);
 	        }
 	        
 	        

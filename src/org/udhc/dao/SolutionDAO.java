@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.udhc.gen.DbCon;
-import org.udhc.gen.HealthRecord;
-import org.udhc.gen.models.Solution;
+import org.udhc.models.HealthRecord;
+import org.udhc.models.Solution;
 
 public class SolutionDAO {
 	
@@ -121,7 +121,7 @@ public class SolutionDAO {
                 	Solution s=new Solution(solution_id, topic_id, solution_content, solution_date, solution_user, solution_language);                           
                     solutions.add(s);
                 }
-                DbCon.closeConnection(con);
+                DbCon.closeConnection(con,stmt,rst);
                 
         }
         catch(Exception e)
@@ -160,7 +160,7 @@ public class SolutionDAO {
                 	Solution s=new Solution(solution_id, topic_id, solution_content, solution_date, solution_user, solution_language);                           
                     solutions.add(s);
                 }
-                DbCon.closeConnection(con);
+                DbCon.closeConnection(con,stmt,rst);
                 
         }
         catch(Exception e)
@@ -195,7 +195,7 @@ public static Solution getSolutionById(int solution_id){
                 	 s=new Solution( solution_id, topic_id, solution_content,solution_date,  solution_user, solution_language);                           
                 	 break;
                 }
-                DbCon.closeConnection(con);
+                DbCon.closeConnection(con,stmt,rst);
                 
         }
         catch(Exception e)

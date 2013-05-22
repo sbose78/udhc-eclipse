@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%@ page import="org.udhc.gen.*" %> 
+<%@ page import="org.udhc.models.*" %> 
 <%@ page import="java.util.*" %> 
 
 

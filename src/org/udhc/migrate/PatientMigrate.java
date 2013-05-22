@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.udhc.gen.DbCon;
-import org.udhc.gen.models.Report;
+import org.udhc.models.Report;
 
 public class PatientMigrate {
 	

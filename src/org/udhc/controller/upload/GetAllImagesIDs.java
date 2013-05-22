@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.udhc.gen.HealthRecord;
-import org.udhc.gen.models.Report;
+import org.udhc.models.HealthRecord;
+import org.udhc.models.Report;
 
 /**
  * Servlet implementation class GetAllImagesIDs

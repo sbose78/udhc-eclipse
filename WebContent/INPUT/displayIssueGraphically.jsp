@@ -1,6 +1,6 @@
 
-<%@page import="org.udhc.gen.models.Report"%>
-<%@page import="org.udhc.gen.*"%>
+
+<%@page import="org.udhc.models.*"%>
 <%@page import="java.util.*"%>
 
 <html>
@@ -177,9 +177,9 @@ if( issue.getApproved()==1 || (issue.getApproved()==0 && (User.isModerator(User.
 	
 }
 
-#topic_div{
-	background-color:  #CB2934;
-	color: white;
+div#topic_div{
+	background-color:white;
+	color: #032844;
 	padding: 12px;
 	font-size: 120%;
     border-radius: 15px;
@@ -192,7 +192,7 @@ if( issue.getApproved()==1 || (issue.getApproved()==0 && (User.isModerator(User.
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/mystyle.css"
 	type="text/css" />
-<%@page import="org.udhc.gen.HealthRecord"%>
+<%@page import="org.udhc.models.HealthRecord"%>
 <%@page import="java.util.ArrayList"%>
 
 <script type="text/javascript">
@@ -279,9 +279,9 @@ if( issue.getApproved()==1 || (issue.getApproved()==0 && (User.isModerator(User.
 		%>
 
 		<li><a class="report_image"
-			href="<%=request.getContextPath()%>/ViewImage?file_id=<%=image.getReport_id()%>&scale=500"
+			href="<%=request.getContextPath()%>/ViewImage?file_id=<%=image.getReport_id()%>&scale=800"
 			title="<%=image.getDescription()%>"> <img
-				src='<%=request.getContextPath()%>/ViewImage?file_id=<%=image.getReport_id()%>&scale=800'
+				src='<%=request.getContextPath()%>/ViewImage?file_id=<%=image.getReport_id()%>&scale=500'
 				height='200px' width='200px' />
 		</a></li>
 
@@ -317,6 +317,7 @@ if( issue.getApproved()==1 || (issue.getApproved()==0 && (User.isModerator(User.
 	<div id="topic_div">
 		<%=issue.getTopic()%>
 	</div>
+	<hr></hr>
 		
 </strong>
 
@@ -524,8 +525,13 @@ else{
 	%>
 	
 <div align="center">
+
+<div><%@include file="../LANDING/hpanel.jsp"%></div>
+
+<br><br><br><br><br><br>
 	
-		<img src="<%=request.getContextPath()%>/STATICS/images/blocked.jpeg">
+		<img src="<%=request.getContextPath()%>/STATICS/images/blocked.jpeg"> &nbsp; <br><br>Moderators please login
+		
 
 </div>	
 

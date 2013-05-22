@@ -1,5 +1,5 @@
-<%@page import="org.udhc.gen.models.Solution"%>
-<%@page import="org.udhc.gen.HealthRecord"%>
+<%@page import="org.udhc.models.Solution"%>
+<%@page import="org.udhc.models.HealthRecord"%>
 <%@page import="org.udhc.dao.*"%>
 
 <%@page import="java.util.ArrayList"%>

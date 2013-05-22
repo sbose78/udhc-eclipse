@@ -1,6 +1,6 @@
 <%@page import="org.udhc.dao.SolutionDAO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="org.udhc.gen.models.Solution"%>
+<%@page import="org.udhc.models.Solution"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

@@ -12,7 +12,9 @@ package org.udhc.gen;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 import javax.naming.Context;
@@ -39,7 +41,7 @@ public class DbCon {
     public static Connection getDbConnection()
     {
         Connection conn = null;
-        try{
+        try{/*
                 System.out.println("MySQL Connection being established");     
                 
                 Context initContext = new InitialContext();
@@ -52,10 +54,10 @@ public class DbCon {
         		//use conn
         		//conn.close();
         		return conn;
-        		
+        		*/
                 
         
-             /*               
+                            
                 Properties properties = new Properties();
                	properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("credentials.properties"));
                	
@@ -76,7 +78,7 @@ public class DbCon {
                 System.out.println("Connected to the database");
                 
            
-               */ 
+               return conn;
                 
 
         }
@@ -105,6 +107,69 @@ public class DbCon {
         return "OK";
         
     }
+    
+    public static String closeConnection(Connection con,Statement ps)
+    {
+        try{
+        ps.close();
+        con.close();
+        }
+        catch(Exception e)
+        {
+            return e.toString();
+        }
+        finally{
+        
+        	ps=null;
+        	con=null;
+        }
+        
+        return "OK";
+        
+    }
+    
+    public static String closeConnection(Connection con,Statement ps, ResultSet rs)
+    {
+        try{
+        rs.close();
+        ps.close();
+        con.close();
+        }
+        catch(Exception e)
+        {
+            return e.toString();
+        }
+        finally{
+        	rs=null;
+        	ps=null;
+        	con=null;
+        }
+        
+        return "OK";
+        
+    }
+    public static String closeConnection(Connection con,PreparedStatement ps, ResultSet rs)
+    {
+        try{
+        rs.close();
+        ps.close();
+        con.close();
+        }
+        catch(Exception e)
+        {
+            return e.toString();
+        }
+        finally{
+        	rs=null;
+        	ps=null;
+        	con=null;
+        }
+        
+        return "OK";
+        
+    }
+    
+    
     
     public static String closeConnection(Connection con)
     {

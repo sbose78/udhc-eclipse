@@ -46,11 +46,36 @@
  				
  			});
  			
+ 			$("input#search_all").keyup(function(){
+ 				refreshVisiblity();
+ 				
+ 				 $( "li[type='health_issue']" ).each(function(){
+ 					 var search_string =$("input#search_all").val();
+ 					 var ref_string = $(this).attr('patient_name');
+ 					 
+ 					 
+ 					 if ( ref_string.toLowerCase().indexOf(search_string.toLowerCase()) <0 ){
+ 					//	 alert (search_string + ":" + ref_string);
+ 						 $(this).hide();	 
+ 					 }
+ 					 
+ 				});
+ 			});
+ 			
  			
  			
  			fetchAllRecords();
  			
- 		})
+ 		});
+ 		
+ 		function refreshVisiblity(){
+ 			  
+ 			  $( "li[type='health_issue']" ).each(function(){
+ 					 $(this).show();	 
+ 								 
+ 				});
+ 			  
+ 		}
  		
  		function fetchTopicDetails(topic_id){
  			$("#topic_details").html("<img width='100px'  height='100px' src='<%=request.getContextPath()%>/STATICS/images/loading2.gif'/>");
@@ -106,7 +131,12 @@
  		function populateTree(all_records){
  			var head_ul = $("ul#head_ul");
  			for(var patient in all_records){
+ 				
+ 				var search_tags=all_records[patient].patient_name;
+ 				
  				var li = $(document.createElement('li'));
+ 				$(li).attr("patient_name",all_records[patient].patient_name);
+ 				$(li).attr("type","health_issue");
  				
  				var div_symbol=$(document.createElement('div')); 
  				div_symbol.attr('class','ExpandCollapse');
@@ -303,27 +333,29 @@
 		<tr>
 			<td valign="top"  align="left" width="45%">
 			
-			<div align="center">
-			  <a class="util_links" id="add_new_health_case" href="<%=request.getContextPath()%>/INPUT/care-seeker-input.jsp">ADD A NEW HEALTH CASE </a> &nbsp;&nbsp; &nbsp;
-        
-         <a class="util_links" href="displayMyInputs.jsp"> OPEN MY RECORDS </a>
-                
-			</div >
-			
-		
-			<div width="100%" id="topic_list">
-			<ul id="head_ul"> 
+						<div align="center">
+						  <a class="util_links" id="add_new_health_case" href="<%=request.getContextPath()%>/INPUT/care-seeker-input.jsp">ADD A NEW HEALTH CASE </a> &nbsp;&nbsp; &nbsp;
+			        
+			        &nbsp;&nbsp;
+     		&nbsp; <img width="20px" alt="" src="<%=request.getContextPath()%>/STATICS/images/06-magnify.png">   
+     		&nbsp; <input id="search_all" type="search" name="s"> 
+			                
+						</div >
 						
-		</ul>
-			</div>
+					
+						<div width="100%" id="topic_list">
+							<ul id="head_ul"> 
+										
+							</ul>
+						</div>
 			</td>
 			
 			<td width="55%" valign="top" align="left">
-				
-				<div id="topic_details" width="100%">
-				
-			
-				</div>
+						
+						<div id="topic_details" width="100%">
+						
+					
+						</div>
 					
 			
 			

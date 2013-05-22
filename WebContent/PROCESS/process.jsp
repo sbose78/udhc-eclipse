@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/mystyle.css" type="text/css" />
 <script type="text/javascript" src="script.js"></script>
 
-<%@ page import="org.udhc.gen.*" %> 
+<%@ page import="org.udhc.models.*" %> 
 <%@ page import="java.util.*" %> 
 
 <!DOCTYPE html>
@@ -48,8 +48,8 @@
         <title>PROCESS</title>
     </head>
 
-            <div><%@include file="../hpanel.jsp" %></div>
-
+            <div><%@include file="../LANDING/hpanel.jsp" %></div>
+		<br><br><br><br><br><br>
     <%
 
     /*

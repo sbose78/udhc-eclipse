@@ -1,4 +1,4 @@
-<%@ page import="org.udhc.gen.*" %> 
+<%@ page import="org.udhc.models.*" %> 
 <%@ page import="java.util.*" %> 
 </head>
 
@@ -14,7 +14,7 @@
 
   
   <div id="content_space">
-      <div><%@include file="hpanel.jsp" %></div>
+      <div><%@include file="./LANDING/hpanel.jsp" %></div>
     
 	
 	
@@ -23,7 +23,7 @@
 		<div class="bd">
                     
                     <form action="<%=request.getContextPath()%>/registerUser"> 
-                        <br> Assigned Anonymized ID/NAME: <input type="text" name="name" value="<%=org.udhc.gen.User.getScientificName()%>"> <br>
+                        <br> Assigned Anonymized ID/NAME: <input type="text" name="name" value="<%=User.getScientificName()%>"> <br>
                         <br> Pincode: <input type="text" name="pincode" value="736146">
                         
                         <br>      Email address <%=User.getLoggedInUserEmail(request)%> <input type="hidden" name="username" value="<%= User.getLoggedInUserEmail(request) %>"> <br><br>

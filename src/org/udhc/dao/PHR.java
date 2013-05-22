@@ -11,8 +11,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.udhc.gen.DbCon;
-import org.udhc.gen.HealthRecord;
-import org.udhc.gen.models.Solution;
+import org.udhc.models.HealthRecord;
+import org.udhc.models.Solution;
 
 public class PHR {
 
