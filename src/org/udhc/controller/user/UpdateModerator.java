@@ -74,11 +74,11 @@ public class UpdateModerator extends HttpServlet {
 			
 			if(isModerator){
 					EmailUtil.sendMail("", to, "ArogyaUDHC Moderator", "Congratulations, you are now a moderator and have access to the dashboard!<br>");
-					String to1[]={"kaustav.bera@udhc.co.in","sbose78@gmail.com","caregiver@udhc.co.in",User.getLoggedInUserEmail(request)};
+					String to1[]={"kaustav.bera@udhc.co.in","sbose78@gmail.com","rakesh7biswas@gmail.com","caregiver@udhc.co.in",User.getLoggedInUserEmail(request)};
 					EmailUtil.sendMail("", to1, "ArogyaUDHC moderator approval for "+email, "Approved by " +User.getLoggedInUserEmail(request));
 			}
 			else{
-				String to1[]={"kaustav.bera@udhc.co.in","sbose78@gmail.com","caregiver@udhc.co.in",User.getLoggedInUserEmail(request)};
+				String to1[]={"kaustav.bera@udhc.co.in","sbose78@gmail.com","rakesh7biswas@gmail.com","caregiver@udhc.co.in",User.getLoggedInUserEmail(request)};
 				EmailUtil.sendMail("", to1, "ArogyaUDHC moderator approval cancelled for "+email, "Cancelled by " +User.getLoggedInUserEmail(request));
 
 			}

@@ -79,7 +79,7 @@ public class MainServlet extends HttpServlet {
 		
 		                      /*
 		                       * 
-		                       * Succesful authentication.
+		                       * Successful authentication.
 		                       * All the session data is updated.
 		                       * TO DO : WIll be shifted to a new function
 		                       * 
@@ -117,16 +117,16 @@ public class MainServlet extends HttpServlet {
 		                        }
 		                        else
 		                        {
-		                        	  String content ="Hi "+name+", <br>";
+		                        	  String content ="Hi "+authentication.getEmail()+", <br>";
                                       content+="Thank you for registering. <br><br>";
                                       content+="Please note that if you are registering as a doctor/medical student," +
                                       		"one of our moderators may get in touch with you to approve your account." +
                                       		"<br><br>Take care.<br> ";
                                       	
-                                      
-                                      EmailUtil.sendMail("", User.getModeratorEmails(),"ArogyaUDHC registration" , content );
-		                            response.sendRedirect(request.getContextPath()+"/completeProfile.jsp");
-		                            return;
+                                      String sendees[] = {authentication.getEmail().toString()};
+                                      EmailUtil.sendMail("",sendees,"ArogyaUDHC registration" , content );
+		                              response.sendRedirect(request.getContextPath()+"/completeProfile.jsp");
+		                             
 		                        }
 		        }
 		        if (op.equals("Google") || op.equals("Yahoo")) {

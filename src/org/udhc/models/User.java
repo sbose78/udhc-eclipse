@@ -455,7 +455,15 @@ public class User {
         return user_al;
     }
     
-    
+    public static String getRoleName(int role){
+    	role= Math.abs(role);
+    	switch(role){
+    		case 0: return "Patient";
+    		case 1 : return "Social worker";
+    		case 2 : return "Care-giver";
+    	}
+    	return "Patient";
+    }
     
     
     public String insertSocialWorkerPatient()

@@ -556,7 +556,8 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 		
 		int approved_status = record.getApproved();
 	 	String approved_value = approved_status == 1 ? "APPROVED" : "NOT";
-	 	String searchTag = record.getSocialWorker_id() + " "+record.getTopic() + " "+ record.getProblem_id() + " "+approved_value;
+          String solved_value = record.getSolved() == 0 ? "solution:no" : "solution:yes";
+	 	String searchTag = record.getSocialWorker_id() + " "+record.getTopic() + " "+ record.getProblem_id() + " "+approved_value+" "+solved_value;
 
 %>
 
