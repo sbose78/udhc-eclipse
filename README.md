@@ -97,11 +97,11 @@ The application business logic consists of signin OpenID which requires predefin
 - Open WebContent/WEB-INF/web.xml and locate the following code snippet
 
 
-	  <context-param>
-	    <description>domain</description>
-	    <param-name>domain_url</param-name>
-	    <param-value> http://care.udhc.co.in/  </param-value>
-	  </context-param>
+  <context-param>
+    <description>domain</description>
+    <param-name>domain_url</param-name>
+    <param-value> http://care.udhc.co.in/  </param-value>
+  </context-param>
 
 	  Change the <param-value> data to the endpoint where the application has been deployed.
 	  When deployed on localhost, remember to enter the context along with the server-name.  
