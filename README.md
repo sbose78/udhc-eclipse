@@ -96,12 +96,12 @@ The application business logic consists of signin OpenID which requires predefin
 
 - Open WebContent/WEB-INF/web.xml and locate the following code snippet
 
-
-  <context-param>
-    <description>domain</description>
-    <param-name>domain_url</param-name>
-    <param-value> http://care.udhc.co.in/  </param-value>
-  </context-param>
+	
+		<context-param>
+			<description>domain</description>
+			<param-name>domain_url</param-name>
+			<param-value> http://care.udhc.co.in/  </param-value>
+		</context-param>
 
 	  Change the <param-value> data to the endpoint where the application has been deployed.
 	  When deployed on localhost, remember to enter the context along with the server-name.  
@@ -114,17 +114,18 @@ The application business logic consists of signin OpenID which requires predefin
 	  	http://localhost:8080/MyContext
 
 
--  Create a file "credentials.properties" in plaintext and add the following 	 	information.  ( Refer : https://gist.github.com/sbose78/5625572 )
+-  Create a file "credentials.properties" in plaintext and add the following information.  ( Refer : https://gist.github.com/sbose78/5625572 )
 
-	database_host=ud_DATABASE_HOST_t5xn6.ap-northeast-1.rds.amazonaws.com
-	database_port=3306
-	database_user=MY_USERNAME
-	database_password=My_secret_password
-	database_database=DATABASE_NAME
-	admin_email=SOME_MAIL@gmail.com
-	admin_password=PASSWORD_of_SOME_MAIL
+		database_host=ud_DATABASE_HOST_t5xn6.ap-northeast-1.rds.amazonaws.com
+		database_port=3306
+		database_user=MY_USERNAME
+		database_password=My_secret_password
+		database_database=DATABASE_NAME
+		admin_email=SOME_MAIL@gmail.com
+		admin_password=PASSWORD_of_SOME_MAIL
 
-- Create a file "context.xml" in plaintext and add the following information. 	  	Note: this file is used in DB connection pooling.
+- Create a file "context.xml" in plaintext and add the following information. 	  	
+  Note: this file is used in DB connection pooling.
 	( Refer : https://gist.github.com/sbose78/5625572 ) 
 
 		<?xml version="1.0" encoding="UTF-8"?>
@@ -176,12 +177,12 @@ It is recommended that the application be deployed locally and tested before dep
 
 Run the Eclipse Project locally using the Apache Tomcat 6 Runtime. 
 Please make sure the web.xml file has been updated accordingly to include the URL of the locally deployed app.
-
-<context-param>
-	    <description>domain</description>
-	    <param-name>domain_url</param-name>
-	    <param-value> http://localhost:8080/MyContext</param-value>
-</context-param>
+		
+		<context-param>
+			    <description>domain</description>
+			    <param-name>domain_url</param-name>
+			    <param-value> http://localhost:8080/MyContext</param-value>
+		</context-param>
 
 Checkpoints.
 
@@ -191,12 +192,13 @@ Signout and Signin again, if the registration form doesn't get displayed this ti
 
 Now , to deploy this webapp on a public network as a WAR, make sure
 - The URL is updated in web.xml
+	
+		<context-param>
+		    <description>domain</description>
+		    <param-name>domain_url</param-name>
+		    <param-value> http://care.udhc.co.in</param-value>
+		</context-param>
 
-	<context-param>
-	    <description>domain</description>
-	    <param-name>domain_url</param-name>
-	    <param-value> http://care.udhc.co.in</param-value>
-	</context-param>
 - The corresponding database connection information in the credentialsproperties" file is reachable from the server where the WAR is being deployed.
 
 After the above steps are verified, generate the WAR 
