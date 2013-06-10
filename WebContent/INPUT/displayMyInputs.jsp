@@ -80,7 +80,7 @@ function uploadImage()
                 <div><%@include file="../LANDING/hpanel.jsp" %></div>
       
       
-      
+      <br><br><br><br><br><br>
       
 <%
 	if(org.udhc.models.User.getLoggedInUserEmail(request).equals("GUEST"))
@@ -108,12 +108,13 @@ function uploadImage()
     }
 %>
 
+
       
                 
                    <div  id="displayInputs_add_new" > <a href="../INPUT/care-seeker-input.jsp">ADD A NEW HEALTH CASE ? </a>
                    
                    &nbsp;
-                   <a href="../INPUT/displayInputs.jsp">OPEN ALL RECORDS </a>
+                   <a href="../INPUT/input_directory.jsp">OPEN ALL RECORDS </a>
                    
                    
                    

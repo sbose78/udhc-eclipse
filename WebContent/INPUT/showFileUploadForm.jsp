@@ -1,5 +1,8 @@
 <div align="center">
+    
+    <!-- 
     Upload more reports in the form of Scans/Images ?
+     -->
         <div id="upload_status"></div>
 </div>  
 
@@ -9,7 +12,7 @@ String topic_id=request.getParameter("topic_id");
 
 %>
 
-
+<!-- 
     
     
 <form  action="<%=request.getContextPath()%>/UploadImage" method="post" enctype="multipart/form-data" id="imageForm" name="imageForm">
@@ -20,3 +23,4 @@ String topic_id=request.getParameter("topic_id");
         
 </form>
     
+ -->

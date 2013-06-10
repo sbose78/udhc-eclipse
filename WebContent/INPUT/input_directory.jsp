@@ -325,7 +325,7 @@
 	
          <%@include file="../LANDING/hpanel.jsp" %>
 
-<br><br><br><br><br><br>
+<br><br><br><br>
 	
 	<body>
 	
@@ -334,11 +334,18 @@
 			<td valign="top"  align="left" width="45%">
 			
 						<div align="center">
-						  <a class="util_links" id="add_new_health_case" href="<%=request.getContextPath()%>/INPUT/care-seeker-input.jsp">ADD A NEW HEALTH CASE </a> &nbsp;&nbsp; &nbsp;
+						 <img width="20px" alt="" src="<%=request.getContextPath()%>/STATICS/images/06-magnify.png">&nbsp;
+						 <input id="search_all" type="search" name="s"><br></br> 
+						
+				 <a class="util_links" id="add_new_health_case" href="<%=request.getContextPath()%>/INPUT/care-seeker-input.jsp">ADD A NEW HEALTH CASE </a> &nbsp;&nbsp; &nbsp;
 			        
-			        &nbsp;&nbsp;
-     		&nbsp; <img width="20px" alt="" src="<%=request.getContextPath()%>/STATICS/images/06-magnify.png">   
-     		&nbsp; <input id="search_all" type="search" name="s"> 
+								        
+			        
+     		   
+     		
+     		&nbsp;
+     		
+			  <a class="util_links" href="<%=request.getContextPath()%>/INPUT/displayMyInputs.jsp"> MY UPLOADS </a> &nbsp;&nbsp; &nbsp;     		 
 			                
 						</div >
 						

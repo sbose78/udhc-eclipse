@@ -23,6 +23,8 @@ import java.util.TimeZone;
 import org.udhc.gen.DbCon;
 import org.udhc.models.Report;
 
+import com.google.gdata.data.extensions.Image;
+
 
 /**
  *
@@ -160,6 +162,34 @@ public class HealthRecord {
     
     public HealthRecord(int topic_id , String topic,String social_worker_id,String patient_name, String problem_details, int approved, String date,int solved)
     {
+        this.topic_id=topic_id+"";
+        this.problem_id= patient_name;
+        this.problem_details=problem_details;
+        this.topic=topic;
+        this.approved=approved;
+        this.socialWorker_id=social_worker_id;
+        this.date=date;
+        this.solved =solved;
+        
+    }
+    
+    boolean isConsentLetterUploaded ;
+    
+    public boolean isConsentLetterUploaded() {
+		return isConsentLetterUploaded;
+	}
+
+	public void setConsentLetterUploaded(boolean isConsentLetterUploaded) {
+		this.isConsentLetterUploaded = isConsentLetterUploaded;
+	}
+	
+	public boolean getConsentLetterUploaded() {
+		return isConsentLetterUploaded;
+	}
+
+	public HealthRecord(boolean isConsentLetterUploaded, int topic_id , String topic,String social_worker_id,String patient_name, String problem_details, int approved, String date,int solved)
+    {
+    	this.isConsentLetterUploaded = isConsentLetterUploaded;
         this.topic_id=topic_id+"";
         this.problem_id= patient_name;
         this.problem_details=problem_details;
@@ -384,10 +414,11 @@ public class HealthRecord {
 
                 stmt=con.createStatement();
                 rst=stmt.executeQuery("select * from forum");
-                while(rst.next()){
-        
-                            	
-                   HealthRecord h=new HealthRecord(Integer.parseInt(rst.getString("idforum")),rst.getString("topic"),rst.getString("social_worker_id"),rst.getString("problem_id"),rst.getString("problem_details"),rst.getInt("approved"),rst.getString("upload_date").toString(),rst.getInt("solved"));
+                while(rst.next()){       
+                   
+                   boolean isConsentLetterUploaded = rst.getBinaryStream("consent_letter")==null?false:true	;
+                   System.out.println("*******"+isConsentLetterUploaded);
+                   HealthRecord h=new HealthRecord(isConsentLetterUploaded, Integer.parseInt(rst.getString("idforum")),rst.getString("topic"),rst.getString("social_worker_id"),rst.getString("problem_id"),rst.getString("problem_details"),rst.getInt("approved"),rst.getString("upload_date").toString(),rst.getInt("solved"));
                    lhr.add(h);
                 }
                 DbCon.closeConnection(con,stmt,rst);
@@ -1008,6 +1039,8 @@ public class HealthRecord {
     	
     	
     }
+    
+    
      
     public static HealthRecord showSolution(int topic_id)
     {

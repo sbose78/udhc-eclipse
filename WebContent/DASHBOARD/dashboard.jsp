@@ -163,6 +163,17 @@ table{
 	z-index:999;
 }
 
+a.consent_letter_uploaded_true{
+
+ 	color: green;
+ 
+}
+
+
+a.consent_letter_uploaded_false{
+	color: red;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -290,7 +301,7 @@ table{
 		
 		
 		$("#load_wait").hide();
-		$("a.solution_box").colorbox({iframe:true, innerWidth:900, innerHeight:700});
+		$("a.solution_box,a.mail_box").colorbox({iframe:true, innerWidth:900, innerHeight:700});
 			
 		$('#jqxtabs').jqxTabs({ position: 'top', width: '99%' , height: "auto", reorder: true });
 			if(  $("input#user_approval_button").size() > 0 )
@@ -353,6 +364,7 @@ table{
 				$("input#approval_button").click(function(){
 					
 					var approval_status= $(this).attr("class");
+					var uploader = $(this).attr("uploader");
 					var topic_id=$(this).attr("topic_id");
 					$(this).attr("value"," WORKING....");
 				//	alert(approval_status);
@@ -374,7 +386,7 @@ table{
 	
 					}
 					
-					var response= updateApprovalStatus(topic_id,approve_to,this,updatedApprovalStatus,updatedApprovalClass);
+					var response= updateApprovalStatus(uploader,topic_id,approve_to,this,updatedApprovalStatus,updatedApprovalClass);
 				//	alert(response[0]);
 					if( response[0].status == 1)
 					{
@@ -458,10 +470,10 @@ table{
 			
 		}
 		
-		function updateApprovalStatus(topic_id, approve_to,button,updatedApprovalStatus,updatedApprovalClass)
+		function updateApprovalStatus(uploader,topic_id, approve_to,button,updatedApprovalStatus,updatedApprovalClass)
 		{
 	
-			var finalUrl='<%=request.getContextPath()%>/changeHealthIssueApprovalStatus?topic_id='+topic_id+'&approve_to='+approve_to;
+			 var finalUrl='<%=request.getContextPath()%>/changeHealthIssueApprovalStatus?topic_id='+topic_id+'&approve_to='+approve_to+'&uploader='+uploader;
 	    	 var req=$.ajax({
 	                   type:"GET",
 	                   url:finalUrl,
@@ -555,8 +567,10 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 		String topic_id=record.getTopic_id();
 		
 		int approved_status = record.getApproved();
+		boolean isConsentLetterUploaded = record.getConsentLetterUploaded();
+		String css_consent_letter_class= isConsentLetterUploaded?"consent_letter_uploaded_true":"consent_letter_uploaded_false";
 	 	String approved_value = approved_status == 1 ? "APPROVED" : "NOT";
-          String solved_value = record.getSolved() == 0 ? "solution:no" : "solution:yes";
+        String solved_value = record.getSolved() == 0 ? "solution:no" : "solution:yes";
 	 	String searchTag = record.getSocialWorker_id() + " "+record.getTopic() + " "+ record.getProblem_id() + " "+approved_value+" "+solved_value;
 
 %>
@@ -584,8 +598,13 @@ String loggedInUser = User.getLoggedInUserEmail(request);
 %>		
 		
 				
-		<a class="solution_box" href="<%=request.getContextPath()%>/SOLUTION/solutions_landing.jsp?topic_id=<%=record.getTopic_id()%>">Update</a> 
-		<a class="solution_box"  href="<%=request.getContextPath()%>/SOLUTION/composeEmail.jsp?topic_id=<%=record.getTopic_id()%>&social_worker_id=<%=record.getSocialWorker_id()%>">EMAIL</a>
+		<a class="solution_box" href="<%=request.getContextPath()%>/SOLUTION/solutions_landing.jsp?topic_id=<%=record.getTopic_id()%>">Update</a>
+&nbsp;&nbsp;&nbsp;		<a class="mail_box" href="<%=request.getContextPath()%>/SOLUTION/composeEmail.jsp?topic_id=<%=record.getTopic_id()%>&social_worker_id=<%=record.getSocialWorker_id()%>">
+
+<img src="<%=request.getContextPath()%>/DASHBOARD/images/18-envelope.png"/>
+
+
+</a>
 		
 <%
 	}
@@ -634,15 +653,15 @@ if(loggedInUser.equals("sbose78@gmail.com") || loggedInUser.equals("bera.kaustav
 		 	
 		 %>
 		 
-		 <input class="<%=button_class%>" id="approval_button" type="button" value="<%=button_value%>" topic_id=<%=record.getTopic_id() %>> 
+		 <input uploader="<%=record.getSocialWorker_id() %>" class="<%=button_class%>" id="approval_button" type="button" value="<%=button_value%>" topic_id=<%=record.getTopic_id() %>> 
 	</td>
 	
 	<td>
 		<%=record.getSocialWorker_id() %>
 	</td>
 	
-	<td>
-		<%=record.getDate() %>
+	<td >
+		<a class="<%=css_consent_letter_class%>" href="<%=request.getContextPath()%>/GetConsentLetter?topic_id=<%=topic_id%>"><%=record.getDate() %></a>
 	</td>
 	
 </tr>

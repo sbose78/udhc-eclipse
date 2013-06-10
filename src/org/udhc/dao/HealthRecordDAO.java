@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.io.InputStream;
 
 import org.udhc.gen.DbCon;
 import org.udhc.models.HealthRecord;
@@ -50,6 +51,38 @@ public class HealthRecordDAO {
 	        
 	        
 	        return lhr;
+	    }
+	   
+	    public InputStream getConsentLetter(int topic_id){
+	    	
+	    	InputStream consent_letter=null;
+	    	Connection con;//=DbCon.getDbConnection();
+		     
+	        try{
+	            
+	                con=DbCon.getDbConnection();
+
+	                ResultSet rst=null;
+	                Statement stmt=null;
+
+	                stmt=con.createStatement();
+	                rst=stmt.executeQuery("select consent_letter from forum where idforum = "+topic_id);
+	                while(rst.next()){
+	                	consent_letter= rst.getBinaryStream("consent_letter");
+	                	 
+	                }
+	                DbCon.closeConnection(con,stmt);
+	        }
+	        
+	        
+	        
+	        catch(Exception e)
+	        {
+	            System.out.println(e.toString());
+	        }
+	        
+	    	
+	    	return consent_letter;
 	    }
 	
 

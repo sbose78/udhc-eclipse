@@ -58,7 +58,7 @@ table{
                     <br><br><br><br><br>
                     
                     
-                    <strong>Signing with your existing Yahoo/Google account</strong>
+                    <strong>Signin with your existing Yahoo/Google account</strong>
                     
                     </p>
                     

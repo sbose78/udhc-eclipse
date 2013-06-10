@@ -3,6 +3,47 @@ INTRODUCTION
 
 ArogyaUDHC, which stands for User-Driven HealthCare has been developed using JavaEE.
 
+USER-FLOW
+---------
+
+There are 3 types of users :
+
+- care-givers  
+	- non-moderator 
+	- moderator
+- social-workers
+- care-seekers
+
+
+The user-perspective flow for a 'care-seeker' is :
+	- Signs up using Google/Yahoo account and is assigned an ( anonymised ) scientific name .
+	- Signs in using Google/Yahoo account.
+	- Downloads consent letter.
+	- Adds her health issue and uploads a scanned image of the (signed) consent letter and awaits its approval.
+	- Views uploaded approved & non-approved issues at http://care.udhc.co.in/INPUT/displayMyInputs.jsp
+	- Views health issues uploaded by her & by other social workers here 
+	  http://care.udhc.co.in/SOLUTION/phrquery.jsp by making a PHR query with the assigned scientific name
+
+
+The user-perspective flow for a 'social-worker':
+	- Signs up using Google/Yahoo account.
+	- Adds a new health issue ( specifies patient scientific name )
+
+
+
+The user-perspective flow for a 'care-giver' is :
+	
+	- Signs up using Google/Yahoo account which gives her privileges same as that of a care-seeker.
+	- Moderator 'approves' the care-giver and so now she can 
+		- take part in discussions and 'comment' on the health issues uploaded on UDHC.
+
+
+The user-perspective flow for a 'moderator' :
+	- Can view the Dashboard http://care.udhc.co.in/DASHBOARD/dashboard.jsp 
+	- Approve/Disapprove health issue uploads ( on grounds of violation of HIPAA guidelines).
+	- Elevate user privileges to moderator privileges.
+
+
 FEATURES 
 ---------
 
