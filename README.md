@@ -16,6 +16,7 @@ There are 3 types of users :
 
 
 The user-perspective flow for a 'care-seeker' is :
+
 	- Signs up using Google/Yahoo account and is assigned an ( anonymised ) scientific name .
 	- Signs in using Google/Yahoo account.
 	- Downloads consent letter.
@@ -26,6 +27,7 @@ The user-perspective flow for a 'care-seeker' is :
 
 
 The user-perspective flow for a 'social-worker':
+
 	- Signs up using Google/Yahoo account.
 	- Adds a new health issue ( specifies patient scientific name )
 
@@ -39,6 +41,7 @@ The user-perspective flow for a 'care-giver' is :
 
 
 The user-perspective flow for a 'moderator' :
+
 	- Can view the Dashboard http://care.udhc.co.in/DASHBOARD/dashboard.jsp 
 	- Approve/Disapprove health issue uploads ( on grounds of violation of HIPAA guidelines).
 	- Elevate user privileges to moderator privileges.
