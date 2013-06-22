@@ -124,7 +124,14 @@ public class MainServlet extends HttpServlet {
                                       		"<br><br>Take care.<br> ";
                                       	
                                       String sendees[] = {authentication.getEmail().toString()};
-                                      EmailUtil.sendMail("",sendees,"ArogyaUDHC registration" , content );
+                                      try{
+                                    	  EmailUtil.sendMail("",sendees,"ArogyaUDHC registration" , content );  
+                                      }
+                                      catch(Exception e){
+                                    	  System.out.println("*** EMAIL COULD NOT BE SENT ****");
+                                    	  e.printStackTrace();
+                                      }
+                                      
 		                              response.sendRedirect(request.getContextPath()+"/completeProfile.jsp");
 		                             
 		                        }
