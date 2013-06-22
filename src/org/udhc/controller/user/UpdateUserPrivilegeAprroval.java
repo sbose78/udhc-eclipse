@@ -59,11 +59,11 @@ public class UpdateUserPrivilegeAprroval extends HttpServlet {
 					EmailUtil.sendMail("", to, "ArogyaUDHC Care-giver approval", "Congratulations, your care-giver account has been approved." +
 						 " <br>");
 						//
-					String to1[]={"kaustav.bera@udhc.co.in","sbose78@gmail.com","caregiver@udhc.co.in",User.getLoggedInUserEmail(request)};
+					String to1[]={User.getLoggedInUserEmail(request)};
 					EmailUtil.sendMail("", to1, "ArogyaUDHC Care-giver approval for "+email, "Approved by " +User.getLoggedInUserEmail(request));
 				} 
 				else{
-					String to1[]={"kaustav.bera@udhc.co.in","sbose78@gmail.com","caregiver@udhc.co.in",User.getLoggedInUserEmail(request)};
+					String to1[]={User.getLoggedInUserEmail(request)};
 					EmailUtil.sendMail("", to1, "ArogyaUDHC Care-giver approval cancelled for "+email, "Cancelled by " +User.getLoggedInUserEmail(request));
 
 				} 

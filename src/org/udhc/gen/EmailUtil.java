@@ -172,7 +172,8 @@ public class EmailUtil {
    }
     
     
-   public static void sendMailCommons(String from,String to[], String subject, String content) throws Exception{
+   public static void sendMailCommons(String from,String to[], String subject, String content) throws Exception
+   {
 
 	   Properties properties = new Properties();
 	   properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("credentials.properties"));
