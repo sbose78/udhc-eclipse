@@ -71,7 +71,9 @@ public class registerUser extends HttpServlet {
             
             if( role !=0){
             	String body = "Dear moderators, <br><br> A new user : "+email+"  has signed up as a "+User.getRoleName(role)+" . Please visit DASHBOARD and approve . <br><br> - The UDHC team";
-            	EmailUtil.sendMail("sbose78@gmail.com", User.getModeratorEmails(), " [UDHC ] User approval required for "+ name, body);
+            	
+            	String emails[]={"sbose78@gmail.com"};
+            	EmailUtil.sendMail("sbose78@gmail.com", emails , " [UDHC ] User approval required for "+ name, body);
             	
             }
             

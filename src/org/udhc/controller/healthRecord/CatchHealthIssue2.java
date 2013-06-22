@@ -151,14 +151,22 @@ public class CatchHealthIssue2 extends HttpServlet {
            * 
            */
           
-           String to[]=User.getModeratorEmails();
-           String subject="[NEW HEALTH ISSUE] Patient name : "+ patient_name + " uploaded by " + User.getLoggedInUserName(request);
-           String content=" Hello care-givers!, <br>A new health issue has been posted on UDHC : "+topic;
-           content+=" <strong> NARRATIVE  </strong>: <br> <br> <br>"+problem_details+"<br> <br> <br>";
-            
-           topic="[ UDHC ] - "+ patient_name + "uploaded by " + org.udhc.models.User.getLoggedInUserName(request);
-           org.udhc.gen.EmailUtil.sendMail("sbose78", to, subject, content);
-            
+          try{
+              
+              String to[]=User.getModeratorEmails();
+              String subject="[NEW HEALTH ISSUE] Patient name : "+ patient_name + " uploaded by " + User.getLoggedInUserName(request);
+              String content=" Hello care-givers!, <br>A new health issue has been posted on UDHC : "+topic;
+              content+=" <strong> NARRATIVE  </strong>: <br> <br> <br>"+problem_details+"<br> <br> <br>";
+               
+              topic="[ UDHC ] - "+ patient_name + "uploaded by " + org.udhc.models.User.getLoggedInUserName(request);
+              org.udhc.gen.EmailUtil.sendMail("sbose78", to, subject, content);
+               
+
+          }
+          catch(Exception e){
+        	  System.out.println("*** EMAIL COULD NOT BE SENT ****");
+        	  e.printStackTrace();
+          }
            response.sendRedirect(request.getContextPath()+"/UPLOADER/care-seeker-input-edit.jsp?topic_id="+topic_id);
            
     }

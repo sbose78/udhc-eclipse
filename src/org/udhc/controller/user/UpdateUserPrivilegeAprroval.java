@@ -70,8 +70,8 @@ public class UpdateUserPrivilegeAprroval extends HttpServlet {
 		}
 	
 	    catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	      System.out.println("*** EMAIL COULD NOT BE SENT ****");
+       	  e.printStackTrace();
 		}
 	 
 		response_object.put("approved", approved);
