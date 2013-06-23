@@ -6,6 +6,7 @@
 
 <%@page import="java.util.ArrayList"%>
 <%@ page import="org.udhc.models.User" %>
+<%@ page import="org.udhc.models.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,8 +15,12 @@
     
     <head>
                 <script type="text/javascript" src="<%=request.getContextPath()%>/INPUT/js/jquery-1.8.3.min.js"></script>
- <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
- <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+ 				<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+ 				<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+ 				
+ 				
+		 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/cleditor/jquery.cleditor.css" /> 
+		 		<script type="text/javascript" src="<%=request.getContextPath()%>/cleditor/jquery.cleditor.js"></script>
         
                 	
 <style>
@@ -86,7 +91,7 @@ label{
 }
 
 
-#care_seeker_form{
+#care_seeker_form_div{
 
 	width:80%;
 	margin: auto;
@@ -95,7 +100,7 @@ label{
 	padding: 4%;
 }
 
-#care_seeker_form:hover{
+#care_seeker_form_div:hover{
 
 	background-color: #F1F1F1;
 	
@@ -110,30 +115,7 @@ label{
 <script>
   
      function makeRichText() {
-                            var Dom = YAHOO.util.Dom,
-                                Event = YAHOO.util.Event;
-
-                            var myConfig = {
-                                height: '180px',
-                                width: '1000px',
-                                dompath: true,
-                                focusAtStart: true
-                            };
-
-                            YAHOO.log('Create the Editor..', 'info', 'example');
-                            var myEditor = new YAHOO.widget.SimpleEditor('editor', myConfig);
-                            myEditor.render();
                             
-                         //Inside an event handler after the Editor is rendered
-                            YAHOO.util.Event.on('b', 'click', function() {
-                                //Put the HTML back into the text area
-                                myEditor.saveHTML();
-
-                                //The var html will now have the contents of the textarea
-                                var html = myEditor.get('element').value;
-                                document.getElementById("v").value=html;
-                                document.form1.submit();
-                            });
                         }
     
     function setNewPatientStatus(isNewPatient)
@@ -162,12 +144,6 @@ label{
             alert("Updated");        
     }
     
-</script>
-
-
-<script src="<%=request.getContextPath()%>/INPUT/js/jquery.js"></script>
-
-<script type="text/javascript">
 
 	function updatePatientName()
 	{
@@ -200,7 +176,30 @@ label{
 	}
 	$(document).ready(function() {
   // Handler for .ready() called.
-		makeRichText();
+  	
+  		
+  		$("#editor").cleditor({
+	
+				width:870,
+				height:400
+	
+		});
+  
+  		$("#care_seeker_form").submit(function(){
+  			if($('#consent_letter').val().length !=0)
+  			{ 				
+  				
+  				return true;
+  			}
+  			else
+  			{
+  				alert("Please upload your signed consent form");
+  				return false;
+  			}
+  				
+  		})
+  	
+		//makeRichText();
   
   		updatePatientName();
   		$("#pincode").change(updatePatientName);
@@ -291,34 +290,8 @@ label{
 
 
 
-
-
-       <script src="http://yui.yahooapis.com/3.5.0/build/yui/yui-min.js"></script>
-  
     
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/menu/assets/skins/sam/menu.css" />
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/button/assets/skins/sam/button.css" />
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css" />
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/container/assets/skins/sam/container.css" />
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/editor/assets/skins/sam/editor.css" />
-<script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/container/container-min.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/menu/menu-min.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/button/button-min.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/editor/editor-min.js"></script>
 
-
-
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css" />
-<script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/event/event-min.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/connection/connection-min.js"></script>
-
-<script src="http://yui.yahooapis.com/3.5.0/build/yui/yui-min.js"></script>
-
-
-<%@ page import="org.udhc.models.*" %>
 
 
 
@@ -331,7 +304,7 @@ label{
     
     <br><br><br><br><br>
     
-    <body   class="yui-skin-sam" >
+    <body >
     
     
             
@@ -398,9 +371,9 @@ label{
 
 
             
-<div id="care_seeker_form" align="center">
+<div id="care_seeker_form_div" align="center">
 
-  <form method="post" action="<%=request.getContextPath() %>/CatchHealthIssue2" name="form1" id="form1"  enctype="multipart/form-data">
+  <form method="post" action="<%=request.getContextPath() %>/CatchHealthIssue2" id="care_seeker_form"  enctype="multipart/form-data">
 
                     <p align='center'>
                         <label>
@@ -409,7 +382,7 @@ label{
                         
                         </label> &nbsp;
                         
-                        <label> UPLOAD Letter of consent  : <input name="f" type="file" id="f"> 
+                        <label> UPLOAD Letter of consent  : <input name="f" type="file" id="consent_letter"> 
                         </label>                       <br><br><br>
                         
                         
@@ -500,7 +473,7 @@ label{
                         
                         <br><br>
                         <label> <strong>PLEASE EXPLAIN THE PROBLEM IN A FEW SENTENCES</strong></label><br><br>
-                        <textarea id="editor" name="editor" rows="20" cols="75" >
+                        <textarea id="editor" name="problem_details" rows="20" cols="75" >
                         
                         <Strong>Enter here</Strong>
                         
@@ -516,7 +489,7 @@ label{
                                 
                         
                         
-                        <input type="hidden" id="v" name="problem_details">
+                        <input type="hidden" id="v" >
                         
                         <br>
 

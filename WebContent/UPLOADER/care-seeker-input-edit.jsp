@@ -233,8 +233,6 @@ input.scan_button{
 
   			
   		$("#load_wait").hide();
-  		//$("#patient_name_text").hide();
-  		//alert("loaded");
   		
 		$("#button1").click(function(){
 			//event.preventDefault();
