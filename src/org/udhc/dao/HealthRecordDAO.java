@@ -109,17 +109,13 @@ public class HealthRecordDAO {
 	                       .post(ClientResponse.class,post);
 	     
 	    		if (response.getStatus() != 200) {
-	    		   throw new RuntimeException("Failed : HTTP error code : "
-	    			+ response.getStatus());
+	    		   throw new RuntimeException("Failed : HTTP error code : "+ response.getStatus());
 	    		}
 	     
-	    		String output = response.getEntity(String.class);
-	    		
+	    		String output = response.getEntity(String.class);	    		
 	    		JSONArray a = (JSONArray)(new JSONParser().parse(output));
-	     
-	    	//	System.out.println("Output from Server .... \n");
-	    	//	System.out.println(output);
-	    		  return a;
+	    		
+	    		return a;
 	     
 	    	  } catch (Exception e) {
 	     
@@ -127,7 +123,7 @@ public class HealthRecordDAO {
 	     
 	    	  }
 	    	
-	    	return null;
+	    	return null ;
 	    }
 	
 
@@ -135,7 +131,7 @@ public class HealthRecordDAO {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		System.out.println(getSimilarRecords("cancer"));
 		
 

@@ -19,39 +19,6 @@
 	src="<%=request.getContextPath()%>/INPUT/colorbox/jquery.colorbox.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/INPUT/colorbox/colorbox.css" />
-
-
-<script src="http://yui.yahooapis.com/3.5.0/build/yui/yui-min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="http://yui.yahooapis.com/2.9.0/build/menu/assets/skins/sam/menu.css" />
-<link rel="stylesheet" type="text/css"
-	href="http://yui.yahooapis.com/2.9.0/build/button/assets/skins/sam/button.css" />
-<link rel="stylesheet" type="text/css"
-	href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css" />
-<link rel="stylesheet" type="text/css"
-	href="http://yui.yahooapis.com/2.9.0/build/container/assets/skins/sam/container.css" />
-<link rel="stylesheet" type="text/css"
-	href="http://yui.yahooapis.com/2.9.0/build/editor/assets/skins/sam/editor.css" />
-<script type="text/javascript"
-	src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript"
-	src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script>
-<script type="text/javascript"
-	src="http://yui.yahooapis.com/2.9.0/build/container/container-min.js"></script>
-<script type="text/javascript"
-	src="http://yui.yahooapis.com/2.9.0/build/menu/menu-min.js"></script>
-<script type="text/javascript"
-	src="http://yui.yahooapis.com/2.9.0/build/button/button-min.js"></script>
-<script type="text/javascript"
-	src="http://yui.yahooapis.com/2.9.0/build/editor/editor-min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css" />
-<script type="text/javascript"
-	src="http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js"></script>
-<script type="text/javascript"
-	src="http://yui.yahooapis.com/2.9.0/build/event/event-min.js"></script>
-<script type="text/javascript"
-	src="http://yui.yahooapis.com/2.9.0/build/connection/connection-min.js"></script>
 <%
 	int health_record_id=Integer.parseInt(request.getParameter("topic_id"));                
 HealthRecord issue= HealthRecord.getHealthRecordByID(health_record_id);
@@ -185,6 +152,12 @@ div#topic_div{
     border-radius: 15px;
 }
 
+div#similar_issues_div{
+
+	padding: 10px;
+
+
+}
 
 </style>
 
@@ -195,11 +168,46 @@ div#topic_div{
 <%@page import="org.udhc.models.HealthRecord"%>
 <%@page import="java.util.ArrayList"%>
 
-<script type="text/javascript">
+
+
+<script src="http://yui.yahooapis.com/3.5.0/build/yui/yui-min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="http://yui.yahooapis.com/2.9.0/build/menu/assets/skins/sam/menu.css" />
+<link rel="stylesheet" type="text/css"
+	href="http://yui.yahooapis.com/2.9.0/build/button/assets/skins/sam/button.css" />
+<link rel="stylesheet" type="text/css"
+	href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css"
+	href="http://yui.yahooapis.com/2.9.0/build/container/assets/skins/sam/container.css" />
+<link rel="stylesheet" type="text/css"
+	href="http://yui.yahooapis.com/2.9.0/build/editor/assets/skins/sam/editor.css" />
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script>
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/2.9.0/build/container/container-min.js"></script>
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/2.9.0/build/menu/menu-min.js"></script>
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/2.9.0/build/button/button-min.js"></script>
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/2.9.0/build/editor/editor-min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css" />
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/2.9.0/build/yahoo/yahoo-min.js"></script>
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/2.9.0/build/event/event-min.js"></script>
+<script type="text/javascript"
+	src="http://yui.yahooapis.com/2.9.0/build/connection/connection-min.js"></script>
+
+<script>
             
  		  // jQuery.noConflict();  
 
-            $(function() {
+            
+ 		$(document).ready(function() {
             	           //  $('#gallery a').lightBox();
                  	$(".report_image").colorbox({rel:'report_image', top: 100, photo:'true', transition:"none", width:"auto", height:"1000px"});
                     		fetchPosts();
@@ -208,6 +216,8 @@ div#topic_div{
                     		             			
 
             });
+ 		
+ 			
             
             function fetchPosts()
             {
@@ -344,6 +354,21 @@ div#topic_div{
 
 </div>
 
+<div id="similar_issues_div">
+	
+	<strong> Similar issues</strong>
+	<div id="similar_issues_list">
+		
+		<div class="similar_issues_entry">	
+			<a href="www.google.com">www.google.com</a> 	
+		</div>
+		
+		<div class="similar_issues_entry">
+			<a href="www.google.com">www.google.com</a>
+		</div>
+	
+	</div>
+</div>
 
 
 </div>
