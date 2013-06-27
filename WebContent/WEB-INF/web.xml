@@ -290,4 +290,14 @@
     <servlet-name>GetConsentLetter</servlet-name>
     <url-pattern>/GetConsentLetter</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetSimilarCases</display-name>
+    <servlet-name>GetSimilarCases</servlet-name>
+    <servlet-class>org.udhc.controller.healthRecord.GetSimilarCases</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSimilarCases</servlet-name>
+    <url-pattern>/GetSimilarCases</url-pattern>
+  </servlet-mapping>
 </web-app>

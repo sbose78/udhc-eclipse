@@ -31,5 +31,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/root/udhc-libs/sax2r2.jar"/>
+	<classpathentry kind="lib" path="/root/Downloads/jersey-bundle-1.9.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

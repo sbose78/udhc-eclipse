@@ -7,8 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.io.InputStream;
 
+import org.json.simple.parser.*;
+import org.json.simple.*;
 import org.udhc.gen.DbCon;
 import org.udhc.models.HealthRecord;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 public class HealthRecordDAO {
 	
@@ -84,6 +90,45 @@ public class HealthRecordDAO {
 	    	
 	    	return consent_letter;
 	    }
+	    
+	    // REST client to access similar-cases service
+	    
+	    public static JSONArray getSimilarRecords(String search_key)
+	    {
+	    	try {
+	    		 
+	    		Client client = Client.create();
+	     
+	    		String post= "report=cancer";
+	    		
+	    		
+	    		WebResource webResource = client
+	    		   .resource("http://health-nodejstest.rhcloud.com/similarity");
+	     
+	    		ClientResponse response = webResource.accept("application/json")
+	                       .post(ClientResponse.class,post);
+	     
+	    		if (response.getStatus() != 200) {
+	    		   throw new RuntimeException("Failed : HTTP error code : "
+	    			+ response.getStatus());
+	    		}
+	     
+	    		String output = response.getEntity(String.class);
+	    		
+	    		JSONArray a = (JSONArray)(new JSONParser().parse(output));
+	     
+	    	//	System.out.println("Output from Server .... \n");
+	    	//	System.out.println(output);
+	    		  return a;
+	     
+	    	  } catch (Exception e) {
+	     
+	    		e.printStackTrace();
+	     
+	    	  }
+	    	
+	    	return null;
+	    }
 	
 
 	/**
@@ -91,6 +136,8 @@ public class HealthRecordDAO {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		System.out.println(getSimilarRecords("cancer"));
+		
 
 	}
 
