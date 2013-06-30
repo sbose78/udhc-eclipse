@@ -44,7 +44,10 @@ public class GetSimilarCases extends HttpServlet {
 
 		String issue_description=request.getParameter("issue_description");
 		issue_description = getTextFromHTML(issue_description);
+		System.out.println(issue_description);
 		JSONArray array_of_similar_records=HealthRecordDAO.getSimilarRecords(issue_description);
+		
+		System.out.println(array_of_similar_records);
 		
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();

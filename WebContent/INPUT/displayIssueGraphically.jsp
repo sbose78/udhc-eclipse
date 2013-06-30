@@ -24,6 +24,10 @@
 HealthRecord issue= HealthRecord.getHealthRecordByID(health_record_id);
 String loggedInUser= User.getLoggedInUserEmail(request);
 
+String issue_details = issue.getProblem_details();
+issue_details= issue_details.replace("\n", "").replace("'", " ");
+System.out.println( issue_details);
+
 /*
 		Only moderator , uploader can view the issue if the issue is not approved yet 
 		So if approved, one can view without a login also.
@@ -159,6 +163,22 @@ div#similar_issues_div{
 
 }
 
+div#similar_issues_list{
+	
+	background-color: white;
+	font-size: 110%;
+}
+div.similar_issues_entry{
+
+	margin: 20px;
+	
+}
+
+a.similar_issues_link{
+	
+	
+}
+
 </style>
 
 
@@ -205,22 +225,62 @@ div#similar_issues_div{
 <script>
             
  		  // jQuery.noConflict();  
-
+		
             
  		$(document).ready(function() {
             	           //  $('#gallery a').lightBox();
                  	$(".report_image").colorbox({rel:'report_image', top: 100, photo:'true', transition:"none", width:"auto", height:"1000px"});
-                    		fetchPosts();
+                    fetchPosts();
+                    fetchSimilarCases();
             			//	alert("touched");
             			
                     		             			
 
             });
  		
+ 		function fetchSimilarCases()
+ 		{
+ 			var issue_description =  '<%=issue_details%>';
+ 			var values = "issue_description="+issue_description;
  			
+ 		    var req=$.ajax({
+ 			        url: "<%=request.getContextPath()%>/GetSimilarCases",
+ 			        type: "post",
+ 			        data: values,
+ 			        success: function(health_cases_json_array){
+ 			          // alert("success");	             
+ 			            display_similar_health_cases(health_cases_json_array);
+ 			        },
+ 			        error:function(){
+ 			            alert("failure");	           
+ 			        }   
+ 		     }); 			
+ 		}
+ 		
+ 		function display_similar_health_cases(display_similar_health_cases)
+ 		{
+ 			for( health_case in display_similar_health_cases  )
+ 			{
+ 					
+ 					var similar_issues_entry=document.createElement("div");
+ 	 	 			var similar_issues_url=document.createElement("a");
+ 	 	 			
+ 	 	 			$(similar_issues_url).append( display_similar_health_cases[health_case].title);
+ 	 	 			$(similar_issues_url).attr("href", display_similar_health_cases[health_case].url);
+ 	 	 			$(similar_issues_url).attr("class", "similar_issues_link");
+ 	 	 			$(similar_issues_entry).attr("class", "similar_issues_entry");
+ 	 	 			$(similar_issues_entry).append(similar_issues_url);
+ 	 	 			
+ 	 	 			var parent_div = document.getElementById("similar_issues_list");
+ 	 	 			$(parent_div).append(similar_issues_entry);
+ 	 			
+ 			
+ 			}
+ 			
+ 		}
             
-            function fetchPosts()
-            {
+        function fetchPosts()
+        {
             	//alert("Please wait while we refresh")
             	var finalUrl='<%=request.getContextPath()%>/PROCESS/showPostsGraphical.jsp?topic_id=<%=request.getParameter("topic_id")%>';
                 var req=$.ajax({
@@ -241,7 +301,7 @@ div#similar_issues_div{
                          }             
                 });  
                      
-            }
+          }
 
             </script>
 
@@ -354,18 +414,19 @@ div#similar_issues_div{
 
 </div>
 
-<div id="similar_issues_div">
+<script type="text/javascript">
 	
-	<strong> Similar issues</strong>
+
+</script>
+
+<hr></hr>
+
+<div id="similar_issues_div" align="left">
+	
+	<strong> Similar issues from <a href="http://www.bmj.com/">BMJ </a> </strong>
 	<div id="similar_issues_list">
 		
-		<div class="similar_issues_entry">	
-			<a href="www.google.com">www.google.com</a> 	
-		</div>
 		
-		<div class="similar_issues_entry">
-			<a href="www.google.com">www.google.com</a>
-		</div>
 	
 	</div>
 </div>
@@ -443,7 +504,7 @@ if(  User.getLoggedInUserRole(request).equals("2") )
 
 </div>
 
-
+arg0
 <br>
 
 <script>
