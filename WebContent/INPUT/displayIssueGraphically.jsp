@@ -165,7 +165,7 @@ div#similar_issues_div{
 
 div#similar_issues_list{
 	
-	background-color: white;
+	
 	font-size: 110%;
 }
 div.similar_issues_entry{
@@ -241,7 +241,7 @@ a.similar_issues_link{
  		function fetchSimilarCases()
  		{
  			var issue_description =  '<%=issue_details%>';
- 			var values = "issue_description="+issue_description;
+ 			var values = "issue_description="+escape(issue_description);
  			
  		    var req=$.ajax({
  			        url: "<%=request.getContextPath()%>/GetSimilarCases",
@@ -249,7 +249,7 @@ a.similar_issues_link{
  			        data: values,
  			        success: function(health_cases_json_array){
  			          // alert("success");	             
- 			            display_similar_health_cases(health_cases_json_array);
+ 			            display_similar_health_cases(escape(health_cases_json_array));
  			        },
  			        error:function(){
  			            alert("failure");	           
@@ -423,7 +423,7 @@ a.similar_issues_link{
 
 <div id="similar_issues_div" align="left">
 	
-	<strong> Similar issues from <a href="http://www.bmj.com/">BMJ </a> </strong>
+	<h2> Similar health cases from <a href="http://www.bmj.com/">BMJ </a> </h2>
 	<div id="similar_issues_list">
 		
 		

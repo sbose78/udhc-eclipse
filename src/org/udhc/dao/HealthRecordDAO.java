@@ -99,7 +99,7 @@ public class HealthRecordDAO {
 	    		 
 	    		Client client = Client.create();
 	     
-	    		String post= "report=cancer";
+	    		String post= "report="+search_key;
 	    		
 	    		
 	    		WebResource webResource = client
