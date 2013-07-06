@@ -13,29 +13,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="<%=request.getContextPath()%>/INPUT/js/jquery-1.8.3.min.js"></script>
+
+
+
+ <script type="text/javascript" src="<%=request.getContextPath()%>/INPUT/js/jquery-1.8.3.min.js"></script>
+ <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+ <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+
+
 <script src="<%=request.getContextPath()%>/LANDING/jquery.bxslider/jquery.bxslider.min.js"></script>
 <link href="<%=request.getContextPath()%>/LANDING/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
 <script src="<%=request.getContextPath()%>/INPUT/colorbox/jquery.colorbox.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/INPUT/colorbox/colorbox.css" />
 
-
-<script>
-	$(document).ready(call_on_ready);
-	
-	function call_on_ready(){
-		
-	$("a.solution_link").colorbox({iframe:true, innerWidth:1000, innerHeight:1000});
-
-	
-	}
-	
-
-</script>
-
 <title>Update profile - Care-seeker</title>
 <style>
+
+td{
+	
+	padding: 2%;
+
+}
 
 .input_date{
 		color:white;
@@ -128,7 +126,7 @@ input{
 
 input:focus{
 
-	border-color: #0055E0;
+	border-color: #0055E0;lem
 	background-color: white;
 
 }
@@ -208,6 +206,58 @@ table{
 </style>
 
 
+
+
+<script>
+	$(document).ready(call_on_ready);
+	
+	function add_new_past_problem_form(){
+		
+	//	alert("clicked");
+		
+		var add_new_past_problem_form_html = $("#sample_problem_form").html();
+		//alert(add_new_past_problem_form_html);
+		
+		
+		var div_problem =document.createElement("div");
+		$(div_problem).html(add_new_past_problem_form_html);
+		
+		$("#problems").append(div_problem);
+		
+	}
+	
+	function add_new_past_surgery_form(){
+		
+		//	alert("clicked");
+			
+			var add_new_past_problem_form_html = $("#sample_surgery_form").html();
+			//alert(add_new_past_problem_form_html);
+			
+			
+			var div_problem =document.createElement("div");
+			$(div_problem).html(add_new_past_problem_form_html);
+			
+			$("#surgeries").append(div_problem);
+			
+		}
+	
+	function call_on_ready(){
+		
+		$("a.solution_link").colorbox({iframe:true, innerWidth:1000, innerHeight:1000});
+		$("input#add_new_problem").click(function(){
+			add_new_past_problem_form();
+		});
+		
+		$("input#add_new_surgery").click(add_new_past_surgery_form);
+		var date = $('.event_date').datepicker({ dateFormat: 'd M yy' });
+		
+	
+	}
+	
+
+</script>
+
+
 </head>
 
          <%@include file="../../LANDING/hpanel.jsp" %>
@@ -230,7 +280,7 @@ table{
 <div class="profile_container">
 
 <table>
-	<tr>
+	<tr> 
 		<td width="70%">
 		<img height="50px" src="<%=request.getContextPath()%>/STATICS/images/MA-logo.jpg"/> 
 							<label>  ArogyaUDHC </label> <br>
@@ -256,9 +306,196 @@ table{
 </table>
 				<hr></hr>
 <br><br>
-				<label>Name </label> &nbsp;&nbsp; <%=request.getParameter("patient_name") %><br> <br>
-				<label>Age </label> &nbsp;&nbsp;TBF<br> <br>
-				<label>Sex</label> &nbsp; TBF<br><br>
+
+	<table>
+		
+		<tr>		
+			<td> <label>Sex </label> </td>
+			<td> TBF </td>
+		</tr>
+	
+		<tr>
+			<td><label>Name </label> &nbsp;&nbsp; </td>
+			<td><%=request.getParameter("patient_name") %></td>
+		</tr>
+		<tr>
+				
+				<td valign="top"><label> History </label> </td>
+				<td>
+					<input name="history" type="checkbox" value="Anaemia">Anaemia<br>
+					<input name="history" type="checkbox" value="Jaundice">Jaundice<br>
+					<input name="history" type="checkbox" value="Cyanosis">Cyanosis<br>
+					<input name="history" type="checkbox" value="Clubbing">Clubbing<br>
+					<input name="history" type="checkbox" value="Edema">Edema<br>
+				</td> 
+		</tr>			
+		<tr>
+			<td valign="top"> <label> Major problems </label><br>
+				
+				<input type="button" id="add_new_problem" value="Add">	
+			
+			</td>
+			<td id="problems">
+			
+				<div class="problem_form" id="sample_problem_form">
+							<label>What was the problem/diagnosis/treatment?</label><br>
+							
+							<textarea name="description_problem" rows="2" cols="20"></textarea>
+							
+							<br>
+							<label> Age when detected </label><br>
+							<input type="text" name="age_problem"/>
+							<br>
+							
+							
+							<label> Current Status </label><br>
+							<input type="text" name="current_status_problem"/>
+						<hr></hr>
+				</div>
+			
+			</td>  
+		
+		
+		</tr>
+		
+		
+		<tr>
+			<td valign="top"> <label> Major surgeries </label><br>
+				
+				<input type="button" id="add_new_surgery" value="Add">	
+			
+			</td>
+			<td id="surgeries">
+			
+				<div class="surgery_form" id="sample_surgery_form">
+							<label> What was the procedure?  Current status? </label><br>
+							
+							<textarea name="description_surgery" rows="2" cols="20"></textarea>
+							
+							<br>
+							<label> Age when done?  </label><br>
+							<input type="text" name="age_surgery"/>
+							<br>
+							
+							
+							<label> Current Status </label><br>
+							<input type="text" name="current_status_surgery"/>
+						<hr></hr>
+				</div>
+			
+			</td>  
+		
+		
+		</tr>
+		
+		
+			<tr>
+			<td valign="top"> <label> Dynamic list of family history </label><br>
+				
+				<input type="button" id="add_new_family_history" value="Add">	
+			
+			</td>
+			<td id="family_histories">
+			
+				<div class="family_history_form" id="sample_family_history_form">
+							<label> What was the procedure?  Current status? </label><br>
+							
+							<textarea name="description_family_history" rows="2" cols="20"></textarea>
+							
+							<br>
+							<label> Age when diagnosed?  </label><br>
+							<input type="text" name="age_family_history"/>
+							<br>
+							
+							
+							<br>
+							<label> Relationship  </label><br>
+							<input type="text" name="age_family_relationship"/>
+							<br>
+							
+							
+							
+							<label> Current Status </label><br>
+							<input type="text" name="current_status_family_history"/>
+							
+							
+													
+						<hr></hr>
+				</div>
+			
+			</td>  
+		
+		
+		</tr>
+				
+				
+		<tr>
+			<td valign="top"> <label> Medication </label><br>
+				
+				<input type="button" id="add_new_medication" value="Add">	
+				
+	
+			</td>
+			<td id="medications">
+			
+				<div class="medication_form" id="sample_medication_form">
+							<label> What was the procedure?  Current status? </label><br>
+							
+							<br>
+							<label> Medicine name  </label><br>
+							<input type="text" name="medicine_name"/>
+							<br>
+							
+							
+							
+							<br>
+							<label> Dosage  </label><br>
+							<input type="text" name="dosage"/>
+							<br>
+							
+							
+							<br>
+							<label> Frequency </label><br>
+							<input type="text" name="frequency"/>
+							<br>
+							
+							
+							
+							<label> Currently taking? </label><br>
+							<input type="radio" name="current_medication_status" value="male">Yes<br>
+							<input type="radio" name="current_medication_status" value="female">No
+							
+							<br>
+							
+							<label> Start date </label><br>
+							<input type="text" name="medication_start_date" class="event_date"/>
+							
+							<br>
+							<label> End date </label><br>
+							<input type="text" name="medication_end_date" class="event_date"/>
+							
+							<br>
+							
+							
+							
+							
+						<hr></hr>
+				</div>
+			
+			</td>  
+		
+		
+		</tr>		
+				
+				
+				
+				
+				
+				
+				
+				
+		
+	</table>
 			<br><br><br><br>	
 <table>				
 				
