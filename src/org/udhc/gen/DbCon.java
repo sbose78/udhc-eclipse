@@ -41,23 +41,9 @@ public class DbCon {
     public static Connection getDbConnection()
     {
         Connection conn = null;
-        try{/*
-                System.out.println("MySQL Connection being established");     
-                
-                Context initContext = new InitialContext();
-        		DataSource ds   = (DataSource)initContext.lookup("java:/comp/env/jdbc/awsDB");
-        		conn = ds.getConnection();
-        		
-        		
-        		
-        		System.out.println(conn.toString());
-        		//use conn
-        		//conn.close();
-        		return conn;
-        		*/
-                
-        
-                            
+        try{                    
+        	
+        	/*
                 Properties properties = new Properties();
                	properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("credentials.properties"));
                	
@@ -79,6 +65,9 @@ public class DbCon {
                 
            
                return conn;
+               */
+        	
+        	conn = getPooledDbConnection();
                 
 
         }
