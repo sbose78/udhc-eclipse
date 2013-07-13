@@ -67,6 +67,10 @@ a.patient_profile:visited{
 	color:white;
 }
 
+a.patient_profile{
+    
+    color: white;    
+}
 
 .topic_name{
     white-space: nowrap;	

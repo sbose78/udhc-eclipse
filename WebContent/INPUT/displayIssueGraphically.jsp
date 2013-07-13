@@ -249,7 +249,7 @@ a.similar_issues_link{
  			        data: values,
  			        success: function(health_cases_json_array){
  			          // alert("success");	             
- 			            display_similar_health_cases(escape(health_cases_json_array));
+ 			            display_similar_health_cases(health_cases_json_array);
  			        },
  			        error:function(){
  			            alert("failure");	           
@@ -257,16 +257,21 @@ a.similar_issues_link{
  		     }); 			
  		}
  		
- 		function display_similar_health_cases(display_similar_health_cases)
+ 		function display_similar_health_cases(similar_health_cases)
  		{
- 			for( health_case in display_similar_health_cases  )
+ 			//alert(similar_health_cases[0].title )
+ 			
+ 			  
+ 			for( health_case in similar_health_cases  )
+ 				
  			{
- 					
+ 				
+ 					alert(similar_health_cases[health_case].title);
  					var similar_issues_entry=document.createElement("div");
  	 	 			var similar_issues_url=document.createElement("a");
  	 	 			
- 	 	 			$(similar_issues_url).append( display_similar_health_cases[health_case].title);
- 	 	 			$(similar_issues_url).attr("href", display_similar_health_cases[health_case].url);
+ 	 	 			$(similar_issues_url).append( similar_health_cases[health_case].title);
+ 	 	 			$(similar_issues_url).attr("href", similar_health_cases[health_case].url);
  	 	 			$(similar_issues_url).attr("class", "similar_issues_link");
  	 	 			$(similar_issues_entry).attr("class", "similar_issues_entry");
  	 	 			$(similar_issues_entry).append(similar_issues_url);
