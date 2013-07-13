@@ -9,6 +9,7 @@ package org.udhc.gen;
  * @author root
  */
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,14 +21,20 @@ import java.util.Properties;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+
 import javax.sql.DataSource;
 public class DbCon {
 	
-	public static Connection getPooledDbConnection() throws NamingException, SQLException
+	public static Connection getPooledDbConnection() throws NamingException, SQLException, IOException
 	{
 		
+		 Properties properties = new Properties();
+         properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("credentials.properties"));
+       
+         String myds=properties.getProperty("datasource").toString();
+		
 		Context initContext = new InitialContext();
-		DataSource ds   = (DataSource)initContext.lookup("java:/comp/env/jdbc/TestDB");
+		DataSource ds   = (DataSource)initContext.lookup("java:/comp/env/jdbc/"+myds);
 		Connection conn = ds.getConnection();
 		
 		System.out.println(conn.toString());
