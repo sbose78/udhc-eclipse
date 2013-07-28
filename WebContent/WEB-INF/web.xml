@@ -166,8 +166,8 @@
   <context-param>
     <description>domain</description>
     <param-name>domain_url</param-name>
-    <param-value> http://care.udhc.co.in/ </param-value>
-  </context-param>  
+    <param-value> http://care.udhc.co.in/summary </param-value>
+  </context-param>
   <servlet>
     <description></description>
     <display-name>changeHealthIssueApprovalStatus</display-name>
@@ -258,18 +258,6 @@
     <servlet-name>GetTimelinePosts</servlet-name>
     <url-pattern>/GetTimelinePosts</url-pattern>
   </servlet-mapping>
-  <resource-ref>
-    <description>DB Connection</description>
-    <res-ref-name>jdbc/awsDB</res-ref-name>
-    <res-type>javax.sql.DataSource</res-type>
-    <res-auth>Container</res-auth>
-  </resource-ref>
-  <resource-ref>
-    <description>DB Connection</description>
-    <res-ref-name>jdbc/TestDB</res-ref-name>
-    <res-type>javax.sql.DataSource</res-type>
-    <res-auth>Container</res-auth>
-  </resource-ref>
   <servlet>
     <description></description>
     <display-name>DbPoolTest</display-name>
@@ -300,4 +288,20 @@
     <servlet-name>GetSimilarCases</servlet-name>
     <url-pattern>/GetSimilarCases</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdatePatientSummary</display-name>
+    <servlet-name>UpdatePatientSummary</servlet-name>
+    <servlet-class>org.udhc.controller.user.UpdatePatientSummary</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdatePatientSummary</servlet-name>
+    <url-pattern>/UpdatePatientSummary</url-pattern>
+  </servlet-mapping>
+  <resource-ref>
+    <description>DB Connection</description>
+    <res-ref-name>jdbc/awsDB</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
 </web-app>

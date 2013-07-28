@@ -262,11 +262,12 @@ a.similar_issues_link{
  			//alert(similar_health_cases[0].title )
  			
  			  
+ 			var count = 0;
  			for( health_case in similar_health_cases  )
+  			{
+ 					if ( ++count > 9) break;
  				
- 			{
- 				
- 					alert(similar_health_cases[health_case].title);
+ 					//alert(similar_health_cases[health_case].title);
  					var similar_issues_entry=document.createElement("div");
  	 	 			var similar_issues_url=document.createElement("a");
  	 	 			

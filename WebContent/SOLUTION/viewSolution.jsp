@@ -66,7 +66,7 @@ header{
 
 <td id="logo" align="center" width="25%">
 <img width="90px" height="90px" src="<%=request.getContextPath()%>/STATICS/images/MA-logo.jpg"/><br>
-<a href="http://www.missionarogya.com">www.missionarogya.org</a>
+<a href="http://www.missionarogya.org">www.missionarogya.org</a>
 
 <br><br>
 

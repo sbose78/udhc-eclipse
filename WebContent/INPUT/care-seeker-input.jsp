@@ -483,7 +483,7 @@ label{
                         <br><br>
                                               <strong>I AGREE TO THE 'CONSENT FORM' CLAUSES AND WISH TO SUBMIT MY CASE</strong>
                       <br><br>
-                         <iframe width="800px" height="300px"src="https://docs.google.com/document/pub?id=1sojONu_CulO28z75DnyZc15C0QrUequr-OYap4GUPvI&amp;embedded=true"></iframe>
+                         <iframe width="800px" height="300px"src="https://docs.google.com/document/d/1sojONu_CulO28z75DnyZc15C0QrUequr-OYap4GUPvI/pub?embedded=true"></iframe>
                                 
                                 <br>
                                 

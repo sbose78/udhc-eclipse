@@ -488,7 +488,7 @@ public class HealthRecord {
         Connection con;//=DbCon.getDbConnection();
      
         try{
-            
+            	System.out.println("connecting...");
                 con=DbCon.getDbConnection();
 
                 ResultSet rst=null;
@@ -509,7 +509,7 @@ public class HealthRecord {
         
         catch(Exception e)
         {
-            System.out.println(e.toString());
+           e.printStackTrace();
         }
         
         
