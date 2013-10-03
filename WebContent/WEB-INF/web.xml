@@ -166,7 +166,7 @@
   <context-param>
     <description>domain</description>
     <param-name>domain_url</param-name>
-    <param-value> http://care.udhc.co.in/summary </param-value>
+    <param-value>http://www.udhc.co.in/</param-value>
   </context-param>
   <servlet>
     <description></description>
